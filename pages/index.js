@@ -12,8 +12,8 @@ export default function Home() {
 
       <main className='max-w-7xl flex flex-col items-center justify-center space-y-8 '>
         <Header />
-        <HomeMoviesList />
-        <HomeMoviesList />
+        <HomeMoviesList title={"Popular Movies"}/>
+        <HomeMoviesList title={"Top Ranked Movies"}/>
         <HomeMoviesList />
       </main>
     </div>
