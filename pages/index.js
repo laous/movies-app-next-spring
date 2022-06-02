@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Header } from '../components'
+import { Header, HomeMoviesList } from '../components'
 
 export default function Home() {
   return (
@@ -10,9 +10,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className='flex flex-col items-center w-screen h-full p-4'>
+      <main className='flex flex-col items-center w-screen h-full p-4 space-y-8'>
         <Header />
-        
+        <HomeMoviesList />
       </main>
     </div>
   )
