@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Header, HomeMoviesList } from "../components";
+import { DiscordBanner, Header, HomeMoviesList } from "../components";
 
 export default function Home() {
   return (
@@ -12,9 +12,10 @@ export default function Home() {
 
       <main className="max-w-7xl flex flex-col items-center justify-center space-y-8 ">
         <Header />
-        <section className="flex flex-col items-center justify-center gap-8">
+        <section className="flex flex-col items-center justify-center gap-12">
           <HomeMoviesList title={"Popular Movies"} />
           <HomeMoviesList title={"Top Ranked Movies"} />
+          <DiscordBanner className="mt-10"/>
           <HomeMoviesList title={"Form your Watchlist"} />
         </section>
       </main>
