@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { DiscordBanner, Header, HomeMoviesList } from "../components";
+import { DiscordBanner, Footer, Header, HomeMoviesList, JoinUs } from "../components";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full py-4 overflow-hidden">
+    <div className="flex flex-col items-center justify-center w-full h-full pt-4 overflow-hidden">
       <Head>
         <title>Movies Land</title>
         <meta name="description" content="Movies Land" />
@@ -16,8 +16,13 @@ export default function Home() {
           <HomeMoviesList title={"Popular Movies"} />
           <HomeMoviesList title={"Top Ranked Movies"} />
           <DiscordBanner/>
-          <HomeMoviesList title={"Form your Watchlist"} />
+          <HomeMoviesList title={"From your Watchlist"} />
         </section>
+        <div className="flex flex-col items-center">
+          <JoinUs />
+          <Footer />
+        </div>
+
       </main>
     </div>
   );
