@@ -1,0 +1,21 @@
+End Points : 
+-------------------------------
+/tmdb/topRated
+/tmdb/popular
+/tmdb/upcoming
+/tmdb/trending
+/tmdb/{id}
+/tmdb/search/{movieTitle}
+-------------------------------
+/user/markWatched/{id_user}/{id_movie}
+/user/unMarkWatched/{id_user}/{id_movie}
+/user/watchedList/{id_user}
+-------------------------------
+/user/addToWishList/{id_user}/{id_movie}
+/user/removeFromWishList/{id_user}/{id_movie}
+/user/wishList/{id_user}
+-------------------------------
+/user/addToFavoritesList/{id_user}/{id_movie}
+/user/removeFromFavoritesList/{id_user}/{id_movie}
+/user/favoritesList/{id_user}
+-------------------------------
