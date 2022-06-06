@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,7 +21,7 @@ public class User {
     private Set<MovieEntity> watchedList;
 
 
-    public User(String username, String email, String password, Set<MovieEntity> whishList, Set<MovieEntity> favorites) {
+    public UserEntity(String username, String email, String password, Set<MovieEntity> whishList, Set<MovieEntity> favorites) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -29,7 +29,7 @@ public class User {
         this.favorites = favorites;
     }
 
-    public User() {
+    public UserEntity() {
     }
 
     public String getUsername() {

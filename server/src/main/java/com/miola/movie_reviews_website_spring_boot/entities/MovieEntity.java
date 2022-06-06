@@ -12,7 +12,7 @@ public class MovieEntity {
     private String name;
     private String description;
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
-    private Set<Review> reviewSet;
+    private Set<ReviewEntity> reviewSet;
 
     public MovieEntity() {
 
@@ -42,11 +42,11 @@ public class MovieEntity {
         this.description = description;
     }
 
-    public Set<Review> getReviewSet() {
+    public Set<ReviewEntity> getReviewSet() {
         return reviewSet;
     }
 
-    public void setReviewSet(Set<Review> reviewSet) {
+    public void setReviewSet(Set<ReviewEntity> reviewSet) {
         this.reviewSet = reviewSet;
     }
 
