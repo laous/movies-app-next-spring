@@ -14,7 +14,7 @@ public class Review {
     private int rating;
     @ManyToOne
     @JoinColumn(name = "movie_id")
-    private Movie movie;
+    private MovieEntity movie;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -27,11 +27,11 @@ public class Review {
         return user;
     }
 
-    public Movie getMovie() {
+    public MovieEntity getMovie() {
         return movie;
     }
 
-    public Review(String reviewText, int rating, Movie movie, User user) {
+    public Review(String reviewText, int rating, MovieEntity movie, User user) {
         this.reviewText = reviewText;
         this.rating = rating;
         this.movie = movie;
@@ -62,7 +62,7 @@ public class Review {
         this.rating = rating;
     }
 
-    public void setMovie(Movie movie) {
+    public void setMovie(MovieEntity movie) {
         this.movie = movie;
     }
 

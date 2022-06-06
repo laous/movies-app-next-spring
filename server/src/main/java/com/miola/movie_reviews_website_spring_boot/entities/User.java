@@ -14,11 +14,11 @@ public class User {
     private String email;
     private String password;
     @OneToMany
-    private Set<Movie> whishList;
+    private Set<MovieEntity> whishList;
     @OneToMany
-    private Set<Movie> favorites;
+    private Set<MovieEntity> favorites;
 
-    public User(String username, String email, String password, Set<Movie> whishList, Set<Movie> favorites) {
+    public User(String username, String email, String password, Set<MovieEntity> whishList, Set<MovieEntity> favorites) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -53,19 +53,19 @@ public class User {
         this.password = password;
     }
 
-    public Set<Movie> getWhishList() {
+    public Set<MovieEntity> getWhishList() {
         return whishList;
     }
 
-    public void setWhishList(Set<Movie> whishList) {
+    public void setWhishList(Set<MovieEntity> whishList) {
         this.whishList = whishList;
     }
 
-    public Set<Movie> getFavorites() {
+    public Set<MovieEntity> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(Set<Movie> favorites) {
+    public void setFavorites(Set<MovieEntity> favorites) {
         this.favorites = favorites;
     }
 
