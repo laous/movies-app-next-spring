@@ -50,4 +50,12 @@ public class MovieEntity {
         this.reviewSet = reviewSet;
     }
 
+    @Override
+    public String toString() {
+        return "MovieEntity{" +
+                "movieId=" + movieId +
+                ", name='" + name + '\'' +
+                ", description='" + description +
+                '}';
+    }
 }

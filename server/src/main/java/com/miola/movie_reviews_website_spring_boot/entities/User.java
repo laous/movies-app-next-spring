@@ -17,6 +17,9 @@ public class User {
     private Set<MovieEntity> whishList;
     @OneToMany
     private Set<MovieEntity> favorites;
+    @OneToMany
+    private Set<MovieEntity> watchedList;
+
 
     public User(String username, String email, String password, Set<MovieEntity> whishList, Set<MovieEntity> favorites) {
         this.username = username;
@@ -75,5 +78,13 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<MovieEntity> getWatchedList() {
+        return watchedList;
+    }
+
+    public void setWatchedList(Set<MovieEntity> watchedList) {
+        this.watchedList = watchedList;
     }
 }
