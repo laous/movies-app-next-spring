@@ -1,7 +1,14 @@
 package com.miola.movie_reviews_website_spring_boot.repos;
 
-import com.miola.movie_reviews_website_spring_boot.entities.Review;
+
+import com.miola.movie_reviews_website_spring_boot.entities.MovieEntity;
+import com.miola.movie_reviews_website_spring_boot.entities.ReviewEntity;
+import com.miola.movie_reviews_website_spring_boot.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ReviewRepository extends CrudRepository<Review, Long> {
+import java.util.List;
+
+public interface ReviewRepository extends CrudRepository<ReviewEntity, Long> {
+    List<ReviewEntity> findByUser(User user);
+    List<ReviewEntity> findByMovie(MovieEntity movie);
 }

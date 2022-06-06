@@ -2,6 +2,7 @@ package com.miola.movie_reviews_website_spring_boot.services;
 
 import com.miola.movie_reviews_website_spring_boot.entities.MovieEntity;
 import com.miola.movie_reviews_website_spring_boot.entities.User;
+import com.miola.movie_reviews_website_spring_boot.jsonModels.Review;
 
 import java.util.List;
 

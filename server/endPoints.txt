@@ -19,3 +19,53 @@ End Points :
 /user/removeFromFavoritesList/{id_user}/{id_movie}
 /user/favoritesList/{id_user}
 -------------------------------
+Reviews EndPoints :
+-------------------------------
+/user/review (POST) 
+what to send : (All is required)
+{
+                "movieId": 507086,
+                "rating": 2.5,
+                "reviewText": "BLABALABALABALABALABALABALXOX",
+                "userId": "2"
+}
+--------------------------------
+/user/review (DELETE)
+what to send :
+{
+                "reviewId": 5
+}
+--------------------------------
+/user/review (PUT)
+what to send : (All is required)
+ { 
+                "reviewId": 1,
+                "movieId": 507086,
+                "rating": 2.5,
+                "reviewText": "BLABALABALABALABALABALABALXOX",
+                "userId": "2"
+}
+--------------------------------
+/user/review/user/{id_user} : get all the reviews of a user
+what you will get : 
+[
+    {
+        "reviewId": 10,
+        "movieId": 338953,
+        "rating": 3.0,
+        "reviewText": "BLBLBL",
+        "userId": 1
+    }, .......
+]
+--------------------------------
+/user/review/movie/{id_movie} : get all the reviews of a movie
+what you will get : 
+[
+    {
+        "reviewId": 10,
+        "movieId": 338953,
+        "rating": 3.0,
+        "reviewText": "BLBLBL",
+        "userId": 1
+    }, .......
+]

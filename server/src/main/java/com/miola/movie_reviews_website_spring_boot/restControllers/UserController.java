@@ -2,11 +2,16 @@ package com.miola.movie_reviews_website_spring_boot.restControllers;
 
 
 import com.miola.movie_reviews_website_spring_boot.entities.MovieEntity;
+import com.miola.movie_reviews_website_spring_boot.entities.ReviewEntity;
 import com.miola.movie_reviews_website_spring_boot.jsonModels.Movie;
 import com.miola.movie_reviews_website_spring_boot.jsonModels.MovieResults;
+import com.miola.movie_reviews_website_spring_boot.jsonModels.Review;
+import com.miola.movie_reviews_website_spring_boot.services.ReviewServiceImpl;
 import com.miola.movie_reviews_website_spring_boot.services.TMDbServiceImpl;
 import com.miola.movie_reviews_website_spring_boot.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,6 +25,8 @@ public class UserController {
     private UserServiceImpl userService;
     @Autowired
     private TMDbServiceImpl tmDbService;
+    @Autowired
+    private ReviewServiceImpl reviewService;
 
     @GetMapping("/markWatched/{id_user}/{id_movie}")
     public boolean markAsWatched(@PathVariable("id_user") Long id_user, @PathVariable("id_movie") Long id_movie){
@@ -27,7 +34,7 @@ public class UserController {
         return false;
     }
 
-    @GetMapping("/nnMarkWatched/{id_user}/{id_movie}")
+    @GetMapping("/unMarkWatched/{id_user}/{id_movie}")
     public boolean unMarkAsWatched(@PathVariable("id_user") Long id_user, @PathVariable("id_movie") Long id_movie){
         if(userService.markOrUnmarkAsWatched(id_movie, id_user, false)) return true;
         return false;
@@ -69,9 +76,9 @@ public class UserController {
         return false;
     }
     @GetMapping("/removeFromFavoritesList/{id_user}/{id_movie}")
-    public boolean removeFromFavoritesList(@PathVariable("id_user") Long id_user, @PathVariable("id_movie") Long id_movie){
-        if(userService.addOrRemoveFromFavoriteList(id_movie, id_user, false)) return true;
-        return false;
+    public ResponseEntity removeFromFavoritesList(@PathVariable("id_user") Long id_user, @PathVariable("id_movie") Long id_movie){
+        if(userService.addOrRemoveFromFavoriteList(id_movie, id_user, false)) return new ResponseEntity<>("true", HttpStatus.OK);
+        return new ResponseEntity<>("true", HttpStatus.OK);
     }
     @GetMapping("/favoritesList/{id_user}")
     public List<Movie> getFavoritesList(@PathVariable("id_user") Long id_user){
@@ -83,5 +90,60 @@ public class UserController {
         }
         return favoritesListJson;
     }
+
+
+    @PostMapping("/review")
+    public ResponseEntity createReview(@RequestBody Review review){
+        if(reviewService.createReview(review)) return new ResponseEntity<>("true", HttpStatus.OK);
+        else return new ResponseEntity<>("false", HttpStatus.OK);
+    }
+
+    @PutMapping("/review")
+    public ResponseEntity editReview(@RequestBody Review review){
+        if(reviewService.editeReview(review)) return new ResponseEntity<>("true", HttpStatus.OK);
+        else return new ResponseEntity<>("false", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/review")
+    public ResponseEntity deleteReview(@RequestBody Review review){
+        if(reviewService.deleteReview(review)) return new ResponseEntity<>("true", HttpStatus.OK);
+        else return new ResponseEntity<>("false", HttpStatus.OK);
+    }
+
+    @GetMapping("/review/user/{id_user}")
+    public List<Review> getReviewsByUser(@PathVariable("id_user") Long id_user){
+        List<Review> reviewsJson = new ArrayList<>();
+        for(ReviewEntity R : reviewService.getAllUserReviews(id_user)){
+            Review r = new Review();
+            r.setReviewId(R.getId());
+            r.setMovieId(R.getMovie().getMovieId());
+            r.setUserId(R.getUser().getId());
+            r.setRating(R.getRating());
+            r.setReviewText(R.getReviewText());
+            reviewsJson.add(r);
+        }
+        return reviewsJson;
+    }
+
+    @GetMapping("/review/movie/{id_movie}")
+    public List<Review> getReviewsByMovie(@PathVariable("id_movie") Long id_movie){
+        List<Review> reviewsJson = new ArrayList<>();
+        for(ReviewEntity R : reviewService.getReviewsByMovie(id_movie)){
+            Review r = new Review();
+            r.setReviewId(R.getId());
+            r.setMovieId(R.getMovie().getMovieId());
+            r.setUserId(R.getUser().getId());
+            r.setRating(R.getRating());
+            r.setReviewText(R.getReviewText());
+            reviewsJson.add(r);
+        }
+        return reviewsJson;
+    }
+
+
+
+
+
+
 
 }
