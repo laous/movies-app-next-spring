@@ -1,8 +1,6 @@
 import { AiFillPlayCircle } from "react-icons/ai";
 import Link from "next/link";
 const HeroSliderItem = () => {
-  const bgimage =
-    "https://filmdaze.net/wp-content/uploads/2018/06/vlcsnap-2018-06-13-16h56m12s456.png";
   return (
     <div
       className={`relative w-full max-w-5xl h-[502px] bg-no-repeat bg-cover  flex items-center justify-center bg-center

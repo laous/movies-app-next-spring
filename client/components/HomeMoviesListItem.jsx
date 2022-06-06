@@ -61,8 +61,8 @@ const HomeMoviesListItem = () => {
         </div>
         <Link href={"/"}>
           <div className="p-0.5  bg-gradient-to-tr  from-[#ff6969] to-[#e752ff] cursor-pointer rounded-sm ">
-            <div className="w-full px-6 py-0.5 h-full bg-black font-normal text-base ">
-              Seen
+            <div className="w-full px-2 py-0.5 h-full bg-black font-normal text-xs md:text-sm opacity-90">
+              Watched
             </div>
           </div>
         </Link>

@@ -1,12 +1,10 @@
 import HeroSliderItem from "./HeroSliderItem";
 import Link from "next/link";
-import Slider from "react-slick";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css";
-// import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 // import required modules
