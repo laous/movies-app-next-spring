@@ -18,10 +18,10 @@ export default function Home() {
       </Head>
 
       <HeroSlider title="Latest Movies" />
-      <HomeMoviesList title={"Popular Movies"} />
-      <HomeMoviesList title={"Top Ranked Movies"} />
+      <HomeMoviesList title={"Popular Movies"} to={"/movies/popular"} />
+      <HomeMoviesList title={"Top Ranked Movies"} to={"/movies/top-rated"} />
       <DiscordBanner />
-      <HomeMoviesList title={"From your Watchlist"} />
+      <HomeMoviesList title={"From your Watchlist"} to={"/movies/watchlist"} />
       <div className="flex flex-col items-center">
         <JoinUs />
       </div>
