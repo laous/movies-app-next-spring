@@ -1,20 +1,53 @@
 import HeroSliderItem from "./HeroSliderItem";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper";
 
 const HeroSlider = ({ title }) => {
   return (
-    <section className="w-full flex flex-col items-center justify-center space-y-5 m-5">
+    <section className="w-full hidden lg:flex flex-col items-center justify-center space-y-5 m-5">
       <header className="w-full max-w-4xl flex items-center justify-between">
         <h2 className="text-xl">{title ? title : "Top Movies"}</h2>
-        <Link href="/">
-          <div className="text-sm text-transparent bg-clip-text bg-gradient-to-r from-[#FF6969] to-[#E752FF]">
+        <Link href="/" className="cursor-pointer">
+          <span className="text-sm text-transparent bg-clip-text bg-gradient-to-r from-[#FF6969] to-[#E752FF]">
             See more
-          </div>
+          </span>
         </Link>
       </header>
-      <div className="w-full flex justify-center items-center">
-        <HeroSliderItem />
-      </div>
+      {/* <div className="w-full max-w-5xl flex items-center justify-between"> */}
+      <Swiper
+        spaceBetween={30}
+        // centeredSlides={true}
+        slidesPerView={1}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper z-20 w-full max-w-5xl flex items-center justify-between"
+      >
+        <SwiperSlide className="w-full flex items-center justify-between overflow-visible">
+          <HeroSliderItem />
+        </SwiperSlide>
+        <SwiperSlide className="w-full">
+          <HeroSliderItem />
+        </SwiperSlide>
+        <SwiperSlide className="w-full ">
+          <HeroSliderItem />
+        </SwiperSlide>
+      </Swiper>
+      {/* </div> */}
     </section>
   );
 };
