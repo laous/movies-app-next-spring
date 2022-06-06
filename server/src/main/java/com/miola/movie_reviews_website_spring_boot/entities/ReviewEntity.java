@@ -4,34 +4,34 @@ package com.miola.movie_reviews_website_spring_boot.entities;
 import javax.persistence.*;
 
 @Entity
-public class Review {
+public class ReviewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String reviewText;
     // rating with starts
-    private int rating;
+    private double rating;
     @ManyToOne
     @JoinColumn(name = "movie_id")
-    private Movie movie;
+    private MovieEntity movie;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
-    public Review() {
+    public ReviewEntity() {
 
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public Movie getMovie() {
+    public MovieEntity getMovie() {
         return movie;
     }
 
-    public Review(String reviewText, int rating, Movie movie, User user) {
+    public ReviewEntity(String reviewText, double rating, MovieEntity movie, UserEntity user) {
         this.reviewText = reviewText;
         this.rating = rating;
         this.movie = movie;
@@ -54,19 +54,19 @@ public class Review {
         this.reviewText = reviewText;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
-    public void setMovie(Movie movie) {
+    public void setMovie(MovieEntity movie) {
         this.movie = movie;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 }

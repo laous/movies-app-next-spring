@@ -1,0 +1,110 @@
+End Points : 
+-------------------------------
+/tmdb/topRated
+/tmdb/popular
+/tmdb/upcoming
+/tmdb/trending
+/tmdb/{id}
+/tmdb/search/{movieTitle}
+-------------------------------
+/user/markWatched/{id_user}/{id_movie}
+/user/unMarkWatched/{id_user}/{id_movie}
+/user/watchedList/{id_user}
+-------------------------------
+/user/addToWishList/{id_user}/{id_movie}
+/user/removeFromWishList/{id_user}/{id_movie}
+/user/wishList/{id_user}
+-------------------------------
+/user/addToFavoritesList/{id_user}/{id_movie}
+/user/removeFromFavoritesList/{id_user}/{id_movie}
+/user/favoritesList/{id_user}
+-------------------------------
+Reviews EndPoints :
+-------------------------------
+/user/review (POST) 
+what to send : (All is required)
+{
+                "movieId": 507086,
+                "rating": 2.5,
+                "reviewText": "BLABALABALABALABALABALABALXOX",
+                "userId": "2"
+}
+--------------------------------
+/user/review (DELETE)
+what to send :
+{
+                "reviewId": 5
+}
+--------------------------------
+/user/review/{id_review} (PUT)
+what to send : (All is required)
+ { 
+        //        "reviewId": 1,(deleted upon request)
+                "movieId": 507086,
+                "rating": 2.5,
+                "reviewText": "BLABALABALABALABALABALABALXOX",
+                "userId": "2"
+}
+--------------------------------
+/user/review/user/{id_user} : get all the reviews of a user
+what you will get : 
+[
+    {
+        "reviewId": 10,
+        "movieId": 338953,
+        "rating": 3.0,
+        "reviewText": "BLBLBL",
+        "userId": 1
+    }, .......
+]
+--------------------------------
+/user/review/movie/{id_movie} : get all the reviews of a movie
+what you will get : 
+[
+    {
+        "reviewId": 10,
+        "movieId": 338953,
+        "rating": 3.0,
+        "reviewText": "BLBLBL",
+        "userId": 1
+    }, .......
+]
+
+-------------------------------
+User EndPoints :
+-------------------------------
+/user/{id_user} (GET) : to get a user
+what you will get : 
+{
+    "userId": 1,
+    "username": "oussama",
+    "email": "oussamahennane@gmail.com",
+    "password": "1234"
+}
+-------------------------------
+/user (POST) : to create a user
+what to send : (All is required)
+{
+    "username": "ilyass",
+    "email": "ilyass@gmail.com",
+    "password": "1234"
+}       
+-------------------------------
+/user/{id_user} (PUT) : to edit a user
+what to send : (All is required)
+{
+    "username": "ilyass",
+    "email": "ilyass@gmail.com",
+    "password": "1234"
+}   
+---------------------------------
+/user/{id_user} (DELETE) : to edit a user
+No body is required
+
+-----------------------------
+/user/login (PUT) : to login
+what to send : (All is required)
+{
+    "username": "ilyass",//this can be the username or email it does not matter, so in the login form the user should be asked to enter (the username or the email)
+    "password": "1234"
+}  
