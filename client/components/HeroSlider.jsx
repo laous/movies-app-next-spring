@@ -28,10 +28,10 @@ const HeroSlider = ({ title }) => {
         spaceBetween={30}
         // centeredSlides={true}
         slidesPerView={1}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
         pagination={{
           clickable: true,
         }}

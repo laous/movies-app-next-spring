@@ -8,7 +8,7 @@ const HeroSliderItem = () => {
       className={`relative w-full max-w-5xl h-[502px] bg-no-repeat bg-cover  flex items-center justify-center bg-center
       bg-[url('https://images.alphacoders.com/736/thumb-1920-736461.png')]`}
     >
-      <div className=" absolute top-0 left-0 h-full w-full bg-black opacity-70"></div>
+      <div className=" absolute top-0 left-0 h-full w-full bg-black opacity-80"></div>
       <button className="cursor-pointer z-10 opacity-50">
         <AiFillPlayCircle className="w-20 h-20" />
       </button>
