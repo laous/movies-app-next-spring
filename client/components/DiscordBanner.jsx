@@ -7,7 +7,7 @@ const DiscordBanner = () => {
         {/* Discord logo */}
         <img
           src="./assets/discord.svg"
-          className="absolute right-2 bottom-0 max-w-[72px] md:max-w-none"
+          className="absolute right-2 bottom-0 max-w-[72px] md:max-w-none hidden md:flex"
         />
 
         <img

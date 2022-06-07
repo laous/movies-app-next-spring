@@ -1,6 +1,6 @@
 import { HomeMoviesListItem } from "../../../components";
 
-const index = () => {
+const Popular = () => {
   return (
     <section className=" flex flex-col items-center justify-center space-y-5 m-5">
       <header className="w-full max-w-4xl flex items-center justify-between">
@@ -27,4 +27,4 @@ const index = () => {
     </section>
   );
 };
-export default index;
+export default Popular;

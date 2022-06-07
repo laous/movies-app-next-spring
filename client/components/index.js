@@ -8,3 +8,9 @@ export {default as JoinUs} from './JoinUs'
 export {default as HeroSliderItem} from './HeroSliderItem'
 export {default as HeroSlider} from './HeroSlider'
 export {default as Layout} from './Layout'
+export {default as CastCard} from './CastCard'
+export {default as TrailerModal} from './TrailerModal'
+export {default as TrailerSection} from './TrailerSection'
+export {default as BorderButton} from './BorderButton'
+
+

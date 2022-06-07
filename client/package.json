@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.2",
+    "@mui/material": "^5.8.2",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-icons": "^4.4.0",
+    "react-player": "^2.10.1",
     "react-toastify": "^9.0.2",
     "swiper": "^8.2.2"
   },
