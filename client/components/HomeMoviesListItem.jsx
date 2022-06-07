@@ -47,7 +47,7 @@ const HomeMoviesListItem = () => {
           </div>
 
           <div className="py-1 px-5 rounded-[5px] bg-gradient-to-r p-[6px] from-[#FF6969] to-[#E752FF] cursor-pointer">
-            <Link href="/movies/your-name" className="">
+            <Link href="/movies/your-name" passHref>
               Details
             </Link>
           </div>

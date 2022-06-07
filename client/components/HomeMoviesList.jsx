@@ -8,7 +8,9 @@ const HomeMoviesList = ({ title, to }) => {
         <h2 className="text-xl">{title ? title : "Top Movies"}</h2>
         {to && (
           <div className="text-sm text-transparent bg-clip-text bg-gradient-to-r from-[#FF6969] to-[#E752FF]">
-            <Link href={to}>See more</Link>
+            <Link href={to} scroll={true} passHref>
+              See more
+            </Link>
           </div>
         )}
       </header>

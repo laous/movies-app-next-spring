@@ -1,6 +1,6 @@
 const CastCard = () => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2 cursor-pointer items-center">
       <img
         src="https://s.hdnux.com/photos/10/12/44/2140469/11/1200x0.jpg"
         alt="Tony Soprano"
