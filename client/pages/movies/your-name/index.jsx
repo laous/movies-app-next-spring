@@ -1,7 +1,7 @@
-import { CastCard, HomeMoviesList } from "../../../components";
+import { CastCard, HomeMoviesList, TrailerSection } from "../../../components";
 const YourName = () => {
   return (
-    <div className="w-full max-w-7xl flex flex-col gap-10 items-center px-4">
+    <div className="w-full max-w-6xl flex flex-col gap-10  px-4">
       {/* First Section */}
       <div className="max-w-5xl flex flex-col md:flex-row gap-7 md:gap-10">
         <img
@@ -51,7 +51,7 @@ const YourName = () => {
         </div>
       </div>
       {/* Trailer Section */}
-      <div></div>
+      <TrailerSection />
       {/* Similar Section */}
       <HomeMoviesList title="Similar Movies" />
     </div>
