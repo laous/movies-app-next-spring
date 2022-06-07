@@ -4,6 +4,10 @@ import {
   HomeMoviesList,
   TrailerSection,
 } from "../../../components";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
+import StarIcon from "@mui/icons-material/Star";
+
 const YourName = () => {
   return (
     <div className="w-full max-w-6xl flex flex-col gap-10  px-4">
@@ -24,7 +28,22 @@ const YourName = () => {
                 <span>Category</span>
               </div>
             </div>
-            <p>Rating here</p>
+            <div>
+              <Typography
+                component="legend"
+                className="flex items-center gap-1"
+              >
+                9/10 <StarIcon fontSize="inherit" style={{ color: "yellow" }} />
+              </Typography>
+              <Rating
+                name="customized-10"
+                defaultValue={2}
+                max={10}
+                emptyIcon={
+                  <StarIcon fontSize="inherit" style={{ color: "black" }} />
+                }
+              />
+            </div>
           </div>
 
           <p>

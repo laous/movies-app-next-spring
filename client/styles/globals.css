@@ -23,3 +23,8 @@ body {
 .swiper {
   overflow: visible !important;
 }
+
+/* Rating icons */
+.MuiRating-iconEmpty {
+  color: black;
+}
