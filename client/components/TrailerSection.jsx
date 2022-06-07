@@ -6,12 +6,12 @@ const TrailerSection = () => {
       <header className="w-full max-w-4xl flex items-center justify-between">
         <h2 className="text-xl">Trailer</h2>
       </header>
-      <div className="flex flex-wrap justify-center items-stretch gap-4 w-full max-w-5xl">
+      <div className="flex flex-wrap justify-center items-stretch gap-4 w-full max-w-[80%] md:max-w-5xl h-64 md:h-[500px]">
         <ReactPlayer
           url="https://www.youtube.com/watch?v=xU47nhruN-Q"
           className="w-full h-auto"
           width="100%"
-          height="500px"
+          height="100%"
         />
       </div>
     </section>

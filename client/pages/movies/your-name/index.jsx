@@ -19,13 +19,21 @@ const YourName = () => {
         />
         <div className="flex flex-col gap-4 justify-start md:justify-between py-4">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-3">
               <h2 className="text-5xl font-bold">Your name</h2>
               <div className="flex items-center gap-3">
-                <span>Category</span>
-                <span>Category</span>
-                <span>Category</span>
-                <span>Category</span>
+                <span className="border border-white px-2 py-[1px] rounded-md text-center">
+                  Category
+                </span>
+                <span className="border border-white px-2 py-[1px] rounded-md text-center">
+                  Category
+                </span>
+                <span className="border border-white px-2 py-[1px] rounded-md text-center">
+                  Category
+                </span>
+                <span className="border border-white px-2 py-[1px] rounded-md text-center">
+                  Category
+                </span>
               </div>
             </div>
             <div>
@@ -53,9 +61,9 @@ const YourName = () => {
             cupiditate, ratione sequi omnis ad modi magni reprehenderit.
           </p>
           <div className="flex items-center gap-3">
-            <BorderButton text={"Mark as Watched"} />
-            <BorderButton text={"Add to Favorites"} />
-            <BorderButton text={"Add to Watchlist"} />
+            <BorderButton text={"Mark as Watched"} color="black" />
+            <BorderButton text={"Add to Favorites"} color="transparent" />
+            <BorderButton text={"Add to Watchlist"} color="black" />
           </div>
         </div>
       </div>
