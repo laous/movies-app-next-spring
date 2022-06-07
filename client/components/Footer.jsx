@@ -3,7 +3,7 @@ import Logo from "./Logo";
 const Footer = () => {
   return (
     <footer className="relative w-screen bg-black min-h-64  flex items-center justify-center">
-      <div className="w-full max-w-3xl py-20 mb-6 flex flex-col lg:flex-row items-start  justify-between lg:space-x-32 space-y-10 lg:space-y-0">
+      <div className="w-full max-w-3xl py-20 mb-6 flex flex-col lg:flex-row items-center md:items-start  justify-between lg:space-x-32 space-y-10 lg:space-y-0">
         <Logo />
         <div className="flex flex-col gap-4">
           <h3>About</h3>
