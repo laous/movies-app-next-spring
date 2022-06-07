@@ -12,5 +12,8 @@ export {default as CastCard} from './CastCard'
 export {default as TrailerModal} from './TrailerModal'
 export {default as TrailerSection} from './TrailerSection'
 export {default as BorderButton} from './BorderButton'
+export {default as SignIn} from './SignIn'
+export {default as Register} from './Register'
+
 
 

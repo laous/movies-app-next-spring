@@ -11,8 +11,12 @@ const Layout = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="max-w-7xl flex flex-col items-center justify-center space-y-8 px-4">
-        <Header /> {children} <Footer />
+      <main className="max-w-7xl h-full flex flex-col items-center justify-between space-y-8 px-4">
+        <Header />{" "}
+        <main className="max-w-7xl flex flex-col items-center justify-center space-y-8 px-4">
+          {children}
+        </main>{" "}
+        <Footer />
       </main>
     </div>
   );

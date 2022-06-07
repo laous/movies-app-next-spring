@@ -36,9 +36,9 @@ const MenuContent = ({ setActiveSearch }) => {
         />
       </div>
       <div className="flex items-center space-x-3 justify-center">
-        <Link href={"/"}>Sign in</Link>
+        <Link href={"/account"}>Sign in</Link>
         <span>|</span>
-        <Link href={"/"}>Sign up</Link>
+        <Link href={"/account"}>Sign up</Link>
       </div>
     </>
   );
