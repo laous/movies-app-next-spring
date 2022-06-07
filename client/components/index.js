@@ -11,4 +11,6 @@ export {default as Layout} from './Layout'
 export {default as CastCard} from './CastCard'
 export {default as TrailerModal} from './TrailerModal'
 export {default as TrailerSection} from './TrailerSection'
+export {default as BorderButton} from './BorderButton'
+
 

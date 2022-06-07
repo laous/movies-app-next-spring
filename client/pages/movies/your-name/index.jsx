@@ -1,4 +1,9 @@
-import { CastCard, HomeMoviesList, TrailerSection } from "../../../components";
+import {
+  BorderButton,
+  CastCard,
+  HomeMoviesList,
+  TrailerSection,
+} from "../../../components";
 const YourName = () => {
   return (
     <div className="w-full max-w-6xl flex flex-col gap-10  px-4">
@@ -8,7 +13,7 @@ const YourName = () => {
           className="w-64 max-w-full h-auto self-center"
           src="https://m.media-amazon.com/images/I/71-WBN3FCBL._AC_SL1280_.jpg"
         />
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 justify-start md:justify-between py-4">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
             <div className="flex flex-col gap-1">
               <h2 className="text-5xl font-bold">Your name</h2>
@@ -29,9 +34,9 @@ const YourName = () => {
             cupiditate, ratione sequi omnis ad modi magni reprehenderit.
           </p>
           <div className="flex items-center gap-3">
-            <button>Mark as Watched</button>
-            <button>Add to Favorites</button>
-            <button>Add to WatchList </button>
+            <BorderButton text={"Mark as Watched"} />
+            <BorderButton text={"Add to Favorites"} />
+            <BorderButton text={"Add to Watchlist"} />
           </div>
         </div>
       </div>

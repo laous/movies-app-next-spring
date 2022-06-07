@@ -8,7 +8,7 @@ const TrailerSection = () => {
       </header>
       <div className="flex flex-wrap justify-center items-stretch gap-4 w-full max-w-5xl">
         <ReactPlayer
-          url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+          url="https://www.youtube.com/watch?v=xU47nhruN-Q"
           className="w-full h-auto"
           width="100%"
           height="500px"
