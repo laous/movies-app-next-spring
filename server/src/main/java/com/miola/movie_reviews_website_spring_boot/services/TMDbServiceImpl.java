@@ -1,8 +1,7 @@
 package com.miola.movie_reviews_website_spring_boot.services;
 
 import com.miola.movie_reviews_website_spring_boot.entities.MovieEntity;
-import com.miola.movie_reviews_website_spring_boot.jsonModels.Movie;
-import com.miola.movie_reviews_website_spring_boot.jsonModels.MovieResults;
+import com.miola.movie_reviews_website_spring_boot.jsonModels.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -39,6 +38,7 @@ public class TMDbServiceImpl implements TMDbService {
     @Value("${tmdb.movie.id.url}")
     private String tmdbMovieIdUrl;
 
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -65,6 +65,24 @@ public class TMDbServiceImpl implements TMDbService {
     public List<Movie> fetchUpcomingMovieList() {
         MovieResults movieResults = restTemplate.getForObject(upcomingMovieUrl, MovieResults.class);
         return movieResults.getResults();
+    }
+
+    @Override
+    public List<Crew> fetchCrews(String uri) {
+        CrewResult crewResult = restTemplate.getForObject(uri, CrewResult.class);
+        return crewResult.getCrew();
+    }
+
+    @Override
+    public List<Movie> fetchSimilarMoviesList(String uri) {
+        MovieResults movieResults = restTemplate.getForObject(uri, MovieResults.class);
+        return movieResults.getResults();
+    }
+
+    @Override
+    public List<Trailer> fetchTrailers(String uri) {
+        TrailerResult trailerResult = restTemplate.getForObject(uri, TrailerResult.class);
+        return trailerResult.getTrailers();
     }
 
     @Override

@@ -10,7 +10,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 public class MovieReviewsWebSiteSpringBootApplication {
-
     @Bean
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
