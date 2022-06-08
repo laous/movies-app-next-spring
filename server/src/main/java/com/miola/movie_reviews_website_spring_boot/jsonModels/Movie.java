@@ -82,6 +82,9 @@ public class Movie {
     @JsonProperty("id")
     private Long id;
 
+    @JsonProperty("trailers")
+    private List<Trailer> trailerResult;
+
     public String getTitle() {
         return title;
     }
@@ -176,5 +179,13 @@ public class Movie {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Trailer> getTrailerResult() {
+        return trailerResult;
+    }
+
+    public void setTrailerResult(List<Trailer> trailerResult) {
+        this.trailerResult = trailerResult;
     }
 }

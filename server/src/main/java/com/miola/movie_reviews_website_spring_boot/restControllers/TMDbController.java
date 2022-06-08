@@ -23,7 +23,11 @@ public class TMDbController {
     }
     @GetMapping("/upcoming")
     public List<Movie> getAllUpcomingMovies(){
-        return movieService.fetchUpcomingMovieList();
+        List<Movie> movies = movieService.fetchUpcomingMovieList();
+        for (Movie M : movies) {
+            M.setTrailerResult(movieService.fetchTrailers("https://api.themoviedb.org/3/movie/"+M.getId()+"/videos?api_key=6c204a7d2fd848e65c5f5230dbc85bb9"));
+        }
+        return movies;
     }
     @GetMapping("/trending")
     public List<Movie> getAllTrendingMovies(){
