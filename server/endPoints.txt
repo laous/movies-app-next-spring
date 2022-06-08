@@ -10,7 +10,7 @@ Movies EndPoints :
 -------------------------------
 /tmdb/trending :  you will get a table of movies
 ----------------------------
-/tmdb/{id_movie} : get a movie by id 
+/tmdb/movieStrip/{id_movie} : get a movie by id (stripped of (trailers/similar/Crew))
 what you will get : (Movie Body)
 {
     "title": "The Lost City",
@@ -73,6 +73,45 @@ what you will get : (Movie Body)
     "status": "Released",
     "id": 752623
 }
+------------------------------
+Updated : (Get movie By id)
+-------------------------------
+/tmdb/{id_movie} (GET): get a movie by id with (trailers/similar/Crew) infos
+what you will get :
+{
+    "movie_fields": {
+       (Movie Body)
+    },
+    "movie_trailers": [
+        {
+            "name": "Extended Preview",
+            "site": "YouTube",
+            "type": "Clip",
+            "key": "lWcD2icgoGs",
+            "official": "true"
+        },
+       ..........
+    ],
+    "similar_movies": [
+        {
+          (Movie Body),
+        },
+        {
+          (Movie Body),
+        },.......
+    ], 
+	"cast_and_crew": [
+        {
+            "id": 18277,
+            "known_for_department": "Acting",
+            "name": "Sandra Bullock",
+            "profile_path": "/u2tnZ0L2dwrzFKevVANYT5Pb1nE.jpg",
+            "character": "Loretta Sage / Angela"
+        },
+       {},.......
+}
+
+
 ----------------------------
 /tmdb/search/{movieTitle} : you will get a table of movies with this title
 

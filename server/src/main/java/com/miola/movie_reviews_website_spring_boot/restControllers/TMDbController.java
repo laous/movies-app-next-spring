@@ -1,10 +1,6 @@
 package com.miola.movie_reviews_website_spring_boot.restControllers;
 
-import com.miola.movie_reviews_website_spring_boot.entities.MovieEntity;
-import com.miola.movie_reviews_website_spring_boot.jsonModels.Crew;
-import com.miola.movie_reviews_website_spring_boot.jsonModels.Movie;
-import com.miola.movie_reviews_website_spring_boot.jsonModels.MovieResults;
-import com.miola.movie_reviews_website_spring_boot.jsonModels.Trailer;
+import com.miola.movie_reviews_website_spring_boot.jsonModels.*;
 import com.miola.movie_reviews_website_spring_boot.services.TMDbServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +32,7 @@ public class TMDbController {
 
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/movieStrip/{id}")
     public Movie getMovieById(@PathVariable("id") Long id){
         return movieService.fetchMovieById("https://api.themoviedb.org/3/movie/"+id+"?api_key=6c204a7d2fd848e65c5f5230dbc85bb9");
     }
@@ -59,6 +55,16 @@ public class TMDbController {
     public List<Trailer> getTrailer(@PathVariable("id") Long id){
         //https://api.themoviedb.org/3/movie/752623/videos?api_key=6c204a7d2fd848e65c5f5230dbc85bb9
         return movieService.fetchTrailers("https://api.themoviedb.org/3/movie/"+id+"/videos?api_key=6c204a7d2fd848e65c5f5230dbc85bb9");
+    }
+
+    @GetMapping("/{id}")
+    public MoviePayload getMovie(@PathVariable("id") Long id){
+        MoviePayload moviePayload = new MoviePayload();
+        moviePayload.setMovie(movieService.fetchMovieById("https://api.themoviedb.org/3/movie/"+id+"?api_key=6c204a7d2fd848e65c5f5230dbc85bb9"));
+        moviePayload.setSimilarMovies(movieService.fetchMoviesBySearchQuery("https://api.themoviedb.org/3/movie/"+id+"/similar?api_key=6c204a7d2fd848e65c5f5230dbc85bb9"));
+        moviePayload.setTrailerResult(movieService.fetchTrailers("https://api.themoviedb.org/3/movie/"+id+"/videos?api_key=6c204a7d2fd848e65c5f5230dbc85bb9"));
+        moviePayload.setCrew(movieService.fetchCrews("https://api.themoviedb.org/3/movie/"+id+"/credits?api_key=6c204a7d2fd848e65c5f5230dbc85bb9"));
+        return moviePayload;
     }
 
 
