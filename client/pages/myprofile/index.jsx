@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { FiLogOut, FiSettings } from "react-icons/fi";
-import { ProfileSection, HomeMoviesList } from "../../components";
+import {
+  ProfileSection,
+  HomeMoviesList,
+  MovieMiniCard,
+} from "../../components";
 
 const MyProfile = () => {
   return (
@@ -23,7 +27,17 @@ const MyProfile = () => {
           </ProfileSettings>
         </Left>
         <Right>
-          <HomeMoviesList title={"Watched Movies"} />
+          <div className=" flex flex-col justify-center">
+            <header className="w-full max-w-4xl flex items-center justify-between">
+              <h2 className="text-xl">Watched Movies</h2>
+            </header>
+            <div className="flex flex-wrap items-stretch gap-4">
+              <MovieMiniCard />
+              <MovieMiniCard />
+              <MovieMiniCard />
+              <MovieMiniCard />
+            </div>
+          </div>
         </Right>
       </Container>
     </main>
