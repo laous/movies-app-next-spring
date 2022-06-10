@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ReactPlayer from "react-player/lazy";
 import { FaPlay } from "react-icons/fa";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { GrVolumeMute, GrVolume } from "react-icons/gr";
 import MuiModal from "@mui/material/Modal";
 
 function TrailerModal({ state, movieLink, setShowModal }) {
@@ -21,10 +23,10 @@ function TrailerModal({ state, movieLink, setShowModal }) {
       <>
         {/* <Toaster position="bottom-center" /> */}
         <button
-          className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#181818] hover:bg-[#181818]"
+          className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none "
           onClick={handleClose}
         >
-          close
+          <AiFillCloseCircle className="h-10 w-10 text-black" />
         </button>
 
         <div className="relative pt-[56.25%]">
@@ -36,7 +38,7 @@ function TrailerModal({ state, movieLink, setShowModal }) {
             playing
             muted={muted}
           />
-          <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
+          {/* <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
               <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
                 <FaPlay className="h-7 w-7 text-black" />
@@ -48,11 +50,15 @@ function TrailerModal({ state, movieLink, setShowModal }) {
               <button className="modalButton">"thumb up icon"</button>
             </div>
             <button className="modalButton" onClick={() => setMuted(!muted)}>
-              {muted ? "volume off" : "volume on"}
+              {muted ? (
+                <GrVolumeMute className="h-8 w-8" />
+              ) : (
+                <GrVolume className="h-8 w-8" />
+              )}
             </button>
-          </div>
+          </div> */}
         </div>
-        <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
+        {/* <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
           <div className="space-y-6 text-lg">
             <div className="flex items-center space-x-2 text-sm">
               <p className="font-semibold text-green-400">32% Match</p>
@@ -85,7 +91,7 @@ function TrailerModal({ state, movieLink, setShowModal }) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </>
     </MuiModal>
   );

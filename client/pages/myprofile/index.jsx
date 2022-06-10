@@ -29,9 +29,9 @@ const MyProfile = () => {
         <Right>
           <div className=" flex flex-col justify-center">
             <header className="w-full max-w-4xl flex items-center justify-between">
-              <h2 className="text-xl">Watched Movies</h2>
+              <h2 className="text-lg">Watched Movies</h2>
             </header>
-            <div className="flex flex-wrap items-stretch gap-4">
+            <div className="flex flex-wrap items-stretch gap-4 px-2">
               <MovieMiniCard />
               <MovieMiniCard />
               <MovieMiniCard />
@@ -131,7 +131,7 @@ const Right = styled.section`
   height: 100%;
   /* background-color: #141a1f; */
   border-radius: 20px;
-  padding: 1.2rem;
+  padding: 1rem;
   overflow-x: auto;
   background: linear-gradient(
     180deg,
