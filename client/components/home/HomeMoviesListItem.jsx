@@ -45,12 +45,11 @@ const HomeMoviesListItem = () => {
               </p>
             </div>
           </div>
-
-          <div className="py-1 px-5 rounded-[5px] bg-gradient-to-r p-[6px] from-[#FF6969] to-[#E752FF] cursor-pointer">
-            <Link href="/movies/your-name" passHref>
+          <Link href="/movies/your-name" passHref>
+            <div className="py-1 px-5 rounded-[5px] bg-gradient-to-r p-[6px] from-[#FF6969] to-[#E752FF] cursor-pointer">
               Details
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       </div>
 

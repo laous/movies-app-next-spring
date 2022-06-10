@@ -1,13 +1,17 @@
 import { AiFillPlayCircle } from "react-icons/ai";
 import Link from "next/link";
-const HeroSliderItem = () => {
+
+const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink }) => {
   return (
     <div
       className={`relative w-full max-w-5xl h-[502px] bg-no-repeat bg-cover  flex items-center justify-center bg-center
       bg-[url('https://images.alphacoders.com/736/thumb-1920-736461.png')]`}
     >
       <div className=" absolute top-0 left-0 h-full w-full bg-black opacity-80"></div>
-      <button className="cursor-pointer z-10 opacity-50">
+      <button
+        className="cursor-pointer z-10 opacity-50"
+        onClick={() => setShowModal(true)}
+      >
         <AiFillPlayCircle className="w-20 h-20" />
       </button>
 

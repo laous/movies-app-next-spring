@@ -10,7 +10,7 @@ import "swiper/css/scrollbar";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
 
-const HeroSlider = ({ title }) => {
+const HeroSlider = ({ title, setShowModal, setMovieLink, movieLink }) => {
   return (
     <section className="w-full hidden lg:flex flex-col items-center justify-center space-y-5 m-5">
       <header className="w-full max-w-4xl flex items-center justify-between">
@@ -38,13 +38,25 @@ const HeroSlider = ({ title }) => {
         className="mySwiper z-20 w-full max-w-5xl flex items-center justify-between"
       >
         <SwiperSlide className="w-full flex items-center justify-between overflow-visible">
-          <HeroSliderItem />
+          <HeroSliderItem
+            setMovieLink={setMovieLink}
+            setShowModal={setShowModal}
+            movieLink={movieLink}
+          />
         </SwiperSlide>
         <SwiperSlide className="w-full">
-          <HeroSliderItem />
+          <HeroSliderItem
+            setMovieLink={setMovieLink}
+            setShowModal={setShowModal}
+            movieLink={movieLink}
+          />
         </SwiperSlide>
         <SwiperSlide className="w-full ">
-          <HeroSliderItem />
+          <HeroSliderItem
+            setMovieLink={setMovieLink}
+            setShowModal={setShowModal}
+            movieLink={movieLink}
+          />
         </SwiperSlide>
       </Swiper>
       {/* </div> */}

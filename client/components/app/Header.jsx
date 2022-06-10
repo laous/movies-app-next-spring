@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { MdSearch, MdClose } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import Logo from "./Logo";
 
 const SearchBar = ({ setActiveSearch }) => {
@@ -36,9 +37,11 @@ const MenuContent = ({ setActiveSearch }) => {
         />
       </div>
       <div className="flex items-center space-x-3 justify-center">
-        <Link href={"/"}>Sign in</Link>
+        <Link href={"/account"}>Sign in</Link>
         <span>|</span>
-        <Link href={"/"}>Sign up</Link>
+        <Link href={"/myprofile"}>
+          <CgProfile className="w-6 h-6 cursor-pointer" />
+        </Link>
       </div>
     </>
   );
