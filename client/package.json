@@ -21,6 +21,7 @@
     "react-icons": "^4.4.0",
     "react-player": "^2.10.1",
     "react-toastify": "^9.0.2",
+    "styled-components": "^5.3.5",
     "swiper": "^8.2.2"
   },
   "devDependencies": {
