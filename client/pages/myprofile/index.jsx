@@ -1,24 +1,24 @@
 import styled from "styled-components";
-import { MdOutlineMenuBook } from "react-icons/md";
 import { FiLogOut, FiSettings } from "react-icons/fi";
-import {
-  ProfileSection,
-  HomeMoviesList,
-  MovieMiniCard,
-} from "../../components";
+import { ProfileSection, MovieMiniCard } from "../../components";
+import { useState } from "react";
+import Link from "next/link";
 
 const MyProfile = () => {
+  const [actualList, setActualList] = useState("watched"); // watched | favorites | watchlist
   return (
     <main className="w-full flex flex-col  md:flex-row justify-between gap-4 mb-16">
       <Container>
         <Left>
           <Cover />
-          <ProfileSection />
+          <ProfileSection setActualList={setActualList} />
           <ProfileSettings>
-            <Settings>
-              <FiSettings />
-              <span>Settings</span>
-            </Settings>
+            <Link href="/myprofile/settings">
+              <Settings>
+                <FiSettings />
+                <span>Settings</span>
+              </Settings>
+            </Link>
             <span>|</span>
             <Logout>
               <FiLogOut />
@@ -29,9 +29,17 @@ const MyProfile = () => {
         <Right>
           <div className=" flex flex-col justify-center">
             <header className="w-full max-w-4xl flex items-center justify-between">
-              <h2 className="text-lg">Watched Movies</h2>
+              {actualList === "watched" && (
+                <h2 className="text-lg">Watched Movies</h2>
+              )}
+              {actualList === "favorites" && (
+                <h2 className="text-lg">Favorite Movies</h2>
+              )}
+              {actualList === "watchlist" && (
+                <h2 className="text-lg">Watchlist</h2>
+              )}
             </header>
-            <div className="flex flex-wrap items-stretch gap-4 px-2">
+            <div className="flex flex-wrap justify-center md:justify-start md:items-stretch gap-4 px-2">
               <MovieMiniCard />
               <MovieMiniCard />
               <MovieMiniCard />

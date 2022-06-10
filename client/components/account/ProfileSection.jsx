@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProfileSection = ({ books, loading }) => {
+const ProfileSection = ({ setActualList }) => {
   return (
     <Container>
       <ProfileInfo>
@@ -17,15 +17,15 @@ const ProfileSection = ({ books, loading }) => {
             <Followers>Following: 69</Followers>
           </Info>
         </Profile>
-        <Readbooks>
+        <Readbooks onClick={() => setActualList("watched")}>
           <Title>Watched Movies</Title>
           <Number>16</Number>
         </Readbooks>
-        <ReadPages>
+        <ReadPages onClick={() => setActualList("favorites")}>
           <Title>Favorite Movies</Title>
           <Number>03</Number>
         </ReadPages>
-        <TotalAuthors>
+        <TotalAuthors onClick={() => setActualList("watchlist")}>
           <Title>Watchlist</Title>
           <Number>01</Number>
         </TotalAuthors>
@@ -116,6 +116,7 @@ const Readbooks = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  cursor: pointer;
 `;
 const ReadPages = styled(Readbooks)`
   background-image: url("/assets/readpages.png");
@@ -125,9 +126,9 @@ const TotalAuthors = styled(Readbooks)`
 `;
 
 const Title = styled.span`
-  font-size: 13px;
+  font-size: 0.9rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 16px;
   letter-spacing: 0em;
   text-align: left;
