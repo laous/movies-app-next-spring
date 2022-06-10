@@ -36,6 +36,7 @@ const MyProfile = () => {
               <MovieMiniCard />
               <MovieMiniCard />
               <MovieMiniCard />
+              <MovieMiniCard />
             </div>
           </div>
         </Right>

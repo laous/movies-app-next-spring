@@ -6,7 +6,10 @@ const ProfileSection = ({ books, loading }) => {
       <ProfileInfo>
         <Profile>
           <Photo>
-            <img src="/assets/yourname-cover.jpg" alt="" />
+            <img
+              src="https://s.hdnux.com/photos/10/12/44/2140469/11/1200x0.jpg"
+              alt="Laous"
+            />
           </Photo>
           <Info>
             <Name>Oussama</Name>
@@ -15,16 +18,16 @@ const ProfileSection = ({ books, loading }) => {
           </Info>
         </Profile>
         <Readbooks>
-          <Title>Books Read</Title>
-          <Number>69</Number>
+          <Title>Watched Movies</Title>
+          <Number>16</Number>
         </Readbooks>
         <ReadPages>
-          <Title>Pages Read</Title>
-          <Number>18,320</Number>
+          <Title>Favorite Movies</Title>
+          <Number>03</Number>
         </ReadPages>
         <TotalAuthors>
-          <Title>Total Authors</Title>
-          <Number>47</Number>
+          <Title>Watchlist</Title>
+          <Number>01</Number>
         </TotalAuthors>
       </ProfileInfo>
     </Container>
@@ -66,8 +69,8 @@ const Profile = styled.div`
   } */
 `;
 const Photo = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   margin-top: -0.5rem;
   img {
     width: 100%;
@@ -78,11 +81,11 @@ const Photo = styled.div`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 2rem;
-  gap: 0.5rem;
   align-self: flex-end;
   margin-right: auto;
   margin-left: 0.8rem;
+  justify-content: center;
+  gap: 7px;
 `;
 const Name = styled.span`
   font-style: normal;

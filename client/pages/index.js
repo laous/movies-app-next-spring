@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import {
   DiscordBanner,
   Footer,
@@ -6,9 +7,12 @@ import {
   HeroSlider,
   HomeMoviesList,
   JoinUs,
+  TrailerModal,
 } from "../components";
 
 export default function Home() {
+  const [showModal, setShowModal] = useState(false)
+  const [movieLink, setMovieLink] = useState("https://www.youtube.com/watch?v=xU47nhruN-Q")
   return (
     <section className="flex flex-col items-center justify-center gap-12 w-full">
       <Head>
@@ -16,8 +20,8 @@ export default function Home() {
         <meta name="description" content="Movies Land" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <HeroSlider title="Latest Movies" />
+      <TrailerModal state={showModal} setShowModal={setShowModal} movieLink={movieLink}/>
+      <HeroSlider title="Latest Movies" setShowModal={setShowModal} setMovieLink={setMovieLink} movieLink={movieLink} />
       <HomeMoviesList title={"Popular Movies"} to={"/movies/popular"} />
       <HomeMoviesList title={"Top Ranked Movies"} to={"/movies/top-rated"} />
       <DiscordBanner />
