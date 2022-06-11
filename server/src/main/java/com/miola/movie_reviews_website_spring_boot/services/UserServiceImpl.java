@@ -101,7 +101,12 @@ public class UserServiceImpl implements UserService{
     public boolean markOrUnmarkAsWatched(Long movieId, Long userId, boolean mark) {
         UserEntity user = userRepository.findById(userId).orElse(null);
         MovieEntity movie = movieRepository.findById(movieId).orElse(null);
-        if(user != null && movie != null){
+        if(movie == null) {
+            movie = new MovieEntity();
+            movie.setMovieId(movieId);
+            movieRepository.save(movie);
+        }
+        if(user != null){
              Set<MovieEntity> watchedList = user.getWatchedList();
              if(mark == true)  watchedList.add(movie);
              if(mark == false)  watchedList.remove(movie);
@@ -117,6 +122,11 @@ public class UserServiceImpl implements UserService{
     public boolean addOrRemoveFromWishList(Long movieId, Long userId, boolean add) {
         UserEntity user = userRepository.findById(userId).orElse(null);
         MovieEntity movie = movieRepository.findById(movieId).orElse(null);
+        if(movie == null) {
+            movie = new MovieEntity();
+            movie.setMovieId(movieId);
+            movieRepository.save(movie);
+        }
         if(user != null && movie != null){
             Set<MovieEntity> wishList = user.getWhishList();
             if(add == true)  wishList.add(movie);
@@ -133,6 +143,11 @@ public class UserServiceImpl implements UserService{
     public boolean addOrRemoveFromFavoriteList(Long movieId, Long userId, boolean favorite) {
         UserEntity user = userRepository.findById(userId).orElse(null);
         MovieEntity movie = movieRepository.findById(movieId).orElse(null);
+        if(movie == null) {
+            movie = new MovieEntity();
+            movie.setMovieId(movieId);
+            movieRepository.save(movie);
+        }
         if(user != null && movie != null){
             Set<MovieEntity> favoritesList = user.getFavorites();
             if(favorite == true)  favoritesList.add(movie);

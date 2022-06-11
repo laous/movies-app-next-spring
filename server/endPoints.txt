@@ -1,23 +1,137 @@
 End Points : 
 -------------------------------
-/tmdb/topRated
-/tmdb/popular
-/tmdb/upcoming
-/tmdb/trending
-/tmdb/{id}
-/tmdb/search/{movieTitle}
+Movies EndPoints :
 -------------------------------
-/user/markWatched/{id_user}/{id_movie}
-/user/unMarkWatched/{id_user}/{id_movie}
-/user/watchedList/{id_user}
+/tmdb/topRated :  you will get a table of movies
+----------------------------
+/tmdb/popular :  you will get a table of movies
+-----------------------------
+/tmdb/upcoming :  you will get a table of movies (i added a field in the movie body called trailers (table of trailers) )
 -------------------------------
-/user/addToWishList/{id_user}/{id_movie}
-/user/removeFromWishList/{id_user}/{id_movie}
-/user/wishList/{id_user}
+/tmdb/trending :  you will get a table of movies
+----------------------------
+/tmdb/movieStrip/{id_movie} : get a movie by id (stripped of (trailers/similar/Crew))
+what you will get : (Movie Body)
+{
+    "title": "The Lost City",
+    "original_title": "The Lost City",
+    "popularity": 3870.596,
+    "backdrop_path": "/1Ds7xy7ILo8u2WWxdnkJth1jQVT.jpg",
+    "poster_path": "/neMZH82Stu91d3iqvLdNQfqPPyl.jpg",
+    "release_date": "2022-03-24",
+    "adult": false,
+    "budget": 74000000,
+    "genre_ids": null,
+    "homepage": "https://www.thelostcity.movie/",
+    "overview": "A reclusive romance novelist was sure nothing could be worse than getting stuck on a book tour with her cover model until a kidnapping attempt sweeps them both into a cutthroat jungle adventure, proving life can be so much stranger, and more romantic, than any of her paperback fictions.",
+    "imdb_id": "tt13320622",
+    "original_language": "en",
+    "production_companies": [
+        {
+            "id": 4,
+            "logo_path": "/gz66EfNoYPqHTYI4q9UEN4CbHRc.png",
+            "origin_country": "US"
+        },
+        {
+            "id": 4258,
+            "logo_path": null,
+            "origin_country": "US"
+        },
+        {
+            "id": 123420,
+            "logo_path": null,
+            "origin_country": "US"
+        },
+        {
+            "id": 121737,
+            "logo_path": null,
+            "origin_country": "US"
+        }
+    ],
+    "production_countries": [
+        {
+            "iso_3166_1": "US",
+            "name": "United States of America"
+        }
+    ],
+    "revenue": 164289828,
+    "runtime": 112,
+    "spoken_languages": [
+        {
+            "iso_639_1": "en",
+            "name": "English"
+        },
+        {
+            "iso_639_1": "fr",
+            "name": "Français"
+        }
+    ],
+    "tagline": "The adventure is real. The heroes are not.",
+    "rating": 0.0,
+    "vote_average": 6.8,
+    "vote_count": 1040,
+    "status": "Released",
+    "id": 752623,
+    "trailers":null
+}
+------------------------------
+Updated : (Get movie By id)
 -------------------------------
-/user/addToFavoritesList/{id_user}/{id_movie}
-/user/removeFromFavoritesList/{id_user}/{id_movie}
-/user/favoritesList/{id_user}
+/tmdb/{id_movie} (GET): get a movie by id with (trailers/similar/Crew) infos
+what you will get :
+{
+    "movie_fields": {
+       (Movie Body)
+    },
+    "movie_trailers": [
+        {
+            "name": "Extended Preview",
+            "site": "YouTube",
+            "type": "Clip",
+            "key": "lWcD2icgoGs",
+            "official": "true"
+        },
+       ..........
+    ],
+    "similar_movies": [
+        {
+          (Movie Body),
+        },
+        {
+          (Movie Body),
+        },.......
+    ], 
+	"cast_and_crew": [
+        {
+            "id": 18277,
+            "known_for_department": "Acting",
+            "name": "Sandra Bullock",
+            "profile_path": "/u2tnZ0L2dwrzFKevVANYT5Pb1nE.jpg",
+            "character": "Loretta Sage / Angela"
+        },
+       {},.......
+}
+
+
+----------------------------
+/tmdb/search/{movieTitle} : you will get a table of movies with this title
+
+-------------------------------
+User Lists EndPoints :
+-------------------------------
+/user/markWatched/{id_user}/{id_movie} : returns true if all is well else false
+/user/unMarkWatched/{id_user}/{id_movie} : returns true if all is well else false
+/user/watchedList/{id_user} : return a tabe of movies
+-------------------------------
+/user/addToWishList/{id_user}/{id_movie}  : returns true if all is well else false
+/user/removeFromWishList/{id_user}/{id_movie}  : returns true if all is well else false
+/user/wishList/{id_user} : return a tabe of movies
+-------------------------------
+/user/addToFavoritesList/{id_user}/{id_movie} : returns true if all is well else false
+/user/removeFromFavoritesList/{id_user}/{id_movie} : returns true if all is well else false 
+/user/favoritesList/{id_user} : return a tabe of movies
+
+
 -------------------------------
 Reviews EndPoints :
 -------------------------------
@@ -108,3 +222,46 @@ what to send : (All is required)
     "username": "ilyass",//this can be the username or email it does not matter, so in the login form the user should be asked to enter (the username or the email)
     "password": "1234"
 }  
+
+-------------------------------
+Crew End Point : 
+-------------------------------
+/tmdb/castAndCrew/{id_movie} (GET) : to get the movie crew
+[
+    {
+        "id": 18277,
+        "known_for_department": "Acting",
+        "name": "Sandra Bullock",
+        "profile_path": "/u2tnZ0L2dwrzFKevVANYT5Pb1nE.jpg",
+        "character": "Loretta Sage / Angela"
+    },.....
+]
+-------------------------------
+Trailer End Point : 
+-------------------------------
+/tmdb/trailer/{id_movie} (GET) : to get the movie trailers
+[
+    {
+        "name": "Extended Preview",
+        "site": "YouTube",
+        "type": "Clip",
+        "key": "lWcD2icgoGs",
+        "official": "true"
+    },.......
+]
+
+-------------------------------
+Similar Movies End Point : 
+-------------------------------
+/tmdb/similar/{id_movie} (GET) : to get similar movies of a movie
+[
+    {movie body},
+    {},....
+]
+
+
+
+
+
+
+
