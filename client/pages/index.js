@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { useState } from "react";
+import axios from 'axios'
 import {
   DiscordBanner,
-  Footer,
-  Header,
   HeroSlider,
   HomeMoviesList,
   JoinUs,
@@ -31,4 +30,13 @@ export default function Home() {
       </div>
     </section>
   );
+}
+
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  // const res = await axios.get('https://localhost:8080/')
+
+  // Pass data to the page via props
+  return { props: {  } }
 }

@@ -2,6 +2,7 @@ import {
   BorderButton,
   CastCard,
   HomeMoviesList,
+  ReviewCard,
   ReviewModal,
   TrailerSection,
 } from "../../../components";
@@ -80,6 +81,17 @@ const YourName = () => {
       </div>
       {/* Trailer Section */}
       <TrailerSection />
+      {/* Review Section */}
+      <div className="flex flex-col items-center justify-center space-y-5 m-5 max-w-6xl overflow-hidden">
+        <header className="w-full max-w-4xl flex items-center ">
+          <h2 className="text-xl">Reviews</h2>
+        </header>
+        <div className="flex items-stretch gap-4 ">
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+        </div>
+      </div>
       {/* Similar Section */}
       <HomeMoviesList title="Similar Movies" />
     </div>
