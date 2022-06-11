@@ -11,11 +11,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-  textColor: "black",
 };
 
 const ReviewModal = () => {
@@ -26,7 +23,7 @@ const ReviewModal = () => {
   return (
     <div>
       <span
-        className="cursor-pointer flex items-center justify-center gap-1 text-lg"
+        className="cursor-pointer flex items-center justify-center gap-1 text-lg hover:text-yellow-400"
         onClick={handleOpen}
       >
         Rate
@@ -37,30 +34,37 @@ const ReviewModal = () => {
         />
       </span>
       <Modal
-        keepMounted
         open={open}
         onClose={handleClose}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
-        <Box sx={style}>
-          <p className="text-gray-800">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Praesentium atque illo debitis excepturi quaerat consequuntur
-            placeat voluptatibus est minima velit repellendus nemo molestias
-            reiciendis fugiat, officiis consequatur dolores iure eos nobis
-            corrupti?
-          </p>
-          <p>
+        <Box
+          sx={style}
+          className="bg-zinc-800 flex flex-col  items-stretch justify-center gap-4 rounded-3xl"
+        >
+          <div className="flex flex-col gap-1">
+            <h3>Add your rating</h3>
             <Rating
               name="customized-10"
-              defaultValue={2}
+              defaultValue={0}
               max={10}
               emptyIcon={
-                <StarIcon fontSize="inherit" style={{ color: "black" }} />
+                <StarIcon
+                  fontSize="inherit"
+                  style={{ color: "black" }}
+                  className="w-7 h-auto"
+                />
               }
             />
-          </p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <h3>Add your review{"(optional)"}</h3>
+            <textarea className="p-2 text-black rounded-xl" rows="7"></textarea>
+          </div>
+          <button className="bg-gray-900 text-white max-w-[100px] self-center px-6 py-1">
+            Add
+          </button>
         </Box>
       </Modal>
     </div>
