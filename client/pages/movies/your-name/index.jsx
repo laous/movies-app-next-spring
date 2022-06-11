@@ -2,9 +2,9 @@ import {
   BorderButton,
   CastCard,
   HomeMoviesList,
+  ReviewModal,
   TrailerSection,
 } from "../../../components";
-import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import StarIcon from "@mui/icons-material/Star";
 
@@ -39,18 +39,14 @@ const YourName = () => {
             <div>
               <Typography
                 component="legend"
-                className="flex items-center gap-1"
+                className="flex justify-between items-center gap-10"
               >
-                9/10 <StarIcon fontSize="inherit" style={{ color: "yellow" }} />
+                <div>
+                  9/10{" "}
+                  <StarIcon fontSize="inherit" style={{ color: "yellow" }} />
+                </div>{" "}
+                <ReviewModal />
               </Typography>
-              <Rating
-                name="customized-10"
-                defaultValue={2}
-                max={10}
-                emptyIcon={
-                  <StarIcon fontSize="inherit" style={{ color: "black" }} />
-                }
-              />
             </div>
           </div>
 

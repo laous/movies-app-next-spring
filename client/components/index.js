@@ -16,6 +16,7 @@ export {default as SignIn} from './account/SignIn'
 export {default as Register} from './account/Register'
 export {default as ProfileSection} from './account/ProfileSection'
 export {default as MovieMiniCard} from './app/MovieMiniCard'
+export {default as ReviewModal} from './single-movie/ReviewModal'
 
 
 
