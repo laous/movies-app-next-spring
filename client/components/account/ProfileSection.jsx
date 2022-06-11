@@ -7,14 +7,13 @@ const ProfileSection = ({ setActualList }) => {
         <Profile>
           <Photo>
             <img
-              src="https://s.hdnux.com/photos/10/12/44/2140469/11/1200x0.jpg"
-              alt="Laous"
+              src="https://upload.wikimedia.org/wikipedia/en/e/ea/Mike_Ehrmantraut_BCS_S3.png"
+              alt="Mike Ehrmantraut"
             />
           </Photo>
           <Info>
             <Name>Oussama</Name>
             <Username>@laous</Username>
-            <Followers>Following: 69</Followers>
           </Info>
         </Profile>
         <Readbooks onClick={() => setActualList("watched")}>
@@ -60,8 +59,7 @@ const Profile = styled.div`
   justify-content: space-between;
   min-width: 100%;
   padding-left: 2.4rem;
-  padding-top: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
   z-index: 10;
 
   /* @media screen and (max-width: 1024px) {
@@ -69,12 +67,10 @@ const Profile = styled.div`
   } */
 `;
 const Photo = styled.div`
-  width: 120px;
-  height: 120px;
-  margin-top: -0.5rem;
+  margin-top: 0rem;
   img {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
 `;
@@ -85,7 +81,7 @@ const Info = styled.div`
   margin-right: auto;
   margin-left: 0.8rem;
   justify-content: center;
-  gap: 7px;
+  gap: 4px;
 `;
 const Name = styled.span`
   font-style: normal;
@@ -97,12 +93,6 @@ const Username = styled.span`
   font-weight: 300;
   font-size: 14px;
   line-height: 17px;
-`;
-const Followers = styled.span`
-  font-style: normal;
-  font-weight: 500;
-  font-size: 11px;
-  line-height: 13px;
 `;
 
 const Readbooks = styled.div`

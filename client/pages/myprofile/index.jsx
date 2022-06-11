@@ -13,14 +13,14 @@ const MyProfile = () => {
           <Cover />
           <ProfileSection setActualList={setActualList} />
           <ProfileSettings>
-            <Link href="/myprofile/settings">
+            {/* <Link href="/myprofile/settings">
               <Settings>
                 <FiSettings />
                 <span>Settings</span>
               </Settings>
-            </Link>
-            <span>|</span>
-            <Logout>
+            </Link> */}
+            {/* <span>|</span> */}
+            <Logout className="mx-auto">
               <FiLogOut />
               <span>Log out</span>
             </Logout>
