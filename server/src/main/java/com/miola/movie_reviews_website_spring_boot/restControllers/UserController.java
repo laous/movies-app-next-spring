@@ -40,7 +40,8 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user){
-        if(userService.authenticate(user.getUsername(), user.getPassword())) return new ResponseEntity<>("true", HttpStatus.OK);
+        System.out.println(user);
+        if(userService.authenticate(user.getUsername(), user.getPassword()) != null) return new ResponseEntity<>(userService.authenticate(user.getUsername(), user.getPassword()), HttpStatus.OK);
         else return new ResponseEntity<>("false", HttpStatus.OK);
     }
 

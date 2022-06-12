@@ -97,4 +97,15 @@ public class UserEntity {
     public void setWatchedList(Set<MovieEntity> watchedList) {
         this.watchedList = watchedList;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", fullname='" + fullname + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

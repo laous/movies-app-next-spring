@@ -83,19 +83,27 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean authenticate(String usernameOrEmail, String password) {
+    public User authenticate(String usernameOrEmail, String password) {
         String username = null, email = null;
         if(usernameOrEmail.contains("@")) email =  usernameOrEmail;
         else username = usernameOrEmail;
         UserEntity user = userRepository.findByUsernameOrEmail(username, email);
+        System.out.println("user entity : "+userRepository.findByUsernameOrEmail(username, email));
+        System.out.println("user password : "+password);
         if(user == null){
-            return false;
-        }else{
-            if(encryptionMd5(password).equals(user.getPassword())) {
-                return true;
-            }
-            else return false;
+            return null;
         }
+        if(encryptionMd5(password).equals(user.getPassword())) {
+                User user1 = new User();
+                user1.setUserId(user.getId());
+                user1.setFullname(user.getFullname());
+                user1.setUsername(user.getUsername());
+                user1.setEmail(user.getEmail());
+                System.out.println("user1  : "+user1);
+                //user1.setPassword();
+                return user1;
+        } else return null;
+
     }
 
     //TODO create movie if it does not exist

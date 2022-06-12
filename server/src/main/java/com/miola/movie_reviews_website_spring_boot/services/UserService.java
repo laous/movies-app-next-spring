@@ -13,7 +13,7 @@ public interface UserService {
     boolean updateUser(User user);
     UserEntity fetchUser(Long id_user);
     boolean deleteUser(Long id_user);
-    boolean authenticate(String username, String password);
+    User authenticate(String username, String password);
     boolean markOrUnmarkAsWatched(Long movieId, Long userId, boolean mark);
     boolean addOrRemoveFromWishList(Long movieId, Long userId, boolean add);
     boolean addOrRemoveFromFavoriteList(Long movieId, Long userId, boolean favorite);
