@@ -29,7 +29,6 @@ const SignIn = () => {
   };
 
   const { user, status, message } = useSelector((state) => state.auth);
-  console.log("USer state :", user);
 
   useEffect(() => {
     if (status === "failed") {
@@ -45,10 +44,9 @@ const SignIn = () => {
           backgroundColor: "darkred",
         },
       });
-      console.log("failed");
     }
-    if (status === "succeeded" || user) {
-      toast.success("Success", {
+    if (status === "succeeded") {
+      toast.success("Auth Success", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,

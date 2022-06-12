@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { register } from "../../reducers/authSlice";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { register, reset } from "../../reducers/authSlice";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // handle form
   const [formData, setFormData] = useState({
@@ -27,6 +30,42 @@ const Register = () => {
     dispatch(register(userData));
   };
 
+  const { user, status, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (status === "failed") {
+      toast.error("Invalid informations!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+    }
+    if (status === "succeeded") {
+      toast.success("Account Created", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "green",
+          color: "white",
+        },
+      });
+      router.push("/");
+      dispatch(reset());
+    }
+  }, [user, status, message, router, dispatch]);
+
   return (
     <div
       className="flex flex-col items-center justify-center  w-80 h-auto shadow-2xl bg-zinc-600 rounded-md  px-6 py-7"
@@ -47,6 +86,7 @@ const Register = () => {
           value={fullname}
           className="py-2 px-3 rounded-md outline-none bg-stone-200 text-black "
           onChange={onChange}
+          required
         />
         <input
           type={"text"}
@@ -55,6 +95,7 @@ const Register = () => {
           value={username}
           className="py-2 px-3 rounded-md outline-none bg-stone-200 text-black "
           onChange={onChange}
+          required
         />
         <input
           type={"text"}
@@ -63,6 +104,7 @@ const Register = () => {
           value={email}
           className="py-2 px-3 rounded-md outline-none bg-stone-200 text-black"
           onChange={onChange}
+          required
         />
         <input
           type={"password"}
@@ -71,6 +113,7 @@ const Register = () => {
           value={password}
           className="py-2 px-3 rounded-md outline-none bg-stone-200 text-black"
           onChange={onChange}
+          required
         />
         <input
           type="submit"
