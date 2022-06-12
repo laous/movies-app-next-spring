@@ -153,7 +153,7 @@ what to send :
 /user/review/{id_review} (PUT)
 what to send : (All is required)
  { 
-        //        "reviewId": 1,(deleted upon request)
+             
                 "movieId": 507086,
                 "rating": 2.5,
                 "reviewText": "BLABALABALABALABALABALABALXOX",
@@ -163,24 +163,28 @@ what to send : (All is required)
 /user/review/user/{id_user} : get all the reviews of a user
 what you will get : 
 [
-    {
-        "reviewId": 10,
-        "movieId": 338953,
-        "rating": 3.0,
-        "reviewText": "BLBLBL",
-        "userId": 1
+     {
+        "reviewId": 1,
+        "movieId": 507086,
+        "rating": 2.5,
+        "reviewText": "BLABALABALABALABALABALABALXOX",
+        "userId": 100,
+        "reviewHeadLine": "BLBLBL",
+        "reviewDate": "2022-06-12T11:29:40.000+00:00"
     }, .......
 ]
 --------------------------------
 /user/review/movie/{id_movie} : get all the reviews of a movie
 what you will get : 
 [
-    {
-        "reviewId": 10,
-        "movieId": 338953,
-        "rating": 3.0,
-        "reviewText": "BLBLBL",
-        "userId": 1
+     {
+        "reviewId": 1,
+        "movieId": 507086,
+        "rating": 2.5,
+        "reviewText": "BLABALABALABALABALABALABALXOX",
+        "userId": 100,
+        "reviewHeadLine": "BLBLBL",
+        "reviewDate": "2022-06-12T11:29:40.000+00:00"
     }, .......
 ]
 
@@ -190,15 +194,17 @@ User EndPoints :
 /user/{id_user} (GET) : to get a user
 what you will get : 
 {
-    "userId": 1,
+    "userId": 100,
+    "fullname": "oussama hennane",
     "username": "oussama",
-    "email": "oussamahennane@gmail.com",
+    "email": "oussamahennane1@gmai.com",
     "password": "1234"
 }
 -------------------------------
 /user (POST) : to create a user
 what to send : (All is required)
 {
+    "fullname": "ilyass imzg",
     "username": "ilyass",
     "email": "ilyass@gmail.com",
     "password": "1234"
@@ -207,6 +213,7 @@ what to send : (All is required)
 /user/{id_user} (PUT) : to edit a user
 what to send : (All is required)
 {
+    "fullname": "ilyass imzg",
     "username": "ilyass",
     "email": "ilyass@gmail.com",
     "password": "1234"

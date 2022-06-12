@@ -10,6 +10,7 @@ import com.miola.movie_reviews_website_spring_boot.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,6 +39,8 @@ public class ReviewServiceImpl implements ReviewService{
             reviewEntity.setUser(user);
             reviewEntity.setReviewText(review.getReviewText());
             reviewEntity.setRating(review.getRating());
+            reviewEntity.setReviewHeadLine(review.getReviewHeadLine());
+            reviewEntity.setReviewDate(new Date());
             reviewRepository.save(reviewEntity);
             return true;
         }
@@ -56,6 +59,8 @@ public class ReviewServiceImpl implements ReviewService{
                 reviewEntity.setUser(user);
                 reviewEntity.setReviewText(review.getReviewText());
                 reviewEntity.setRating(review.getRating());
+                reviewEntity.setReviewHeadLine(review.getReviewHeadLine());
+                reviewEntity.setReviewDate(new Date());
                 reviewRepository.save(reviewEntity);
                 return true;
             }
