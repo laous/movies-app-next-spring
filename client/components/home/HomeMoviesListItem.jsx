@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const HomeMoviesListItem = () => {
+const HomeMoviesListItem = ({ movie }) => {
   return (
     <div className="flex flex-col space-y-2 my-3 max-w-[47%] md:max-w-none">
       <div className="relative group w-64 max-w-full h-auto">
@@ -13,7 +13,9 @@ const HomeMoviesListItem = () => {
         <div className="max-w-full absolute bg-black bottom-0 top-0 left-0 right-0 opacity-0 group-hover:opacity-70 flex flex-col justify-between items-center py-5 px-4">
           <div className="flex flex-col gap-4">
             <header className="flex flex-col gap-1">
-              <h2 className="text-xl md:text-2xl font-semibold">Your Name</h2>
+              <h2 className="text-xl md:text-2xl font-semibold">
+                {movie ? movie.title : "Your Name"}
+              </h2>
               <div className="flex items-center justify-between">
                 <span className="text-sm md:text-base font-medium">+16</span>
                 <span className="text-base font-medium">|</span>
