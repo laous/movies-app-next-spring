@@ -53,6 +53,7 @@ const MyProfile = () => {
   );
 };
 export default MyProfile;
+MyProfile.auth = true;
 
 const Container = styled.main`
   width: 100%;

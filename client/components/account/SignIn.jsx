@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../reducers/authSlice";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login, reset } from "../../reducers/authSlice";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // handle form
   const [formData, setFormData] = useState({
@@ -24,6 +27,43 @@ const SignIn = () => {
     const userData = { username, password };
     dispatch(login(userData));
   };
+
+  const { user, status, message } = useSelector((state) => state.auth);
+  console.log("USer state :", user);
+
+  useEffect(() => {
+    if (status === "failed") {
+      toast.error("Wrong Credentials", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      console.log("failed");
+    }
+    if (status === "succeeded" || user) {
+      toast.success("Success", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "green",
+        },
+      });
+      router.push("/");
+      dispatch(reset());
+    }
+  }, [user, status, message, router, dispatch]);
 
   return (
     <div
