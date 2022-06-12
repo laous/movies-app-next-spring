@@ -1,7 +1,7 @@
 import Link from "next/link";
 import HomeMoviesListItem from "./HomeMoviesListItem";
 
-const HomeMoviesList = ({ title, to }) => {
+const HomeMoviesList = ({ title, to, movies }) => {
   return (
     <section className=" flex flex-col items-center justify-center space-y-5 m-5">
       <header className="w-full max-w-4xl flex items-center justify-between">
@@ -15,10 +15,22 @@ const HomeMoviesList = ({ title, to }) => {
         )}
       </header>
       <div className="flex flex-wrap justify-center items-stretch gap-4">
-        <HomeMoviesListItem />
-        <HomeMoviesListItem />
-        <HomeMoviesListItem />
-        <HomeMoviesListItem />
+        {movies ? (
+          movies
+            ?.slice(0, 4)
+            ?.map((movie, index) => (
+              <HomeMoviesListItem movie={movie} key={index} />
+            ))
+        ) : (
+          <>
+            {" "}
+            <HomeMoviesListItem />
+            <HomeMoviesListItem />
+            <HomeMoviesListItem />
+            <HomeMoviesListItem />
+          </>
+        )}
+        {/*  */}
       </div>
     </section>
   );

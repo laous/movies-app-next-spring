@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import {
   DiscordBanner,
   HeroSlider,
@@ -9,9 +9,13 @@ import {
   TrailerModal,
 } from "../components";
 
-export default function Home() {
-  const [showModal, setShowModal] = useState(false)
-  const [movieLink, setMovieLink] = useState("https://www.youtube.com/watch?v=xU47nhruN-Q")
+export default function Home({
+  topRatedMovies,
+  popularMovies,
+  upcomingMovies,
+}) {
+  const [showModal, setShowModal] = useState(false);
+  const [movieLink, setMovieLink] = useState("");
   return (
     <section className="flex flex-col items-center justify-center gap-12 w-full">
       <Head>
@@ -19,12 +23,32 @@ export default function Home() {
         <meta name="description" content="Movies Land" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <TrailerModal state={showModal} setShowModal={setShowModal} movieLink={movieLink}/>
-      <HeroSlider title="Latest Movies" setShowModal={setShowModal} setMovieLink={setMovieLink} movieLink={movieLink} />
-      <HomeMoviesList title={"Popular Movies"} to={"/movies/popular"} />
-      <HomeMoviesList title={"Top Ranked Movies"} to={"/movies/top-rated"} />
+      <TrailerModal
+        state={showModal}
+        setShowModal={setShowModal}
+        movieLink={"https://www.youtube.com/watch?v=" + movieLink}
+      />
+      <HeroSlider
+        title="Upcoming Movies"
+        setShowModal={setShowModal}
+        setMovieLink={setMovieLink}
+        movieLink={movieLink}
+        upcomingMovies={upcomingMovies}
+      />
+
+      <HomeMoviesList
+        title={"Top Ranked Movies"}
+        to={"/movies/top-rated"}
+        movies={topRatedMovies}
+      />
+      <HomeMoviesList
+        title={"Latest Movies"}
+        to={"/movies/popular"}
+        movies={popularMovies}
+      />
+
       <DiscordBanner />
-      <HomeMoviesList title={"From your Watchlist"} to={"/movies/watchlist"} />
+      {/* <HomeMoviesList title={"From your Watchlist"} to={"/movies/watchlist"} /> */}
       <div className="flex flex-col items-center">
         <JoinUs />
       </div>
@@ -32,11 +56,28 @@ export default function Home() {
   );
 }
 
-
 export async function getServerSideProps() {
   // Fetch data from external API
-  // const res = await axios.get('https://localhost:8080/')
+  const [topRatedMovies, popularMovies, upcomingMovies] = await Promise.all([
+    axios
+      .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/topRated")
+      .then((res) => res.data),
+    axios
+      .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/popular")
+      .then((res) => res.data),
+    axios
+      .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/upcoming")
+      .then((res) => res.data),
+  ]);
+  // const  topRatedMovies = await fetch(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/topRated")
+  // const data = await topRatedMovies.json()
 
   // Pass data to the page via props
-  return { props: {  } }
+  return {
+    props: {
+      topRatedMovies: topRatedMovies,
+      popularMovies: popularMovies,
+      upcomingMovies,
+    },
+  };
 }
