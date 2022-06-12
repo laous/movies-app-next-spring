@@ -2,7 +2,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { MdSearch, MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { FiLogOut } from "react-icons/fi";
 import Logo from "./Logo";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../reducers/authSlice";
+import { toast } from "react-toastify";
 
 const SearchBar = ({ setActiveSearch }) => {
   return (
@@ -22,6 +26,23 @@ const SearchBar = ({ setActiveSearch }) => {
 };
 
 const MenuContent = ({ setActiveSearch }) => {
+  const { user, status, message } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    toast.info("You are logged out!!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <>
       <Logo />
@@ -36,19 +57,31 @@ const MenuContent = ({ setActiveSearch }) => {
           className="border-none outline-none bg-transparent"
         />
       </div>
-      <div className="flex items-center space-x-3 justify-center">
-        <Link href={"/account"}>Sign in</Link>
-        <span>|</span>
-        <Link href={"/myprofile"}>
-          <CgProfile className="w-6 h-6 cursor-pointer" />
-        </Link>
-      </div>
+      {user ? (
+        <div className="flex items-center space-x-3 justify-center">
+          <Link href={"/myprofile"}>
+            <CgProfile className="w-6 h-6 cursor-pointer" />
+          </Link>
+          <span>|</span>
+          <button onClick={handleLogout}>
+            <FiLogOut className="w-5 h-auto cursor-pointer text-red-600" />
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center space-x-3 justify-center">
+          <Link href={"/account"}>Sign in</Link>
+          <span>|</span>
+          <Link href={"/account"}>Register</Link>
+        </div>
+      )}
     </>
   );
 };
 
 const Header = () => {
   const [activeSearch, setActiveSearch] = useState(false);
+  const { user, status, message } = useSelector((state) => state.auth);
+  console.log("USer state :", user);
 
   return (
     <header
