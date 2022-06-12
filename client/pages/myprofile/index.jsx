@@ -1,26 +1,40 @@
 import styled from "styled-components";
-import { FiLogOut, FiSettings } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import { ProfileSection, MovieMiniCard } from "../../components";
 import { useState } from "react";
-import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { logout } from "../../reducers/authSlice";
+import { toast } from "react-toastify";
 
 const MyProfile = () => {
   const [actualList, setActualList] = useState("watched"); // watched | favorites | watchlist
+  const { user, status, message } = useSelector((state) => state.auth);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    toast.info("You are logged out!!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    router.push("/account");
+  };
   return (
     <main className="w-full flex flex-col  md:flex-row justify-between gap-4 mb-16">
       <Container>
         <Left>
           <Cover />
-          <ProfileSection setActualList={setActualList} />
+          <ProfileSection setActualList={setActualList} user={user} />
           <ProfileSettings>
-            {/* <Link href="/myprofile/settings">
-              <Settings>
-                <FiSettings />
-                <span>Settings</span>
-              </Settings>
-            </Link> */}
-            {/* <span>|</span> */}
-            <Logout className="mx-auto">
+            <Logout className="mx-auto" onClick={handleLogout}>
               <FiLogOut />
               <span>Log out</span>
             </Logout>

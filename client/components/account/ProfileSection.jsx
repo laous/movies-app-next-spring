@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProfileSection = ({ setActualList }) => {
+const ProfileSection = ({ setActualList, user }) => {
   return (
     <Container>
       <ProfileInfo>
@@ -12,8 +12,8 @@ const ProfileSection = ({ setActualList }) => {
             />
           </Photo>
           <Info>
-            <Name>Oussama</Name>
-            <Username>@laous</Username>
+            <Name>{user?.fullname?.split(" ")[0]}</Name>
+            <Username>@{user?.username}</Username>
           </Info>
         </Profile>
         <Readbooks onClick={() => setActualList("watched")}>

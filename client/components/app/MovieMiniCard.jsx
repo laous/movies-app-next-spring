@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-const MovieMiniCard = () => {
+const MovieMiniCard = ({ movie }) => {
   return (
     <Link href="/movies/your-name">
-      <div className="flex flex-col space-y-2 my-3 max-w-[47%] md:max-w-none cursor-pointer">
+      <div className="flex flex-col my-3 max-w-[47%] md:max-w-none cursor-pointer">
         <div className="group w-36 max-w-full h-auto">
           {/* Image */}
           <img
@@ -12,10 +12,9 @@ const MovieMiniCard = () => {
           />
         </div>
 
-        <div className="flex items-center space-x-5 justify-between px-1">
+        <div className="flex items-center space-x-5 justify-center px-1">
           <div className="flex flex-col">
-            <h3 className="text-lg">Your Name</h3>
-            <span className="text-xs">By Makoto Shinkai</span>
+            <h3 className="text-md">Your Name</h3>
           </div>
           {/* <Link href={"/"}>
           <div className="p-0.5  bg-gradient-to-tr  from-[#ff6969] to-[#e752ff] cursor-pointer rounded-sm ">
