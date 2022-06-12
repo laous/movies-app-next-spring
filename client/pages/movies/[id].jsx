@@ -76,7 +76,10 @@ const SingleMovie = ({ movie, similar }) => {
         </div>
       </div>
       {/* Trailer Section */}
-      <TrailerSection />
+      {movie_trailers?.slice(0, 2).map((trailer, index) => (
+        <TrailerSection trailer={trailer} key={index} />
+      ))}
+
       {/* Review Section */}
       <div className="flex flex-col items-center justify-center space-y-5 m-5 max-w-6xl overflow-hidden">
         <header className="w-full max-w-4xl flex items-center ">
