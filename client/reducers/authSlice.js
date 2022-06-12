@@ -1,9 +1,13 @@
 import {createAsyncThunk , createSlice} from "@reduxjs/toolkit"
-import * as api from "../../services"
+import * as api from "../services"
 
 
 // get user from local storage
-const user = JSON.parse(localStorage.getItem('movies-user'))
+let user = null
+if (typeof window !== 'undefined') {
+ user = JSON.parse(localStorage.getItem('movies-user'))
+}
+
 
 // our initial state
 const initialState = {

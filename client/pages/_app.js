@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { Layout } from "../components";
 import "../styles/globals.css";
+import { store } from "../store";
+import { Provider } from "react-redux";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
+    <Provider store={store}>    <Layout>
       <Head>
         <link
           rel="stylesheet"
@@ -16,7 +18,8 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Component {...pageProps} />
-    </Layout>
+    </Layout></Provider>
+
   );
 }
 
