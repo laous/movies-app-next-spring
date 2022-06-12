@@ -4,6 +4,14 @@ import Link from "next/link";
 import { imageUrl } from "../../constants/";
 
 const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
+  const handlePlayClick = () => {
+    setShowModal(true);
+    setMovieLink(
+      movie.trailers.length > 2
+        ? movie?.trailers[1].key
+        : movie?.trailers[0].key
+    );
+  };
   return (
     <div
       className={`relative w-full max-w-5xl h-[502px] bg-no-repeat bg-cover  flex items-center justify-center bg-center 
@@ -13,7 +21,7 @@ const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
       <div className=" absolute top-0 left-0 h-full w-full bg-black opacity-80"></div>
       <button
         className="cursor-pointer z-10 opacity-50"
-        onClick={() => setShowModal(true)}
+        onClick={handlePlayClick}
       >
         <AiFillPlayCircle className="w-20 h-20" />
       </button>

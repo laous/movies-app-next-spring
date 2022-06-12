@@ -15,9 +15,7 @@ export default function Home({
   upcomingMovies,
 }) {
   const [showModal, setShowModal] = useState(false);
-  const [movieLink, setMovieLink] = useState(
-    "https://www.youtube.com/watch?v=xU47nhruN-Q"
-  );
+  const [movieLink, setMovieLink] = useState("");
   return (
     <section className="flex flex-col items-center justify-center gap-12 w-full">
       <Head>
@@ -28,7 +26,7 @@ export default function Home({
       <TrailerModal
         state={showModal}
         setShowModal={setShowModal}
-        movieLink={movieLink}
+        movieLink={"https://www.youtube.com/watch?v=" + movieLink}
       />
       <HeroSlider
         title="Latest Movies"
