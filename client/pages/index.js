@@ -9,9 +9,11 @@ import {
   TrailerModal,
 } from "../components";
 
-export default function Home({ topRatedMovies, popularMovies }) {
-  console.log("Top Rated Movies " + topRatedMovies);
-  console.log("Popular Movies " + popularMovies);
+export default function Home({
+  topRatedMovies,
+  popularMovies,
+  upcomingMovies,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [movieLink, setMovieLink] = useState(
     "https://www.youtube.com/watch?v=xU47nhruN-Q"
@@ -33,9 +35,10 @@ export default function Home({ topRatedMovies, popularMovies }) {
         setShowModal={setShowModal}
         setMovieLink={setMovieLink}
         movieLink={movieLink}
+        upcomingMovies={upcomingMovies}
       />
       <HomeMoviesList
-        title={"Popular Movies"}
+        title={"Latest Movies"}
         to={"/movies/popular"}
         movies={popularMovies}
       />
@@ -45,7 +48,7 @@ export default function Home({ topRatedMovies, popularMovies }) {
         movies={topRatedMovies}
       />
       <DiscordBanner />
-      <HomeMoviesList title={"From your Watchlist"} to={"/movies/watchlist"} />
+      {/* <HomeMoviesList title={"From your Watchlist"} to={"/movies/watchlist"} /> */}
       <div className="flex flex-col items-center">
         <JoinUs />
       </div>
@@ -55,12 +58,15 @@ export default function Home({ topRatedMovies, popularMovies }) {
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const [topRatedMovies, popularMovies] = await Promise.all([
+  const [topRatedMovies, popularMovies, upcomingMovies] = await Promise.all([
     axios
       .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/topRated")
       .then((res) => res.data),
     axios
       .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/popular")
+      .then((res) => res.data),
+    axios
+      .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/upcoming")
       .then((res) => res.data),
   ]);
   // const  topRatedMovies = await fetch(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/topRated")
@@ -68,6 +74,10 @@ export async function getServerSideProps() {
 
   // Pass data to the page via props
   return {
-    props: { topRatedMovies: topRatedMovies, popularMovies: popularMovies },
+    props: {
+      topRatedMovies: topRatedMovies,
+      popularMovies: popularMovies,
+      upcomingMovies,
+    },
   };
 }

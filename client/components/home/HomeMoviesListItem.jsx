@@ -43,7 +43,7 @@ const HomeMoviesListItem = ({ movie }) => {
 
             {/* content */}
             <div className="flex flex-col gap-1">
-              <h4 className="text-base md:text-lg font-semibold">Story</h4>
+              <h4 className="text-base md:text-lg font-semibold">Overview</h4>
               <p className="text-xs md:text-sm font-normal">
                 {movie?.overview.slice(0, 200) +
                   (movie?.overview.length > 200 ? " ..." : "")}
