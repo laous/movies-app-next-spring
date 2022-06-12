@@ -2,12 +2,13 @@ import Link from "next/link";
 import { imageUrl } from "../../constants/";
 const HomeMoviesListItem = ({ movie }) => {
   return (
-    <div className="flex flex-col  space-y-2 my-3 max-w-[47%]  md:max-w-[36%] lg:max-w-[22%]">
+    <div className="flex flex-col  space-y-2 my-3 max-w-[47%]  md:max-w-[36%] lg:max-w-[23%]">
       <div className="relative group w-64 h-auto">
         {/* Image */}
         <img
-          className="w-64 max-w-full h-auto group-hover:opacity-25 rounded-xl"
+          className="w-60 max-w-full h-auto group-hover:opacity-25 rounded-xl"
           src={imageUrl + movie?.poster_path}
+          alt={movie?.title}
         />
         {/* Content on hover */}
         <div className="max-w-full absolute bg-black bottom-0 top-0 left-0 right-0 opacity-0 group-hover:opacity-80 flex flex-col justify-between items-center py-5 px-4">
@@ -28,7 +29,7 @@ const HomeMoviesListItem = ({ movie }) => {
                 <span className="text-base font-medium">+16</span>
               </div>
 
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <span className="text-sm md:text-base font-normal text-[#7B7B7B]">
                   Animation,
                 </span>
@@ -38,7 +39,7 @@ const HomeMoviesListItem = ({ movie }) => {
                 <span className="text-base font-normal text-[#7B7B7B]">
                   Fantasy
                 </span>
-              </div>
+              </div> */}
             </header>
 
             {/* content */}
@@ -50,7 +51,7 @@ const HomeMoviesListItem = ({ movie }) => {
               </p>
             </div>
           </div>
-          <Link href="/movies/your-name" passHref>
+          <Link href={"/movies/" + movie?.id} passHref>
             <div className="py-1 px-5 rounded-[5px] bg-gradient-to-r p-[6px] from-[#FF6969] to-[#E752FF] cursor-pointer">
               Details
             </div>
@@ -58,18 +59,18 @@ const HomeMoviesListItem = ({ movie }) => {
         </div>
       </div>
 
-      <div className="flex items-center space-x-5 justify-between px-1">
+      <div className="flex items-center space-x-5 justify-center px-1">
         <div className="flex flex-col">
           <h3 className="text-base">{movie?.title}</h3>
-          <span className="text-xs">By Makoto Shinkai</span>
+          {/* <span className="text-xs">By Makoto Shinkai</span> */}
         </div>
-        <Link href={"/"}>
+        {/* <Link href={"/"}>
           <div className="p-0.5  bg-gradient-to-tr  from-[#ff6969] to-[#e752ff] cursor-pointer rounded-sm ">
             <div className="w-full px-2 py-0.5 h-full bg-black font-normal text-xs md:text-sm opacity-90">
               Watched
             </div>
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

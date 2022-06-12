@@ -43,7 +43,7 @@ const HeroSlider = ({
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper z-20 w-full max-w-5xl flex items-center justify-between"
       >
-        {upcomingMovies.slice(0, 4).map((movie, index) => (
+        {upcomingMovies?.map((movie, index) => (
           <SwiperSlide
             key={index}
             className="w-full flex items-center justify-between overflow-visible"

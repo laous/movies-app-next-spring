@@ -30,7 +30,7 @@ const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
         <div className="flex flex-col gap-4 justify-between h-[60%] items-baseline">
           <header className="flex flex-col gap-1">
             <h2 className="text-xl md:text-2xl font-semibold">{movie.title}</h2>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3 max-w-[130px]">
               <span className="text-sm md:text-base font-medium">
                 {movie?.release_date.split("-")[0]}
               </span>
@@ -42,7 +42,7 @@ const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
               <span className="text-base font-medium">+16</span>
             </div>
 
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <span className="text-sm md:text-base font-normal text-[#7B7B7B]">
                 Animation,
               </span>
@@ -52,7 +52,7 @@ const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
               <span className="text-base font-normal text-[#7B7B7B]">
                 Fantasy
               </span>
-            </div>
+            </div> */}
           </header>
           {/* content */}
           <div className="flex flex-col gap-1">
@@ -62,7 +62,7 @@ const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
                 (movie?.overview.length > 150 ? " ..." : "")}
             </p>
           </div>
-          <Link href={"/"}>
+          <Link href={"/movies/" + movie.id}>
             <div className="p-0.5  bg-gradient-to-tr  from-[#ff6969] to-[#e752ff] cursor-pointer rounded-sm ">
               <div className="w-full px-6 py-1 bg-black font-normal text-base opacity-90">
                 Details

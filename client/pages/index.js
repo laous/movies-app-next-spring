@@ -29,22 +29,24 @@ export default function Home({
         movieLink={"https://www.youtube.com/watch?v=" + movieLink}
       />
       <HeroSlider
-        title="Latest Movies"
+        title="Upcoming Movies"
         setShowModal={setShowModal}
         setMovieLink={setMovieLink}
         movieLink={movieLink}
         upcomingMovies={upcomingMovies}
+      />
+
+      <HomeMoviesList
+        title={"Top Ranked Movies"}
+        to={"/movies/top-rated"}
+        movies={topRatedMovies}
       />
       <HomeMoviesList
         title={"Latest Movies"}
         to={"/movies/popular"}
         movies={popularMovies}
       />
-      <HomeMoviesList
-        title={"Top Ranked Movies"}
-        to={"/movies/top-rated"}
-        movies={topRatedMovies}
-      />
+
       <DiscordBanner />
       {/* <HomeMoviesList title={"From your Watchlist"} to={"/movies/watchlist"} /> */}
       <div className="flex flex-col items-center">
