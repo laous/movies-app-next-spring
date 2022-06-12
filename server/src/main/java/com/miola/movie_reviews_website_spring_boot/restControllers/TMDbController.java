@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tmdb")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TMDbController {
     @Autowired
     private TMDbServiceImpl movieService;
