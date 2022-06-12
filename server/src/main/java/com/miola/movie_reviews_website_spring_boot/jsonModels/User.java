@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class User {
     @JsonProperty("userId")
     private Long userId;
+
+    @JsonProperty("fullname")
+    private String fullname;
+
     @JsonProperty("username")
     private String username;
     @JsonProperty("email")
@@ -21,6 +25,13 @@ public class User {
         this.password = password;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
 
     public Long getUserId() {
         return userId;

@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService{
         UserEntity userEntity = new UserEntity();
         if(user != null) {
             try{
+                userEntity.setFullname(user.getFullname());
                 userEntity.setUsername(user.getUsername());
                 userEntity.setEmail(user.getEmail());
                 userEntity.setPassword(user.getPassword());
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService{
             try{
                 UserEntity userEntity = userRepository.findById(user.getUserId()).orElse(null);
                 //userEntity.setId(user.getUserId());
+                userEntity.setFullname(user.getFullname());
                 userEntity.setUsername(user.getUsername());
                 userEntity.setEmail(user.getEmail());
                 userEntity.setPassword(user.getPassword());

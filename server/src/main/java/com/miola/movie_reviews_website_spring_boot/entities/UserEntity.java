@@ -10,6 +10,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String fullname;
     private String username;
     private String email;
     private String password;
@@ -21,7 +22,8 @@ public class UserEntity {
     private Set<MovieEntity> watchedList;
 
 
-    public UserEntity(String username, String email, String password, Set<MovieEntity> whishList, Set<MovieEntity> favorites) {
+    public UserEntity(String fullname, String username, String email, String password, Set<MovieEntity> whishList, Set<MovieEntity> favorites) {
+        this.fullname = fullname;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -30,6 +32,14 @@ public class UserEntity {
     }
 
     public UserEntity() {
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUsername() {
