@@ -18,7 +18,8 @@ public class User {
     @JsonProperty("password")
     private String password;
 
-    public User(Long userId, String username, String email, String password) {
+    public User(Long userId, String fullname, String username, String email, String password) {
+        this.fullname = fullname;
         this.userId = userId;
         this.username = username;
         this.email = email;

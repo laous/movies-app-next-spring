@@ -60,7 +60,7 @@ public class UserController {
     @GetMapping("/{id_user}")
     public User getUser(@PathVariable("id_user") Long id_user){
         UserEntity userEntity = userService.fetchUser(id_user);
-        User user = new User(userEntity.getId(), userEntity.getUsername(), userEntity.getEmail(), userEntity.getPassword());
+        User user = new User(userEntity.getId(), userEntity.getFullname(), userEntity.getUsername(), userEntity.getEmail(), userEntity.getPassword());
         return user;
     }
 
@@ -152,12 +152,15 @@ public class UserController {
     public List<Review> getReviewsByUser(@PathVariable("id_user") Long id_user){
         List<Review> reviewsJson = new ArrayList<>();
         for(ReviewEntity R : reviewService.getAllUserReviews(id_user)){
+            System.out.println(R);
             Review r = new Review();
             r.setReviewId(R.getId());
             r.setMovieId(R.getMovie().getMovieId());
             r.setUserId(R.getUser().getId());
             r.setRating(R.getRating());
             r.setReviewText(R.getReviewText());
+            r.setReviewHeadLine(R.getReviewHeadLine());
+            r.setReviewDate(R.getReviewDate());
             reviewsJson.add(r);
         }
         return reviewsJson;
@@ -173,6 +176,8 @@ public class UserController {
             r.setUserId(R.getUser().getId());
             r.setRating(R.getRating());
             r.setReviewText(R.getReviewText());
+            r.setReviewHeadLine(R.getReviewHeadLine());
+            r.setReviewDate(R.getReviewDate());
             reviewsJson.add(r);
         }
         return reviewsJson;

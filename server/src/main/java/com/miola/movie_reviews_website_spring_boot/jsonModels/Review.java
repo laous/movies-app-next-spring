@@ -6,6 +6,7 @@ import com.miola.movie_reviews_website_spring_boot.entities.MovieEntity;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Review {
@@ -20,6 +21,28 @@ public class Review {
     private String reviewText;
     @JsonProperty("userId")
     private Long userId;
+
+    @JsonProperty("reviewHeadLine")
+    private String reviewHeadLine;
+
+    @JsonProperty("reviewDate")
+    private Date reviewDate;
+
+    public String getReviewHeadLine() {
+        return reviewHeadLine;
+    }
+
+    public void setReviewHeadLine(String reviewHeadLine) {
+        this.reviewHeadLine = reviewHeadLine;
+    }
+
+    public Date getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(Date reviewDate) {
+        this.reviewDate = reviewDate;
+    }
 
     public Long getMovieId() {
         return movieId;
