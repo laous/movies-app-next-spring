@@ -23,6 +23,7 @@ import {
   addToFavorites,
   addToWatchlist,
   removeFromWatchlist,
+  getWatchlist,
 } from "../../reducers/userDataSlice";
 import { toast } from "react-toastify";
 
@@ -30,9 +31,10 @@ const SingleMovie = ({ movie, reviews }) => {
   const { movie_fields, movie_trailers, similar_movies, cast_and_crew } = movie;
   const dispatch = useDispatch();
   const { user, status, message } = useSelector((state) => state.auth);
-  const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = useSelector(
-    (state) => state.userData
-  );
+  const userData = useSelector((state) => state.userData);
+  const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = userData;
+
+  console.log("User data ", userData);
 
   const [watched, setWatched] = useState(true);
   const [isFavorite, setIsFavorite] = useState(true);
@@ -45,7 +47,10 @@ const SingleMovie = ({ movie, reviews }) => {
     if (favoriteMovies.status === "idle") {
       dispatch(getFavoriteMovies());
     }
-  }, [dispatch, watchedMovies.status, favoriteMovies.status]);
+    if (watchlist.status === "idle") {
+      dispatch(getWatchlist());
+    }
+  }, [dispatch, watchedMovies.status, favoriteMovies.status, watchlist.status]);
 
   const router = useRouter();
   const id = router.query.id;

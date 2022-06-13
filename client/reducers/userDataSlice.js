@@ -71,6 +71,23 @@ export const getFavoriteMovies = createAsyncThunk(
     }
 )
 
+export const getWatchlist = createAsyncThunk(
+  'books/getWatchlist',
+  async (movies,  thunkAPI) => {
+    try {
+      return await api.getWatchList(user.userId)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 
 export const userDataSlice = createSlice(
     {
@@ -101,6 +118,7 @@ export const userDataSlice = createSlice(
         }, 
         extraReducers: (builder) =>{
             builder
+            //watched movies
             .addCase(getWatchedMovies.pending , (state)=>{
                 state.watchedMovies.status='loading'
             })
@@ -113,6 +131,7 @@ export const userDataSlice = createSlice(
                 state.watchedMovies.message = action.payload
                 state.watchedMovies.list=[]
             })
+            // favorites
             .addCase(getFavoriteMovies.pending , (state)=>{
                 state.favoriteMovies.status='loading'
             })
@@ -125,6 +144,19 @@ export const userDataSlice = createSlice(
                 state.favoriteMovies.message = action.payload
                 state.favoriteMovies.list=[]
             })
+            // watchlist
+            .addCase(getWatchlist.pending , (state)=>{
+              state.watchlist.status='loading'
+          })
+          .addCase(getWatchlist.fulfilled , (state, action)=>{
+              state.watchlist.status = 'succeeded'
+              state.watchlist.list = action.payload.data
+          })
+          .addCase(getWatchlist.rejected , (state, action)=>{
+              state.watchlist.status='failed'
+              state.watchlist.message = action.payload
+              state.watchlist.list=[]
+          })
         }
     }
 )

@@ -30,7 +30,7 @@ const ProfileSection = ({ setActualList, user }) => {
         </ReadPages>
         <TotalAuthors onClick={() => setActualList("watchlist")}>
           <Title>Watchlist</Title>
-          <Number>{watchedMovies?.list.length}</Number>
+          <Number>{watchlist?.list.length}</Number>
         </TotalAuthors>
       </ProfileInfo>
     </Container>

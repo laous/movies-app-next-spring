@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import {
   getWatchedMovies,
   getFavoriteMovies,
+  getWatchlist,
 } from "../../reducers/userDataSlice";
 
 const MyProfile = () => {
@@ -30,7 +31,10 @@ const MyProfile = () => {
     if (favoriteMovies.status === "idle") {
       dispatch(getFavoriteMovies());
     }
-  }, [dispatch, watchedMovies.status, favoriteMovies.status]);
+    if (watchlist.status === "idle") {
+      dispatch(getWatchlist());
+    }
+  }, [dispatch, watchedMovies.status, favoriteMovies.status, watchlist.status]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -70,7 +74,7 @@ const MyProfile = () => {
 
           {/* Watchlist Movies */}
           {actualList === "watchlist" && (
-            <MoviesList title="Watchlits" movies={watchedMovies} />
+            <MoviesList title="Watchlist" movies={watchlist} />
           )}
         </Right>
       </Container>
