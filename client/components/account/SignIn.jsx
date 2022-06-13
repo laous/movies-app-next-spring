@@ -56,6 +56,7 @@ const SignIn = () => {
         progress: undefined,
         style: {
           backgroundColor: "green",
+          color: "white",
         },
       });
       router.push("/");

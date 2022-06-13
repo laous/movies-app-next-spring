@@ -8,6 +8,7 @@ import {
   JoinUs,
   TrailerModal,
 } from "../components";
+import { useSelector } from "react-redux";
 
 export default function Home({
   topRatedMovies,
@@ -16,6 +17,7 @@ export default function Home({
 }) {
   const [showModal, setShowModal] = useState(false);
   const [movieLink, setMovieLink] = useState("");
+  const { user, status, message } = useSelector((state) => state.auth);
   return (
     <section className="flex flex-col items-center justify-center gap-12 w-full">
       <Head>
@@ -49,9 +51,10 @@ export default function Home({
 
       <DiscordBanner />
       {/* <HomeMoviesList title={"From your Watchlist"} to={"/movies/watchlist"} /> */}
-      <div className="flex flex-col items-center">
+      {!user &&       <div className="flex flex-col items-center">
         <JoinUs />
-      </div>
+      </div>}
+
     </section>
   );
 }

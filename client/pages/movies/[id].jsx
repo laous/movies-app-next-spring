@@ -26,6 +26,7 @@ import {
   getWatchlist,
 } from "../../reducers/userDataSlice";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const SingleMovie = ({ movie, reviews }) => {
   const { movie_fields, movie_trailers, similar_movies, cast_and_crew } = movie;
@@ -411,49 +412,58 @@ const SingleMovie = ({ movie, reviews }) => {
             </div>
 
             <p>{movie_fields?.overview}</p>
-            <div className="flex items-center gap-3">
-              {watched ? (
-                <BorderButton
-                  text={"Unwatch"}
-                  color="black"
-                  onClick={unmarkAsWatched}
-                />
-              ) : (
-                <BorderButton
-                  text={"Mark as Watched"}
-                  color="black"
-                  onClick={markAsWatched}
-                />
-              )}
-              {watched &&
-                (isFavorite ? (
+            {/* Buttons */}
+            {user ? (
+              <div className="flex items-center gap-3">
+                {watched ? (
                   <BorderButton
-                    text={"Remove from Favorites"}
-                    color="transparent"
-                    onClick={handleRemoveFromFavorites}
+                    text={"Unwatch"}
+                    color="black"
+                    onClick={unmarkAsWatched}
                   />
                 ) : (
                   <BorderButton
-                    text={"Add to Favorites"}
-                    color="transparent"
-                    onClick={hanldeAddToFavorites}
+                    text={"Mark as Watched"}
+                    color="black"
+                    onClick={markAsWatched}
                   />
-                ))}
+                )}
+                {watched &&
+                  (isFavorite ? (
+                    <BorderButton
+                      text={"Remove from Favorites"}
+                      color="transparent"
+                      onClick={handleRemoveFromFavorites}
+                    />
+                  ) : (
+                    <BorderButton
+                      text={"Add to Favorites"}
+                      color="transparent"
+                      onClick={hanldeAddToFavorites}
+                    />
+                  ))}
 
-              {isInWatchlist ? (
-                <BorderButton
-                  text={"Remove from Watchlist"}
-                  color="black"
-                  onClick={handleRemoveFromWatchlist}
-                />
-              ) : (
-                <BorderButton
-                  text={"Add to Watchlist"}
-                  color="black"
-                  onClick={hanldeAddToWatchlist}
-                />
-              )}
-            </div>
+                {isInWatchlist ? (
+                  <BorderButton
+                    text={"Remove from Watchlist"}
+                    color="black"
+                    onClick={handleRemoveFromWatchlist}
+                  />
+                ) : (
+                  <BorderButton
+                    text={"Add to Watchlist"}
+                    color="black"
+                    onClick={hanldeAddToWatchlist}
+                  />
+                )}
+              </div>
+            ) : (
+              <Link href="/account">
+                <p className="text-red-500 text-center cursor-pointer hover:text-red-300">
+                  Please sign in for more!
+                </p>
+              </Link>
+            )}
           </div>
         </div>
         {/* Cast Section */}
@@ -462,7 +472,7 @@ const SingleMovie = ({ movie, reviews }) => {
             <h2 className="text-xl">Cast</h2>
           </header>
           <div className="flex flex-wrap items-stretch gap-4">
-            {cast_and_crew.slice(0, 7).map((cast, index) => (
+            {cast_and_crew.slice(0, 10).map((cast, index) => (
               <CastCard cast={cast} key={index} />
             ))}
           </div>
