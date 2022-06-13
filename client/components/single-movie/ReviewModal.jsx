@@ -8,6 +8,9 @@ import axios from "axios";
 
 import { useRouter } from "next/router";
 
+import * as api from "../../services";
+import { toast } from "react-toastify";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -28,17 +31,36 @@ const ReviewModal = ({ user, movie }) => {
 
   const router = useRouter();
 
+  console.log(user);
+
   const handleAddReview = async (e) => {
     e.preventDefault();
-    const review = { movieId: movie.id, rating, reviewText, userId: user.id };
+    const review = {
+      movieId: movie.id,
+      rating: rating,
+      reviewText: reviewText,
+      userId: user.userId,
+    };
     console.log("Review ", review);
-    await axios
-      .post(process.env.NEXT_PUBLIC_API_LINK + "/user/review", review)
-      .then(() => console.log("Success"))
-      .catch((err) => console.error(err));
-    setOpen(false);
+    const res = await api.addReview(review);
+    if (res) {
+      setOpen(false);
 
-    router.reload(window.location.pathname);
+      router.reload(window.location.pathname);
+    } else {
+      toast.error("Not submitted!!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+    }
   };
 
   return (

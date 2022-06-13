@@ -38,3 +38,12 @@ export const logout =  () => {
     localStorage.removeItem('movies-user')
 }
 }
+
+// 
+export const addReview =async  (payload) => {
+    const response =     await axios
+    .post(process.env.NEXT_PUBLIC_API_LINK + "/user/review", payload , config)
+    if(!response.data) return false
+
+    return response.data
+}

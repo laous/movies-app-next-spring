@@ -20,11 +20,22 @@ const SingleMovie = ({ movie, reviews }) => {
   console.log("Reviews: ", reviews);
 
   const getAverageStars = () => {
-    const total = 0;
+    let total = 0;
     reviews?.map((review) => {
       total += review.rating;
     });
     return total / reviews.length;
+  };
+
+  const checkCurrentUserRating = () => {
+    let i = 0;
+    reviews.map((review) => {
+      if (review?.userId == user?.userId) {
+        i = 1;
+      }
+    });
+
+    return i == 1;
   };
 
   return (
@@ -65,17 +76,27 @@ const SingleMovie = ({ movie, reviews }) => {
                   component="legend"
                   className="flex justify-between items-center gap-10"
                 >
-                  <div>
-                    {reviews?.length > 0 &&
-                      getAverageStars() + "/10" +
-                      (
-                        <StarIcon
-                          fontSize="inherit"
-                          style={{ color: "yellow" }}
-                        />
-                      )}
+                  <div className="flex flex-col items-center justify-center">
+                    {reviews?.length > 0 && (
+                      <>
+                        <div className="flex items-center justify-center">
+                          {" "}
+                          <span>{getAverageStars() + "/10"}</span>
+                          <StarIcon
+                            fontSize="inherit"
+                            style={{ color: "yellow" }}
+                          />
+                        </div>
+
+                        <span className="text-xs">
+                          {checkCurrentUserRating() && "You rated this movie!"}
+                        </span>
+                      </>
+                    )}
                   </div>{" "}
-                  {user && <ReviewModal user={user} movie={movie_fields} />}
+                  {user && !checkCurrentUserRating() && (
+                    <ReviewModal user={user} movie={movie_fields} />
+                  )}
                 </Typography>
               </div>
             </div>
