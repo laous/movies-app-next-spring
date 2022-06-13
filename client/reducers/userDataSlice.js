@@ -112,7 +112,7 @@ export const userDataSlice = createSlice(
             state.watchlist.list.push(action.payload)
           },
           removeFromWatchlist : (state,action) => {
-            const movies =  state.watchList.list.filter(item => item.id !== action.payload.id) 
+            const movies =  state.watchlist.list.filter(item => item.id !== action.payload.id) 
             state.watchlist.list = movies
           }
         }, 

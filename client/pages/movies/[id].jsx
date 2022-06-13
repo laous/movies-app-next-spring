@@ -69,6 +69,15 @@ const SingleMovie = ({ movie, reviews }) => {
     }
     return false;
   };
+
+  const checkIsInWatchlist = () => {
+    const movie_index = watchlist.list.findIndex((item) => id == item.id);
+    if (movie_index > -1) {
+      return true;
+    }
+    return false;
+  };
+
   const getAverageStars = () => {
     let total = 0;
     reviews?.map((review) => {
@@ -91,7 +100,8 @@ const SingleMovie = ({ movie, reviews }) => {
   useEffect(() => {
     setWatched(checkIfWatched());
     setIsFavorite(checkIsFavorite());
-  }, [id, checkIfWatched, watchedMovies, favoriteMovies]);
+    setIsInWatchlist(checkIsInWatchlist());
+  }, [id, checkIfWatched, watchedMovies, favoriteMovies, watchlist]);
 
   // buttons events
   // handle watching movies
@@ -298,7 +308,7 @@ const SingleMovie = ({ movie, reviews }) => {
     });
     setIsInWatchlist(true);
   };
-  const handleRemoveFromFavoritesWatchList = async () => {
+  const handleRemoveFromWatchlist = async () => {
     const res = await axios.get(
       process.env.NEXT_PUBLIC_API_LINK +
         "/user/removeFromWishList/" +
@@ -430,8 +440,18 @@ const SingleMovie = ({ movie, reviews }) => {
                   />
                 ))}
 
-              {!watched && (
-                <BorderButton text={"Add to Watchlist"} color="black" />
+              {isInWatchlist ? (
+                <BorderButton
+                  text={"Remove from Watchlist"}
+                  color="black"
+                  onClick={handleRemoveFromWatchlist}
+                />
+              ) : (
+                <BorderButton
+                  text={"Add to Watchlist"}
+                  color="black"
+                  onClick={hanldeAddToWatchlist}
+                />
               )}
             </div>
           </div>
