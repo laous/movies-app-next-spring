@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FiLogOut } from "react-icons/fi";
-import { ProfileSection, MovieMiniCard } from "../../components";
+import { ProfileSection, MoviesList } from "../../components";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -60,30 +60,18 @@ const MyProfile = () => {
           </ProfileSettings>
         </Left>
         <Right>
-          <div className=" flex flex-col justify-center">
-            <header className="w-full max-w-4xl flex items-center justify-between">
-              {actualList === "watched" && (
-                <h2 className="text-lg">Watched Movies</h2>
-              )}
-              {actualList === "favorites" && (
-                <h2 className="text-lg">Favorite Movies</h2>
-              )}
-              {actualList === "watchlist" && (
-                <h2 className="text-lg">Watchlist</h2>
-              )}
-            </header>
-            <div className="flex flex-wrap justify-start itmems-stretch gap-2 px-2">
-              {watchedMovies.list.map((movie, index) => (
-                <>
-                  <MovieMiniCard movie={movie} key={index} />
-                  <MovieMiniCard movie={movie} key={index} />
-                  <MovieMiniCard movie={movie} key={index} />
-                  <MovieMiniCard movie={movie} key={index} />
-                  <MovieMiniCard movie={movie} key={index} />
-                </>
-              ))}
-            </div>
-          </div>
+          {actualList === "watched" && (
+            <MoviesList title="Watched Movies" movies={watchedMovies} />
+          )}
+          {/* Favorites Movies */}
+          {actualList === "favorites" && (
+            <MoviesList title="Favorite Movies" movies={favoriteMovies} />
+          )}
+
+          {/* Watchlist Movies */}
+          {actualList === "watchlist" && (
+            <MoviesList title="Watchlits" movies={watchedMovies} />
+          )}
         </Right>
       </Container>
     </main>
