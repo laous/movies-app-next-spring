@@ -18,6 +18,9 @@ import {
   getFavoriteMovies,
   getWatchedMovies,
   markMovieAsWatched,
+  unwatchMovie,
+  removeFromFavorites,
+  addToFavorites,
 } from "../../reducers/userDataSlice";
 import { toast } from "react-toastify";
 
@@ -30,6 +33,7 @@ const SingleMovie = ({ movie, reviews }) => {
   );
   console.log("Watched Movies ", watchedMovies);
   const [watched, setWatched] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(true);
 
   useEffect(() => {
     if (watchedMovies.status === "idle") {
@@ -50,6 +54,13 @@ const SingleMovie = ({ movie, reviews }) => {
     return false;
   };
 
+  const checkIsFavorite = () => {
+    const movie_index = favoriteMovies.list.findIndex((item) => id == item.id);
+    if (movie_index > -1) {
+      return true;
+    }
+    return false;
+  };
   const getAverageStars = () => {
     let total = 0;
     reviews?.map((review) => {
@@ -71,9 +82,11 @@ const SingleMovie = ({ movie, reviews }) => {
 
   useEffect(() => {
     setWatched(checkIfWatched());
-  }, [id, checkIfWatched, watchedMovies]);
+    setIsFavorite(checkIsFavorite());
+  }, [id, checkIfWatched, watchedMovies, favoriteMovies]);
 
   // buttons events
+  // handle watching movies
   const markAsWatched = async () => {
     const res = await axios.get(
       process.env.NEXT_PUBLIC_API_LINK +
@@ -82,7 +95,7 @@ const SingleMovie = ({ movie, reviews }) => {
         "/" +
         id
     );
-    console.log("Response ", res);
+    if (watched) return;
     dispatch(markMovieAsWatched(movie_fields));
 
     if (!res) {
@@ -114,8 +127,210 @@ const SingleMovie = ({ movie, reviews }) => {
     });
     setWatched(true);
   };
-  const unmarkAsWatched = async () => {};
-  const addToFavorites = async () => {};
+  const unmarkAsWatched = async () => {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_API_LINK +
+        "/user/unMarkWatched/" +
+        user?.userId +
+        "/" +
+        id
+    );
+    if (!watched) return;
+    dispatch(unwatchMovie(movie_fields));
+
+    if (!res) {
+      toast.error("Movie not removed!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    toast.success("Movie removed!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setWatched(false);
+  };
+
+  // handle favorite movies
+  const hanldeAddToFavorites = async () => {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_API_LINK +
+        "/user/addToFavoritesList/" +
+        user?.userId +
+        "/" +
+        id
+    );
+    if (!watched) return;
+
+    if (!res) {
+      toast.error("Movie not added!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    dispatch(addToFavorites(movie_fields));
+    toast.success("Movie added!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsFavorite(true);
+  };
+  const handleRemoveFromFavorites = async () => {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_API_LINK +
+        "/user/removeFromFavoritesList/" +
+        user?.userId +
+        "/" +
+        id
+    );
+    if (!watched) return;
+
+    if (!res) {
+      toast.error("Movie not removed!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    dispatch(removeFromFavorites(movie_fields));
+    toast.success("Movie removed!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsFavorite(false);
+  };
+
+  // handle watchList
+  const hanldeAddToWatchlist = async () => {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_API_LINK +
+        "/user/addToFavoritesList/" +
+        user?.userId +
+        "/" +
+        id
+    );
+    if (!watched) return;
+
+    if (!res) {
+      toast.error("Movie not added!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    dispatch(addToFavorites(movie_fields));
+    toast.success("Movie added!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsFavorite(true);
+  };
+  const handleRemoveFromFavoritesWatchList = async () => {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_API_LINK +
+        "/user/removeFromFavoritesList/" +
+        user?.userId +
+        "/" +
+        id
+    );
+    if (!watched) return;
+
+    if (!res) {
+      toast.error("Movie not removed!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    dispatch(removeFromFavorites(movie_fields));
+    toast.success("Movie removed!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsFavorite(false);
+  };
 
   return (
     <>
@@ -194,13 +409,20 @@ const SingleMovie = ({ movie, reviews }) => {
                   onClick={markAsWatched}
                 />
               )}
-              {watched && (
-                <BorderButton
-                  text={"Add to Favorites"}
-                  color="transparent"
-                  onClick={addToFavorites}
-                />
-              )}
+              {watched &&
+                (isFavorite ? (
+                  <BorderButton
+                    text={"Remove from Favorites"}
+                    color="transparent"
+                    onClick={handleRemoveFromFavorites}
+                  />
+                ) : (
+                  <BorderButton
+                    text={"Add to Favorites"}
+                    color="transparent"
+                    onClick={hanldeAddToFavorites}
+                  />
+                ))}
 
               {!watched && (
                 <BorderButton text={"Add to Watchlist"} color="black" />
