@@ -11,13 +11,46 @@ import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import { imageUrl } from "../../constants";
 import Head from "next/head";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import {
+  getFavoriteMovies,
+  getWatchedMovies,
+  markMovieAsWatched,
+} from "../../reducers/userDataSlice";
+import { toast } from "react-toastify";
 
 const SingleMovie = ({ movie, reviews }) => {
   const { movie_fields, movie_trailers, similar_movies, cast_and_crew } = movie;
+  const dispatch = useDispatch();
   const { user, status, message } = useSelector((state) => state.auth);
+  const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = useSelector(
+    (state) => state.userData
+  );
+  const [watched, setWatched] = useState(false);
 
-  console.log("Reviews: ", reviews);
+  useEffect(() => {
+    if (watchedMovies.status === "idle") {
+      dispatch(getWatchedMovies());
+    }
+    if (favoriteMovies.status === "idle") {
+      dispatch(getFavoriteMovies());
+    }
+  }, [dispatch, watchedMovies.status, favoriteMovies.status]);
+
+  const router = useRouter();
+  const id = router.query.id;
+  const checkIfWatched = () => {
+    let i = 0;
+    watchedMovies.list.filter((movie) => {
+      if (movie.id == id) {
+        i = 1;
+      }
+    });
+
+    return i == 1;
+  };
 
   const getAverageStars = () => {
     let total = 0;
@@ -37,6 +70,50 @@ const SingleMovie = ({ movie, reviews }) => {
 
     return i == 1;
   };
+
+  // buttons events
+  const markAsWatched = async () => {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_API_LINK +
+        "/user/markWatched/" +
+        user?.userId +
+        "/" +
+        movie_fields.id
+    );
+    console.log("Response ", res);
+    dispatch(markMovieAsWatched(movie_fields));
+
+    if (!res) {
+      toast.error("Movie not added!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    toast.success("Movie added!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    // setWatched(true);
+  };
+  const unmarkAsWatched = async () => {};
+  const addToFavorites = async () => {};
 
   return (
     <>
@@ -80,7 +157,6 @@ const SingleMovie = ({ movie, reviews }) => {
                     {reviews?.length > 0 && (
                       <>
                         <div className="flex items-center justify-center">
-                          {" "}
                           <span>{getAverageStars() + "/10"}</span>
                           <StarIcon
                             fontSize="inherit"
@@ -103,9 +179,30 @@ const SingleMovie = ({ movie, reviews }) => {
 
             <p>{movie_fields?.overview}</p>
             <div className="flex items-center gap-3">
-              <BorderButton text={"Mark as Watched"} color="black" />
-              <BorderButton text={"Add to Favorites"} color="transparent" />
-              <BorderButton text={"Add to Watchlist"} color="black" />
+              {!checkIfWatched() ? (
+                <BorderButton
+                  text={"Mark as Watched"}
+                  color="black"
+                  onClick={markAsWatched}
+                />
+              ) : (
+                <BorderButton
+                  text={"Unwatch"}
+                  color="black"
+                  onClick={unmarkAsWatched}
+                />
+              )}
+              {checkIfWatched() && (
+                <BorderButton
+                  text={"Add to Favorites"}
+                  color="transparent"
+                  onClick={addToFavorites}
+                />
+              )}
+
+              {!checkIfWatched() && (
+                <BorderButton text={"Add to Watchlist"} color="black" />
+              )}
             </div>
           </div>
         </div>

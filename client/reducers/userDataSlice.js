@@ -117,5 +117,5 @@ export const userDataSlice = createSlice(
 
 
 export const watchedMovies = state => state.user.watchedMovies
-export const {markBookAsReadRedux,unreadBookRedux} =userDataSlice.actions
+export const {markMovieAsWatched,unwatchMovie} =userDataSlice.actions
 export default userDataSlice.reducer

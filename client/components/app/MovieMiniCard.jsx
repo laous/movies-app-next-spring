@@ -8,7 +8,7 @@ const MovieMiniCard = ({ movie }) => {
         <div className="group max-w-full h-auto">
           {/* Image */}
           <img
-            className="w-36  h-auto group-hover:opacity-75"
+            className="w-36  h-auto group-hover:opacity-75 rounded-md"
             src={imageUrl + movie?.poster_path}
             alt={movie?.title}
           />
