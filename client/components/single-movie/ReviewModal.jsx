@@ -4,6 +4,9 @@ import Modal from "@mui/material/Modal";
 
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
+import axios from "axios";
+
+import { useRouter } from "next/router";
 
 const style = {
   position: "absolute",
@@ -15,10 +18,28 @@ const style = {
   p: 4,
 };
 
-const ReviewModal = () => {
+const ReviewModal = ({ user, movie }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [reviewText, setReviewText] = React.useState("");
+  const [rating, setRating] = React.useState(0);
+
+  const router = useRouter();
+
+  const handleAddReview = async (e) => {
+    e.preventDefault();
+    const review = { movieId: movie.id, rating, reviewText, userId: user.id };
+    console.log("Review ", review);
+    await axios
+      .post(process.env.NEXT_PUBLIC_API_LINK + "/user/review", review)
+      .then(() => console.log("Success"))
+      .catch((err) => console.error(err));
+    setOpen(false);
+
+    router.reload(window.location.pathname);
+  };
 
   return (
     <div>
@@ -47,7 +68,8 @@ const ReviewModal = () => {
             <h3>Add your rating</h3>
             <Rating
               name="customized-10"
-              defaultValue={0}
+              defaultValue={rating}
+              onChange={(e) => setRating(Number(e.target.value))}
               max={10}
               emptyIcon={
                 <StarIcon
@@ -60,9 +82,17 @@ const ReviewModal = () => {
           </div>
           <div className="flex flex-col gap-1">
             <h3>Add your review{"(optional)"}</h3>
-            <textarea className="p-2 text-black rounded-xl" rows="7"></textarea>
+            <textarea
+              className="p-2 text-black rounded-xl"
+              rows="7"
+              value={reviewText}
+              onChange={(e) => setReviewText(e.target.value)}
+            ></textarea>
           </div>
-          <button className="bg-gray-900 text-white max-w-[100px] self-center px-6 py-1">
+          <button
+            className="bg-gray-900 text-white max-w-[100px] self-center px-6 py-1"
+            onClick={handleAddReview}
+          >
             Add
           </button>
         </Box>

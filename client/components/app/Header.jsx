@@ -81,7 +81,6 @@ const MenuContent = ({ setActiveSearch }) => {
 const Header = () => {
   const [activeSearch, setActiveSearch] = useState(false);
   const { user, status, message } = useSelector((state) => state.auth);
-  console.log("USer state :", user);
 
   return (
     <header

@@ -11,10 +11,13 @@ import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import { imageUrl } from "../../constants";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 
 const SingleMovie = ({ movie, reviews }) => {
-  console.log(movie);
   const { movie_fields, movie_trailers, similar_movies, cast_and_crew } = movie;
+  const { user, status, message } = useSelector((state) => state.auth);
+
+  console.log("Reviews: ", reviews);
 
   const getAverageStars = () => {
     const total = 0;
@@ -72,7 +75,7 @@ const SingleMovie = ({ movie, reviews }) => {
                         />
                       )}
                   </div>{" "}
-                  <ReviewModal />
+                  {user && <ReviewModal user={user} movie={movie_fields} />}
                 </Typography>
               </div>
             </div>
