@@ -21,6 +21,8 @@ import {
   unwatchMovie,
   removeFromFavorites,
   addToFavorites,
+  addToWatchlist,
+  removeFromWatchlist,
 } from "../../reducers/userDataSlice";
 import { toast } from "react-toastify";
 
@@ -31,9 +33,10 @@ const SingleMovie = ({ movie, reviews }) => {
   const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = useSelector(
     (state) => state.userData
   );
-  console.log("Watched Movies ", watchedMovies);
+
   const [watched, setWatched] = useState(true);
   const [isFavorite, setIsFavorite] = useState(true);
+  const [isInWatchlist, setIsInWatchlist] = useState(true);
 
   useEffect(() => {
     if (watchedMovies.status === "idle") {
@@ -254,12 +257,11 @@ const SingleMovie = ({ movie, reviews }) => {
   const hanldeAddToWatchlist = async () => {
     const res = await axios.get(
       process.env.NEXT_PUBLIC_API_LINK +
-        "/user/addToFavoritesList/" +
+        "/user/addToWishList/" +
         user?.userId +
         "/" +
         id
     );
-    if (!watched) return;
 
     if (!res) {
       toast.error("Movie not added!", {
@@ -276,7 +278,7 @@ const SingleMovie = ({ movie, reviews }) => {
       });
       return;
     }
-    dispatch(addToFavorites(movie_fields));
+    dispatch(addToWatchlist(movie_fields));
     toast.success("Movie added!", {
       position: "bottom-right",
       autoClose: 3000,
@@ -289,17 +291,16 @@ const SingleMovie = ({ movie, reviews }) => {
         backgroundColor: "darkblue",
       },
     });
-    setIsFavorite(true);
+    setIsInWatchlist(true);
   };
   const handleRemoveFromFavoritesWatchList = async () => {
     const res = await axios.get(
       process.env.NEXT_PUBLIC_API_LINK +
-        "/user/removeFromFavoritesList/" +
+        "/user/removeFromWishList/" +
         user?.userId +
         "/" +
         id
     );
-    if (!watched) return;
 
     if (!res) {
       toast.error("Movie not removed!", {
@@ -316,7 +317,7 @@ const SingleMovie = ({ movie, reviews }) => {
       });
       return;
     }
-    dispatch(removeFromFavorites(movie_fields));
+    dispatch(removeFromWatchlist(movie_fields));
     toast.success("Movie removed!", {
       position: "bottom-right",
       autoClose: 3000,
@@ -329,7 +330,7 @@ const SingleMovie = ({ movie, reviews }) => {
         backgroundColor: "darkblue",
       },
     });
-    setIsFavorite(false);
+    setIsInWatchlist(false);
   };
 
   return (

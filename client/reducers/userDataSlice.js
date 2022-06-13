@@ -27,7 +27,7 @@ const initialState = {
     status: 'idle',
     message:''
 },
-watchList : {
+watchlist : {
     list: [],
     status: 'idle',
     message:''
@@ -83,6 +83,20 @@ export const userDataSlice = createSlice(
           unwatchMovie : (state,action) => {
             const movies =  state.watchedMovies.list.filter(item => item.id !== action.payload.id) 
             state.watchedMovies.list = movies
+          },
+          addToFavorites : (state,action) => {
+            state.favoriteMovies.list.push(action.payload)
+          },
+          removeFromFavorites : (state,action) => {
+            const movies =  state.favoriteMovies.list.filter(item => item.id !== action.payload.id) 
+            state.favoriteMovies.list = movies
+          },
+          addToWatchlist : (state,action) => {
+            state.watchlist.list.push(action.payload)
+          },
+          removeFromWatchlist : (state,action) => {
+            const movies =  state.watchList.list.filter(item => item.id !== action.payload.id) 
+            state.watchlist.list = movies
           }
         }, 
         extraReducers: (builder) =>{
@@ -117,5 +131,5 @@ export const userDataSlice = createSlice(
 
 
 export const watchedMovies = state => state.user.watchedMovies
-export const {markMovieAsWatched,unwatchMovie} =userDataSlice.actions
+export const {markMovieAsWatched,unwatchMovie,addToFavorites,removeFromFavorites , addToWatchlist , removeFromWatchlist} =userDataSlice.actions
 export default userDataSlice.reducer
