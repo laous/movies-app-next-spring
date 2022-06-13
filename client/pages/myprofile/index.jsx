@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { logout } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
-import { getWatchedMovies } from "../../reducers/userDataSlice";
+import {
+  getWatchedMovies,
+  getFavoriteMovies,
+} from "../../reducers/userDataSlice";
 
 const MyProfile = () => {
   const [actualList, setActualList] = useState("watched"); // watched | favorites | watchlist
@@ -24,7 +27,10 @@ const MyProfile = () => {
     if (watchedMovies.status === "idle") {
       dispatch(getWatchedMovies());
     }
-  }, [dispatch, watchedMovies.status]);
+    if (favoriteMovies.status === "idle") {
+      dispatch(getFavoriteMovies());
+    }
+  }, [dispatch, watchedMovies.status, favoriteMovies.status]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -66,12 +72,16 @@ const MyProfile = () => {
                 <h2 className="text-lg">Watchlist</h2>
               )}
             </header>
-            <div className="flex flex-wrap justify-center md:justify-start md:items-stretch gap-4 px-2">
-              <MovieMiniCard />
-              <MovieMiniCard />
-              <MovieMiniCard />
-              <MovieMiniCard />
-              <MovieMiniCard />
+            <div className="flex flex-wrap justify-start itmems-stretch gap-2 px-2">
+              {watchedMovies.list.map((movie, index) => (
+                <>
+                  <MovieMiniCard movie={movie} key={index} />
+                  <MovieMiniCard movie={movie} key={index} />
+                  <MovieMiniCard movie={movie} key={index} />
+                  <MovieMiniCard movie={movie} key={index} />
+                  <MovieMiniCard movie={movie} key={index} />
+                </>
+              ))}
             </div>
           </div>
         </Right>

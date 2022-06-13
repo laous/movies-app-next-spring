@@ -36,12 +36,29 @@ watchList : {
     
 }
 
-// get all books from database
+// get all watched movies by user from database
 export const getWatchedMovies = createAsyncThunk(
     'books/getWatchedMovies',
     async (movies,  thunkAPI) => {
       try {
         return await api.getWatchedMovies(user.userId)
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString()
+        return thunkAPI.rejectWithValue(message)
+      }
+    }
+)
+
+export const getFavoriteMovies = createAsyncThunk(
+    'books/getFavoriteMovies',
+    async (movies,  thunkAPI) => {
+      try {
+        return await api.getFavoriteMovies(user.userId)
       } catch (error) {
         const message =
           (error.response &&
@@ -81,7 +98,8 @@ export const userDataSlice = createSlice(
                 state.watchedMovies.status='failed'
                 state.watchedMovies.message = action.payload
                 state.watchedMovies.list=[]
-            })            .addCase(getFavoriteMovies.pending , (state)=>{
+            })
+            .addCase(getFavoriteMovies.pending , (state)=>{
                 state.favoriteMovies.status='loading'
             })
             .addCase(getFavoriteMovies.fulfilled , (state, action)=>{
