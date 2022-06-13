@@ -47,3 +47,28 @@ export const addReview =async  (payload) => {
 
     return response.data
 }
+
+/* Watched Movies */
+// get watched movies
+export const getWatchedMovies = async (userId) => {
+    return await axios
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/watchedList/"+ userId)
+}
+
+/* Favorite Movies */
+export const getFavoriteMovies = async (userId) => {
+    return await axios
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/favoritesList/"+ userId)
+}
+
+/* Watchlist */
+export const getWatchList = async (userId) => {
+    return await axios
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/wishList/"+ userId)
+}
+
+/* All reviews by User*/
+export const getReviewsByUser = async (userId) => {
+    return await axios
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/review/user/"+ userId)
+}

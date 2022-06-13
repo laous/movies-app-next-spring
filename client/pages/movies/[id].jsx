@@ -152,7 +152,7 @@ export async function getServerSideProps(ctx) {
   // console.log("Context: " + ctx);
   // Fetch data from external API
 
-  const [movie, reviews] = await Promise.all([
+  const [movie, reviews, watchedMovies] = await Promise.all([
     axios
       .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/" + id)
       .then((res) => res.data),
@@ -162,10 +162,10 @@ export async function getServerSideProps(ctx) {
   ]);
 
   reviews.map(async (review) => {
-    const user = await axios.get(
-      process.env.NEXT_PUBLIC_API_LINK + "/user/" + review.id
-    );
-    review.user = user;
+    const user = await axios
+      .get(process.env.NEXT_PUBLIC_API_LINK + "/user/" + review?.userId)
+      .then((res) => res.data);
+    review = { ...review, user: user };
   });
 
   // Pass data to the page via props
