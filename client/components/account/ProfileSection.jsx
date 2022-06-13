@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const ProfileSection = ({ setActualList, user }) => {
+  const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = useSelector(
+    (state) => state.userData
+  );
   return (
     <Container>
       <ProfileInfo>
@@ -18,15 +22,15 @@ const ProfileSection = ({ setActualList, user }) => {
         </Profile>
         <Readbooks onClick={() => setActualList("watched")}>
           <Title>Watched Movies</Title>
-          <Number>16</Number>
+          <Number>{watchedMovies?.list.length}</Number>
         </Readbooks>
         <ReadPages onClick={() => setActualList("favorites")}>
           <Title>Favorite Movies</Title>
-          <Number>03</Number>
+          <Number>{favoriteMovies?.list.length}</Number>
         </ReadPages>
         <TotalAuthors onClick={() => setActualList("watchlist")}>
           <Title>Watchlist</Title>
-          <Number>01</Number>
+          <Number>{watchlist?.list.length}</Number>
         </TotalAuthors>
       </ProfileInfo>
     </Container>

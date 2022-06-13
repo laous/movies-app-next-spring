@@ -23,7 +23,7 @@ const TopRatedMovies = ({ movies }) => {
 };
 export default TopRatedMovies;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // Fetch data from external API
   const res = await axios.get(
     process.env.NEXT_PUBLIC_API_LINK + "/tmdb/topRated"

@@ -1,17 +1,40 @@
 import styled from "styled-components";
 import { FiLogOut } from "react-icons/fi";
-import { ProfileSection, MovieMiniCard } from "../../components";
-import { useState } from "react";
+import { ProfileSection, MoviesList } from "../../components";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { logout } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
+import {
+  getWatchedMovies,
+  getFavoriteMovies,
+  getWatchlist,
+} from "../../reducers/userDataSlice";
 
 const MyProfile = () => {
   const [actualList, setActualList] = useState("watched"); // watched | favorites | watchlist
   const { user, status, message } = useSelector((state) => state.auth);
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = useSelector(
+    (state) => state.userData
+  );
+
+  console.log("Watched : ", watchedMovies);
+
+  useEffect(() => {
+    if (watchedMovies.status === "idle") {
+      dispatch(getWatchedMovies());
+    }
+    if (favoriteMovies.status === "idle") {
+      dispatch(getFavoriteMovies());
+    }
+    if (watchlist.status === "idle") {
+      dispatch(getWatchlist());
+    }
+  }, [dispatch, watchedMovies.status, favoriteMovies.status, watchlist.status]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -41,26 +64,18 @@ const MyProfile = () => {
           </ProfileSettings>
         </Left>
         <Right>
-          <div className=" flex flex-col justify-center">
-            <header className="w-full max-w-4xl flex items-center justify-between">
-              {actualList === "watched" && (
-                <h2 className="text-lg">Watched Movies</h2>
-              )}
-              {actualList === "favorites" && (
-                <h2 className="text-lg">Favorite Movies</h2>
-              )}
-              {actualList === "watchlist" && (
-                <h2 className="text-lg">Watchlist</h2>
-              )}
-            </header>
-            <div className="flex flex-wrap justify-center md:justify-start md:items-stretch gap-4 px-2">
-              <MovieMiniCard />
-              <MovieMiniCard />
-              <MovieMiniCard />
-              <MovieMiniCard />
-              <MovieMiniCard />
-            </div>
-          </div>
+          {actualList === "watched" && (
+            <MoviesList title="Watched Movies" movies={watchedMovies} />
+          )}
+          {/* Favorites Movies */}
+          {actualList === "favorites" && (
+            <MoviesList title="Favorite Movies" movies={favoriteMovies} />
+          )}
+
+          {/* Watchlist Movies */}
+          {actualList === "watchlist" && (
+            <MoviesList title="Watchlist" movies={watchlist} />
+          )}
         </Right>
       </Container>
     </main>
