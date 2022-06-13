@@ -28,7 +28,8 @@ const SingleMovie = ({ movie, reviews }) => {
   const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = useSelector(
     (state) => state.userData
   );
-  const [watched, setWatched] = useState(false);
+  console.log("Watched Movies ", watchedMovies);
+  const [watched, setWatched] = useState(true);
 
   useEffect(() => {
     if (watchedMovies.status === "idle") {
@@ -42,14 +43,11 @@ const SingleMovie = ({ movie, reviews }) => {
   const router = useRouter();
   const id = router.query.id;
   const checkIfWatched = () => {
-    let i = 0;
-    watchedMovies.list.filter((movie) => {
-      if (movie.id == id) {
-        i = 1;
-      }
-    });
-
-    return i == 1;
+    const movie_index = watchedMovies.list.findIndex((item) => id == item.id);
+    if (movie_index > -1) {
+      return true;
+    }
+    return false;
   };
 
   const getAverageStars = () => {
@@ -71,6 +69,10 @@ const SingleMovie = ({ movie, reviews }) => {
     return i == 1;
   };
 
+  useEffect(() => {
+    setWatched(checkIfWatched());
+  }, [id, checkIfWatched, watchedMovies]);
+
   // buttons events
   const markAsWatched = async () => {
     const res = await axios.get(
@@ -78,7 +80,7 @@ const SingleMovie = ({ movie, reviews }) => {
         "/user/markWatched/" +
         user?.userId +
         "/" +
-        movie_fields.id
+        id
     );
     console.log("Response ", res);
     dispatch(markMovieAsWatched(movie_fields));
@@ -110,7 +112,7 @@ const SingleMovie = ({ movie, reviews }) => {
         backgroundColor: "darkblue",
       },
     });
-    // setWatched(true);
+    setWatched(true);
   };
   const unmarkAsWatched = async () => {};
   const addToFavorites = async () => {};
@@ -179,20 +181,20 @@ const SingleMovie = ({ movie, reviews }) => {
 
             <p>{movie_fields?.overview}</p>
             <div className="flex items-center gap-3">
-              {!checkIfWatched() ? (
-                <BorderButton
-                  text={"Mark as Watched"}
-                  color="black"
-                  onClick={markAsWatched}
-                />
-              ) : (
+              {watched ? (
                 <BorderButton
                   text={"Unwatch"}
                   color="black"
                   onClick={unmarkAsWatched}
                 />
+              ) : (
+                <BorderButton
+                  text={"Mark as Watched"}
+                  color="black"
+                  onClick={markAsWatched}
+                />
               )}
-              {checkIfWatched() && (
+              {watched && (
                 <BorderButton
                   text={"Add to Favorites"}
                   color="transparent"
@@ -200,7 +202,7 @@ const SingleMovie = ({ movie, reviews }) => {
                 />
               )}
 
-              {!checkIfWatched() && (
+              {!watched && (
                 <BorderButton text={"Add to Watchlist"} color="black" />
               )}
             </div>
