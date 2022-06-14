@@ -35,7 +35,7 @@ const SingleMovie = ({ movie, reviews }) => {
   const userData = useSelector((state) => state.userData);
   const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = userData;
 
-  console.log("User data ", userData);
+  console.log("Reviews ", reviews);
 
   const [watched, setWatched] = useState(true);
   const [isFavorite, setIsFavorite] = useState(true);
@@ -52,6 +52,15 @@ const SingleMovie = ({ movie, reviews }) => {
       dispatch(getWatchlist());
     }
   }, [dispatch, watchedMovies.status, favoriteMovies.status, watchlist.status]);
+
+  useEffect(() => {
+    reviews.map(async (review) => {
+      const user = await axios
+        .get(process.env.NEXT_PUBLIC_API_LINK + "/user/" + review?.userId)
+        .then((res) => res.data);
+      if (user) review.user = user;
+    });
+  }, [reviews]);
 
   const router = useRouter();
   const id = router.query.id;
@@ -509,7 +518,7 @@ export async function getServerSideProps(ctx) {
   // console.log("Context: " + ctx);
   // Fetch data from external API
 
-  const [movie, reviews, watchedMovies] = await Promise.all([
+  const [movie, reviews] = await Promise.all([
     axios
       .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/" + id)
       .then((res) => res.data),
@@ -517,13 +526,6 @@ export async function getServerSideProps(ctx) {
       .get(process.env.NEXT_PUBLIC_API_LINK + "/user/review/movie/" + id)
       .then((res) => res.data),
   ]);
-
-  reviews.map(async (review) => {
-    const user = await axios
-      .get(process.env.NEXT_PUBLIC_API_LINK + "/user/" + review?.userId)
-      .then((res) => res.data);
-    review = { ...review, user: user };
-  });
 
   // Pass data to the page via props
   return {
