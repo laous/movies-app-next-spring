@@ -22,8 +22,6 @@ const MyProfile = () => {
     (state) => state.userData
   );
 
-  console.log("Watched : ", watchedMovies);
-
   useEffect(() => {
     if (watchedMovies.status === "idle") {
       dispatch(getWatchedMovies());
