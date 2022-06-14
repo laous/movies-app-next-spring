@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
+import SearchItem from "./SearchItem";
 
 const SearchBar = ({ setActiveSearch }) => {
   const searchRef = useRef(null);
@@ -74,19 +75,17 @@ const SearchBar = ({ setActiveSearch }) => {
         onClick={() => setActiveSearch(false)}
       />
       {active && results.length > 0 && (
-        <ul
-          className="list-none overflow-hidden mt-2 p-2 absolute top-full inset-x-0 min-h-100px
-          bg-white z-50"
-        >
-          {results.map(({ id, title }, index) => (
-            <Link href={"/movie/" + id}>
-              <li
-                className="text-black text-normal mt-2 leading-4 last:mb-4"
-                key={index}
-              >
-                {title}
-              </li>
-            </Link>
+        <ul className="list-none  mt-2 p-2 absolute top-full inset-x-0 min-h-100px z-50 bg-zinc-800">
+          {results.slice(0, 6).map((movie, index) => (
+            <li
+              className="w-full"
+              onClick={() => {
+                setActive(false);
+                setActiveSearch(false);
+              }}
+            >
+              <SearchItem movie={movie} key={index} />
+            </li>
           ))}
         </ul>
       )}
