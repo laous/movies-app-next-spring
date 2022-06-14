@@ -45,13 +45,14 @@ export default function Home({
         to={"/movies/top-rated"}
         movies={topRatedMovies}
       />
+      <DiscordBanner />
       <HomeMoviesList
         title={"Latest Movies"}
         to={"/movies/popular"}
         movies={popularMovies}
       />
 
-      <DiscordBanner />
+      
       {/* {watchlist.length>0 && <HomeMoviesList title={"From your Watchlist"}  movies={watchlist} />} */}
       {!user &&       <div className="flex flex-col items-center">
         <JoinUs />

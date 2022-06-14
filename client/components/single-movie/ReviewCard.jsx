@@ -2,7 +2,6 @@ import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 
 const ReviewCard = ({ review }) => {
-  console.log("Review: ", review);
   return (
     <div className="flex flex-col justify-between w-80 gap-5 px-4 py-3 bg-zinc-800 rounded-2xl">
       <header className="flex flex-col items-center">

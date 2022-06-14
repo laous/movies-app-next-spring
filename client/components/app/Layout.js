@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
       </Head>
 
       <Header />
-      <main className="max-w-7xl flex flex-col items-center justify-center space-y-8 px-4 mt-9">
+      <main className="max-w-7xl flex flex-col items-center justify-center gap-4 px-4 mt-9">
         {children}
       </main>
       <ToastContainer />
