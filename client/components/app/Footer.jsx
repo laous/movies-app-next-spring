@@ -31,9 +31,15 @@ const Footer = () => {
         </div>
       </div>
 
-      <p className="absolute bottom-4 mt-6 mx-auto text-xs">
-        with love {"<3"} by marcsox{" "}
-      </p>
+      <div className="absolute bottom-4 mt-6 mx-auto text-sm">
+        <a
+          href="https://laous.netlify.app/"
+          target={"_blank"}
+          className="hover:text-red-300"
+        >
+          with love {"<3"}
+        </a>
+      </div>
       <div className="h-1 w-full absolute bottom-0 bg-gradient-to-r from-[#ff6969] to-[#e752ff]"></div>
     </footer>
   );

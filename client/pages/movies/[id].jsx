@@ -481,7 +481,7 @@ const SingleMovie = ({ movie, reviews }) => {
             <h2 className="text-xl">Cast</h2>
           </header>
           <div className="flex flex-wrap items-stretch gap-4">
-            {cast_and_crew.slice(0, 10).map((cast, index) => (
+            {cast_and_crew.slice(0, 12).map((cast, index) => (
               <CastCard cast={cast} key={index} />
             ))}
           </div>

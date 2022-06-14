@@ -101,8 +101,6 @@ export const userDataSlice = createSlice(
             state.favoriteMovies.status="idle"
             state.watchlist.list=[]
             state.watchlist.status="idle"
-            state.ratedMovies.list=[]
-            state.ratedMovies.status="idle"
             state.user=null
             state.status = "idle"
         },
