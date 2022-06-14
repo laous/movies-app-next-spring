@@ -10,6 +10,7 @@ import {
   getWatchedMovies,
   getFavoriteMovies,
   getWatchlist,
+  resetUserData,
 } from "../../reducers/userDataSlice";
 
 const MyProfile = () => {
@@ -32,11 +33,18 @@ const MyProfile = () => {
     if (watchlist.status === "idle") {
       dispatch(getWatchlist());
     }
-  }, [dispatch, watchedMovies.status, favoriteMovies.status, watchlist.status]);
+  }, [
+    dispatch,
+    watchedMovies.status,
+    favoriteMovies.status,
+    watchlist.status,
+    user.userId,
+  ]);
 
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    dispatch(resetUserData());
     toast.info("You are logged out!!", {
       position: "bottom-right",
       autoClose: 5000,
@@ -46,7 +54,7 @@ const MyProfile = () => {
       draggable: true,
       progress: undefined,
     });
-    router.push("/account");
+    router.reload("/account");
   };
   return (
     <main className="w-full flex flex-col  md:flex-row justify-between gap-4 mb-16">

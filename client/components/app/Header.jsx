@@ -9,6 +9,8 @@ import { logout } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
 import SearchItem from "./SearchItem";
+import { resetUserData } from "../../reducers/userDataSlice";
+import { useRouter } from "next/router";
 
 const SearchBar = ({ setActiveSearch }) => {
   const searchRef = useRef(null);
@@ -96,10 +98,11 @@ const SearchBar = ({ setActiveSearch }) => {
 const MenuContent = ({ setActiveSearch }) => {
   const { user, status, message } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(logout());
+    dispatch(logout(), resetUserData());
     toast.info("You are logged out!!", {
       position: "bottom-right",
       autoClose: 5000,
@@ -109,6 +112,7 @@ const MenuContent = ({ setActiveSearch }) => {
       draggable: true,
       progress: undefined,
     });
+    router.push("/account");
   };
 
   return (
