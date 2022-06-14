@@ -7,6 +7,7 @@ const CastCard = ({ cast }) => {
         src={imageUrl + cast?.profile_path}
         alt={cast?.title}
         className="w-20 md:w-28 max-w-full h-auto rounded-md"
+        loading="lazy"
       />
       <div className="flex flex-col items-center justify-center">
         <h3>{cast.name}</h3>

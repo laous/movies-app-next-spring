@@ -94,6 +94,18 @@ export const userDataSlice = createSlice(
         name:'user',
         initialState,
         reducers:{
+          resetUserData: (state) => {
+            state.watchedMovies.list=[]
+            state.watchedMovies.status="idle"
+            state.favoriteMovies.list=[]
+            state.favoriteMovies.status="idle"
+            state.watchlist.list=[]
+            state.watchlist.status="idle"
+            state.ratedMovies.list=[]
+            state.ratedMovies.status="idle"
+            state.user=null
+            state.status = "idle"
+        },
           markMovieAsWatched : (state,action) => {
             state.watchedMovies.list.push(action.payload)
           },
@@ -162,6 +174,6 @@ export const userDataSlice = createSlice(
 )
 
 
-export const watchedMovies = state => state.user.watchedMovies
-export const {markMovieAsWatched,unwatchMovie,addToFavorites,removeFromFavorites , addToWatchlist , removeFromWatchlist} =userDataSlice.actions
+
+export const {resetUserData,markMovieAsWatched,unwatchMovie,addToFavorites,removeFromFavorites , addToWatchlist , removeFromWatchlist} =userDataSlice.actions
 export default userDataSlice.reducer

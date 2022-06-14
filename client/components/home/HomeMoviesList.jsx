@@ -14,23 +14,13 @@ const HomeMoviesList = ({ title, to, movies }) => {
           </div>
         )}
       </header>
-      <div className="flex flex-wrap justify-center items-stretch gap-4">
-        {movies ? (
+      <div className="flex flex-wrap justify-center items-stretch gap-2">
+        {movies &&
           movies
             ?.slice(0, 4)
             ?.map((movie, index) => (
               <HomeMoviesListItem movie={movie} key={index} />
-            ))
-        ) : (
-          <>
-            {" "}
-            <HomeMoviesListItem />
-            <HomeMoviesListItem />
-            <HomeMoviesListItem />
-            <HomeMoviesListItem />
-          </>
-        )}
-        {/*  */}
+            ))}
       </div>
     </section>
   );

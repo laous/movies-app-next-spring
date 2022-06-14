@@ -24,10 +24,11 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = { fullname, email, username, password };
     dispatch(register(userData));
+    await router.push("/").then(() => router.reload());
   };
 
   const { user, status, message } = useSelector((state) => state.auth);

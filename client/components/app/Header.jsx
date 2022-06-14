@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { MdSearch, MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
@@ -7,20 +7,90 @@ import Logo from "./Logo";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
+import axios from "axios";
+import SearchItem from "./SearchItem";
+import { resetUserData } from "../../reducers/userDataSlice";
+import { useRouter } from "next/router";
 
 const SearchBar = ({ setActiveSearch }) => {
+  const searchRef = useRef(null);
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState(false);
+  const [results, setResults] = useState([]);
+  const searchEndpoint = (query) =>
+    `${process.env.NEXT_PUBLIC_API_LINK}/tmdb/search/${query}`;
+
+  const config = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+
+  const handleChange = useCallback(async (event) => {
+    const query = event.target.value;
+    setQuery(query);
+    if (query.length) {
+      await axios
+        .get(searchEndpoint(query), config)
+        .then((res) => res.data)
+        .then((res) => {
+          setResults(res);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      setResults([]);
+    }
+  }, []);
+
+  const handleFocus = () => {
+    setActive(true);
+    window.addEventListener("click", handleClick);
+  };
+
+  const handleClick = useCallback((event) => {
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setActive(false);
+      setQuery("");
+      setResults([]);
+      window.removeEventListener("click", handleClick);
+    }
+  }, []);
+
   return (
-    <div className=" w-full flex items-center justify-between gap-2 text-white">
+    <div
+      className="relative w-full flex items-center justify-between gap-2 text-white"
+      ref={searchRef}
+    >
       <MdSearch className="w-5 h-auto" />
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Enter a movie title"
         className="border-none outline-none bg-transparent w-[200px]"
+        onChange={handleChange}
+        onFocus={handleFocus}
+        value={query}
+        autofocus
       />
       <MdClose
         className="w-5 h-auto cursor-pointer"
         onClick={() => setActiveSearch(false)}
       />
+      {active && results.length > 0 && (
+        <ul className="list-none  mt-2 p-2 absolute top-full inset-x-0 min-h-100px z-50 bg-zinc-800">
+          {results.slice(0, 6).map((movie, index) => (
+            <li
+              className="w-full"
+              onClick={() => {
+                setActive(false);
+                setActiveSearch(false);
+              }}
+            >
+              <SearchItem movie={movie} key={index} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
@@ -28,10 +98,12 @@ const SearchBar = ({ setActiveSearch }) => {
 const MenuContent = ({ setActiveSearch }) => {
   const { user, status, message } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    dispatch(resetUserData());
     toast.info("You are logged out!!", {
       position: "bottom-right",
       autoClose: 5000,
@@ -41,6 +113,7 @@ const MenuContent = ({ setActiveSearch }) => {
       draggable: true,
       progress: undefined,
     });
+    router.reload("/account");
   };
 
   return (

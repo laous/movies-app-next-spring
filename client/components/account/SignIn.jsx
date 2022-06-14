@@ -22,10 +22,11 @@ const SignIn = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = { username, password };
     dispatch(login(userData));
+    await router.push("/").then(() => router.reload());
   };
 
   const { user, status, message } = useSelector((state) => state.auth);

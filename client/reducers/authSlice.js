@@ -64,8 +64,8 @@ export const authSlice = createSlice(
         initialState,
         reducers:{
             reset: (state) => {
-                state.status='idle'
-                state.message=''
+              state.status='idle'
+              state.message=''
             }
         }, 
         extraReducers: (builder) =>{
