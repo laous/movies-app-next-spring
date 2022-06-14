@@ -34,7 +34,6 @@ const SearchBar = ({ setActiveSearch }) => {
         .then((res) => res.data)
         .then((res) => {
           setResults(res);
-          console.log("Results: ", results);
         })
         .catch((err) => console.error(err));
     } else {
@@ -69,6 +68,7 @@ const SearchBar = ({ setActiveSearch }) => {
         onChange={handleChange}
         onFocus={handleFocus}
         value={query}
+        autofocus
       />
       <MdClose
         className="w-5 h-auto cursor-pointer"

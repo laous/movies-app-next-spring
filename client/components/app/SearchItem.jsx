@@ -12,7 +12,7 @@ const SearchItem = ({ movie }) => {
           alt={title}
         />
         <h2>{title}</h2>
-        <span>{release_date.split("-")[0]}</span>
+        <span>{release_date?.split("-")[0]}</span>
       </div>
     </Link>
   );

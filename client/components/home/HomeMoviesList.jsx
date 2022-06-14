@@ -14,7 +14,7 @@ const HomeMoviesList = ({ title, to, movies }) => {
           </div>
         )}
       </header>
-      <div className="flex flex-wrap justify-center items-stretch gap-4">
+      <div className="flex flex-wrap justify-center items-stretch gap-2">
         {movies ? (
           movies
             ?.slice(0, 4)
@@ -23,7 +23,6 @@ const HomeMoviesList = ({ title, to, movies }) => {
             ))
         ) : (
           <>
-            {" "}
             <HomeMoviesListItem />
             <HomeMoviesListItem />
             <HomeMoviesListItem />

@@ -2,7 +2,10 @@ import Link from "next/link";
 import { imageUrl } from "../../constants/";
 const HomeMoviesListItem = ({ movie }) => {
   return (
-    <div className="flex flex-col  space-y-2 my-3 max-w-[47%]  md:max-w-[36%] lg:max-w-[23%]">
+    <div
+      className="flex flex-col items-center  gap-1 my-3 "
+      style={{ flex: 1 }}
+    >
       <div className="relative group w-64 h-auto">
         {/* Image */}
         <img
@@ -28,18 +31,6 @@ const HomeMoviesListItem = ({ movie }) => {
                 <span className="text-base font-medium">|</span>
                 <span className="text-base font-medium">+16</span>
               </div>
-
-              {/* <div className="flex items-center gap-2">
-                <span className="text-sm md:text-base font-normal text-[#7B7B7B]">
-                  Animation,
-                </span>
-                <span className="text-base font-normal text-[#7B7B7B]">
-                  Drama,
-                </span>
-                <span className="text-base font-normal text-[#7B7B7B]">
-                  Fantasy
-                </span>
-              </div> */}
             </header>
 
             {/* content */}
@@ -59,19 +50,7 @@ const HomeMoviesListItem = ({ movie }) => {
         </div>
       </div>
 
-      <div className="flex items-center space-x-5 justify-center px-1">
-        <div className="flex flex-col">
-          <h3 className="text-base">{movie?.title}</h3>
-          {/* <span className="text-xs">By Makoto Shinkai</span> */}
-        </div>
-        {/* <Link href={"/"}>
-          <div className="p-0.5  bg-gradient-to-tr  from-[#ff6969] to-[#e752ff] cursor-pointer rounded-sm ">
-            <div className="w-full px-2 py-0.5 h-full bg-black font-normal text-xs md:text-sm opacity-90">
-              Watched
-            </div>
-          </div>
-        </Link> */}
-      </div>
+      <h3 className="text-base  max-w-[70%]">{movie?.title}</h3>
     </div>
   );
 };
