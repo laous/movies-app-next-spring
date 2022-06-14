@@ -524,7 +524,17 @@ export async function getServerSideProps(ctx) {
       .then((res) => res.data),
     axios
       .get(process.env.NEXT_PUBLIC_API_LINK + "/user/review/movie/" + id)
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .then((res) => {
+        res.map(async (review) => {
+          const user = await axios
+            .get(process.env.NEXT_PUBLIC_API_LINK + "/user/" + review?.userId)
+            .then((res) => res.data);
+          if (user) review.user = user;
+          return;
+        });
+        return res;
+      }),
   ]);
 
   // Pass data to the page via props
