@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 const Register = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isRegister, setIsRegister] = useState(false);
 
   // handle form
   const [formData, setFormData] = useState({
@@ -26,6 +27,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsRegister(true);
     const userData = { fullname, email, username, password };
     dispatch(register(userData));
     await router.push("/").then(() => router.reload());
@@ -34,7 +36,7 @@ const Register = () => {
   const { user, status, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (status === "failed") {
+    if (status === "failed" && isRegister) {
       toast.error("Invalid informations!", {
         position: "bottom-right",
         autoClose: 5000,
@@ -48,7 +50,7 @@ const Register = () => {
         },
       });
     }
-    if (status === "succeeded") {
+    if (status === "succeeded" && isRegister) {
       toast.success("Account Created", {
         position: "bottom-right",
         autoClose: 5000,

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 const SignIn = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
 
   // handle form
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLogin(true);
     const userData = { username, password };
     dispatch(login(userData));
     await router.push("/").then(() => router.reload());
@@ -32,7 +34,7 @@ const SignIn = () => {
   const { user, status, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (status === "failed") {
+    if (status === "failed" && isLogin) {
       toast.error("Wrong Credentials", {
         position: "bottom-right",
         autoClose: 5000,
@@ -46,7 +48,7 @@ const SignIn = () => {
         },
       });
     }
-    if (status === "succeeded") {
+    if (status === "succeeded" && isLogin) {
       toast.success("Auth Success", {
         position: "bottom-right",
         autoClose: 5000,
