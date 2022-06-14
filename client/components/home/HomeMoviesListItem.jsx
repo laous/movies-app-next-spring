@@ -12,6 +12,7 @@ const HomeMoviesListItem = ({ movie }) => {
           className="w-60 max-w-full h-auto group-hover:opacity-25 rounded-xl"
           src={imageUrl + movie?.poster_path}
           alt={movie?.title}
+          loading="lazy"
         />
         {/* Content on hover */}
         <div className="max-w-full absolute bg-black bottom-0 top-0 left-0 right-0 opacity-0 group-hover:opacity-80 flex flex-col justify-between items-center py-5 px-4">

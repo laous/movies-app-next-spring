@@ -102,7 +102,8 @@ const MenuContent = ({ setActiveSearch }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(logout(), resetUserData());
+    dispatch(logout());
+    dispatch(resetUserData());
     toast.info("You are logged out!!", {
       position: "bottom-right",
       autoClose: 5000,
@@ -112,7 +113,7 @@ const MenuContent = ({ setActiveSearch }) => {
       draggable: true,
       progress: undefined,
     });
-    router.push("/account");
+    router.reload("/account");
   };
 
   return (

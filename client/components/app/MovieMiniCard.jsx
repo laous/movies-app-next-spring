@@ -11,6 +11,7 @@ const MovieMiniCard = ({ movie }) => {
             className="w-36  h-auto group-hover:opacity-75 rounded-md"
             src={imageUrl + movie?.poster_path}
             alt={movie?.title}
+            loading="lazy"
           />
         </div>
         <h3 className="text-sm max-w-[130px] text-center">{movie?.title}</h3>
