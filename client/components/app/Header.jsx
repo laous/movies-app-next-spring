@@ -70,7 +70,7 @@ const SearchBar = ({ setActiveSearch }) => {
         onChange={handleChange}
         onFocus={handleFocus}
         value={query}
-        autofocus
+        autoFocus
       />
       <MdClose
         className="w-5 h-auto cursor-pointer"
@@ -85,8 +85,9 @@ const SearchBar = ({ setActiveSearch }) => {
                 setActive(false);
                 setActiveSearch(false);
               }}
+              key={index}
             >
-              <SearchItem movie={movie} key={index} />
+              <SearchItem movie={movie} />
             </li>
           ))}
         </ul>

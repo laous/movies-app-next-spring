@@ -35,8 +35,6 @@ const SingleMovie = ({ movie, reviews }) => {
   const userData = useSelector((state) => state.userData);
   const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = userData;
 
-  console.log("Reviews ", reviews);
-
   const [watched, setWatched] = useState(true);
   const [isFavorite, setIsFavorite] = useState(true);
   const [isInWatchlist, setIsInWatchlist] = useState(true);
@@ -116,13 +114,17 @@ const SingleMovie = ({ movie, reviews }) => {
   // buttons events
   // handle watching movies
   const markAsWatched = async () => {
-    const res = await axios.get(
-      process.env.NEXT_PUBLIC_API_LINK +
-        "/user/markWatched/" +
-        user?.userId +
-        "/" +
-        id
-    );
+    const res = await axios
+      .get(
+        process.env.NEXT_PUBLIC_API_LINK +
+          "/user/markWatched/" +
+          user?.userId +
+          "/" +
+          id
+      )
+      .catch((error) => {
+        console.log("Error for mark as watched", error.response);
+      });
     if (watched) return;
     dispatch(markMovieAsWatched(movie_fields));
 
@@ -156,13 +158,17 @@ const SingleMovie = ({ movie, reviews }) => {
     setWatched(true);
   };
   const unmarkAsWatched = async () => {
-    const res = await axios.get(
-      process.env.NEXT_PUBLIC_API_LINK +
-        "/user/unMarkWatched/" +
-        user?.userId +
-        "/" +
-        id
-    );
+    const res = await axios
+      .get(
+        process.env.NEXT_PUBLIC_API_LINK +
+          "/user/unMarkWatched/" +
+          user?.userId +
+          "/" +
+          id
+      )
+      .catch((error) => {
+        console.log("Error for unwatched", error.response);
+      });
     if (!watched) return;
     dispatch(unwatchMovie(movie_fields));
 
@@ -198,13 +204,17 @@ const SingleMovie = ({ movie, reviews }) => {
 
   // handle favorite movies
   const hanldeAddToFavorites = async () => {
-    const res = await axios.get(
-      process.env.NEXT_PUBLIC_API_LINK +
-        "/user/addToFavoritesList/" +
-        user?.userId +
-        "/" +
-        id
-    );
+    const res = await axios
+      .get(
+        process.env.NEXT_PUBLIC_API_LINK +
+          "/user/addToFavoritesList/" +
+          user?.userId +
+          "/" +
+          id
+      )
+      .catch((error) => {
+        console.log("Error for add to fav", error.response);
+      });
     if (!watched) return;
 
     if (!res) {

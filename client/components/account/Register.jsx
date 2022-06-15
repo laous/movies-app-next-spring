@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, reset } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -29,28 +30,18 @@ const Register = () => {
     e.preventDefault();
     setIsRegister(true);
     const userData = { fullname, email, username, password };
-    dispatch(register(userData));
-    await router.push("/").then(() => router.reload());
-  };
-
-  const { user, status, message } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (status === "failed" && isRegister) {
-      toast.error("Invalid informations!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        style: {
-          backgroundColor: "darkred",
-        },
-      });
-    }
-    if (status === "succeeded" && isRegister) {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    };
+    const response = await axios.post(
+      process.env.NEXT_PUBLIC_API_LINK + "/user",
+      userData,
+      config
+    );
+    if (response.data) {
       toast.success("Account Created", {
         position: "bottom-right",
         autoClose: 5000,
@@ -64,10 +55,30 @@ const Register = () => {
           color: "white",
         },
       });
-      router.push("/");
-      dispatch(reset());
+      toast.info("You have to sign in now!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.error("Invalid informations!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
     }
-  }, [user, status, message, router, dispatch]);
+  };
 
   return (
     <div
