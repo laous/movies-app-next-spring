@@ -1,5 +1,4 @@
 import HeroSliderItem from "./HeroSliderItem";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles

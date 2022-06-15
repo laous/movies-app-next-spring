@@ -2,22 +2,31 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import Link from "next/link";
 
 import { imageUrl } from "../../constants/";
+import Image from "next/image";
 
 const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
   const handlePlayClick = () => {
     setShowModal(true);
     setMovieLink(
-      movie.trailers.length > 2
+      movie?.trailers?.length > 2
         ? movie?.trailers[1].key
         : movie?.trailers[0].key
     );
   };
   return (
     <div
-      className={`relative w-full max-w-5xl h-[502px] bg-no-repeat bg-cover  flex items-center justify-center bg-center 
+      className={`relative w-full max-w-5xl h-[502px] flex items-center justify-center 
       `}
-      style={{ backgroundImage: `url(${imageUrl + movie?.backdrop_path})` }}
     >
+      <Image
+        src={imageUrl + movie?.backdrop_path}
+        layout="fill"
+        loading="lazy"
+        objectFit="cover"
+        className="absolute inset-0"
+        placeholder="blur"
+        blurDataURL={`/_next/image?url=${imageUrl + movie?.poster_path}&q=1`}
+      />
       <div className=" absolute top-0 left-0 h-full w-full bg-black opacity-80"></div>
       <button
         className="cursor-pointer z-10 opacity-50"

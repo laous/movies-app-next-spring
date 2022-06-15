@@ -1,14 +1,11 @@
 import { useState } from "react";
 import ReactPlayer from "react-player/lazy";
-import { FaPlay } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ImVolumeMedium, ImVolumeMute2 } from "react-icons/im";
 import MuiModal from "@mui/material/Modal";
 
 function TrailerModal({ state, movieLink, setShowModal }) {
-  // const [showModal, setShowModal] = useState(state);
   const [muted, setMuted] = useState(true);
-  const [addedToList, setAddedToList] = useState(false);
 
   const handleClose = () => {
     setShowModal(false);
@@ -18,7 +15,7 @@ function TrailerModal({ state, movieLink, setShowModal }) {
     <MuiModal
       open={state}
       onClose={handleClose}
-      className="fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"
+      className="fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl  rounded-md scrollbar-hide"
     >
       <>
         {/* <Toaster position="bottom-center" /> */}

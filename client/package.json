@@ -2,6 +2,7 @@
   "name": "movies-spring-fe",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

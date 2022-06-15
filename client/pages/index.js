@@ -8,7 +8,7 @@ import {
   JoinUs,
   TrailerModal,
 } from "../components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Home({
   topRatedMovies,
@@ -17,7 +17,6 @@ export default function Home({
 }) {
   const [showModal, setShowModal] = useState(false);
   const [movieLink, setMovieLink] = useState("");
-  const dispatch = useDispatch()
   const { user, status, message } = useSelector((state) => state.auth);
 
   return (
@@ -52,18 +51,44 @@ export default function Home({
         movies={popularMovies}
       />
 
-      
       {/* {watchlist.length>0 && <HomeMoviesList title={"From your Watchlist"}  movies={watchlist} />} */}
-      {!user &&       <div className="flex flex-col items-center">
-        <JoinUs />
-      </div>}
-
+      {!user && (
+        <div className="flex flex-col items-center">
+          <JoinUs />
+        </div>
+      )}
     </section>
   );
 }
 
 export async function getStaticProps() {
   // Fetch data from external API
+  // const [topRatedMovies, popularMovies, upcomingMovies] = await Promise.all([
+  //   axios
+  //     .get(
+  //       "https://api.themoviedb.org/3/movie/top_rated?api_key=" +
+  //         process.env.TMDB_API_KEY +
+  //         "&language=en-US&page=1"
+  //     )
+  //     .then((res) => res.data.results),
+  //   axios
+  //     .get(
+  //       "https://api.themoviedb.org/3/movie/popular?api_key=" +
+  //         process.env.TMDB_API_KEY +
+  //         "&language=en-US&page=1"
+  //     )
+  //     .then((res) => res.data.results),
+  //   axios
+  //     .get(
+  //       "https://api.themoviedb.org/3/movie/upcoming?api_key=" +
+  //         process.env.TMDB_API_KEY +
+  //         "&language=en-US&page=1"
+  //     )
+  //     .then((res) => {
+  //       return res.data.results;
+  //     }),
+  // ]);
+
   const [topRatedMovies, popularMovies, upcomingMovies] = await Promise.all([
     axios
       .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/topRated")
@@ -75,8 +100,6 @@ export async function getStaticProps() {
       .get(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/upcoming")
       .then((res) => res.data),
   ]);
-  // const  topRatedMovies = await fetch(process.env.NEXT_PUBLIC_API_LINK + "/tmdb/topRated")
-  // const data = await topRatedMovies.json()
 
   // Pass data to the page via props
   return {
