@@ -4,33 +4,32 @@ import { ProfileSection, MoviesList } from "../../components";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { logout } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
 import {
   getWatchedMovies,
   getFavoriteMovies,
   getWatchlist,
   resetUserData,
+  logout,
 } from "../../reducers/userDataSlice";
 
 const MyProfile = () => {
   const [actualList, setActualList] = useState("watched"); // watched | favorites | watchlist
-  const { user, status, message } = useSelector((state) => state.auth);
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = useSelector(
-    (state) => state.userData
-  );
+  const userData = useSelector((state) => state.userData);
+  const { user, watchedMovies, favoriteMovies, watchlist } = userData;
+  console.log("User data: ", userData);
 
   useEffect(() => {
-    if (watchedMovies.status === "idle") {
+    if (watchedMovies.status == "idle") {
       dispatch(getWatchedMovies());
     }
-    if (favoriteMovies.status === "idle") {
+    if (favoriteMovies.status == "idle") {
       dispatch(getFavoriteMovies());
     }
-    if (watchlist.status === "idle") {
+    if (watchlist.status == "idle") {
       dispatch(getWatchlist());
     }
   }, [
@@ -45,6 +44,7 @@ const MyProfile = () => {
     e.preventDefault();
     dispatch(logout());
     dispatch(resetUserData());
+    router.push("/account");
     toast.info("You are logged out!!", {
       position: "bottom-right",
       autoClose: 5000,
@@ -54,7 +54,6 @@ const MyProfile = () => {
       draggable: true,
       progress: undefined,
     });
-    router.reload("/account");
   };
   return (
     <main className="w-full flex flex-col  md:flex-row justify-between gap-4 mb-16">

@@ -18,7 +18,8 @@ export default function Home({
   const [showModal, setShowModal] = useState(false);
   const [movieLink, setMovieLink] = useState("");
   const dispatch = useDispatch()
-  const { user, status, message } = useSelector((state) => state.auth);
+  const userData = useSelector((state) => state.userData);
+  const {user } = userData;
 
   return (
     <section className="flex flex-col items-center justify-center gap-12 w-full">

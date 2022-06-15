@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register, reset } from "../../reducers/authSlice";
+import { resetUserData, register } from "../../reducers/userDataSlice";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -30,10 +30,10 @@ const Register = () => {
     setIsRegister(true);
     const userData = { fullname, email, username, password };
     dispatch(register(userData));
-    await router.push("/").then(() => router.reload());
   };
 
-  const { user, status, message } = useSelector((state) => state.auth);
+  const userData = useSelector((state) => state.userData);
+  const { user, status, message } = userData;
 
   useEffect(() => {
     if (status === "failed" && isRegister) {
@@ -65,7 +65,6 @@ const Register = () => {
         },
       });
       router.push("/");
-      dispatch(reset());
     }
   }, [user, status, message, router, dispatch]);
 

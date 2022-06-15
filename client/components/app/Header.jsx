@@ -5,11 +5,10 @@ import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
 import Logo from "./Logo";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
 import SearchItem from "./SearchItem";
-import { resetUserData } from "../../reducers/userDataSlice";
+import { resetUserData, logout } from "../../reducers/userDataSlice";
 import { useRouter } from "next/router";
 
 const SearchBar = ({ setActiveSearch }) => {
@@ -96,7 +95,8 @@ const SearchBar = ({ setActiveSearch }) => {
 };
 
 const MenuContent = ({ setActiveSearch }) => {
-  const { user, status, message } = useSelector((state) => state.auth);
+  const userData = useSelector((state) => state.userData);
+  const { user } = userData;
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -104,6 +104,7 @@ const MenuContent = ({ setActiveSearch }) => {
     e.preventDefault();
     dispatch(logout());
     dispatch(resetUserData());
+    router.push("/account");
     toast.info("You are logged out!!", {
       position: "bottom-right",
       autoClose: 5000,
@@ -113,7 +114,6 @@ const MenuContent = ({ setActiveSearch }) => {
       draggable: true,
       progress: undefined,
     });
-    router.reload("/account");
   };
 
   return (
@@ -153,7 +153,6 @@ const MenuContent = ({ setActiveSearch }) => {
 
 const Header = () => {
   const [activeSearch, setActiveSearch] = useState(false);
-  const { user, status, message } = useSelector((state) => state.auth);
 
   return (
     <header

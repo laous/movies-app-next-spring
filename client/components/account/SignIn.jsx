@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login, reset } from "../../reducers/authSlice";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { login, resetUserData } from "../../reducers/userDataSlice";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const SignIn = () => {
     setIsLogin(true);
     const userData = { username, password };
     dispatch(login(userData));
-    await router.push("/").then(() => router.reload());
   };
 
-  const { user, status, message } = useSelector((state) => state.auth);
+  const userData = useSelector((state) => state.userData);
+  const { user, status, message } = userData;
 
   useEffect(() => {
     if (status === "failed" && isLogin) {
@@ -63,8 +63,8 @@ const SignIn = () => {
         },
       });
       router.push("/");
-      dispatch(reset());
     }
+    // dispatch(resetUserData())
   }, [user, status, message, router, dispatch]);
 
   return (

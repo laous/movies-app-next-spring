@@ -30,12 +30,10 @@ import Link from "next/link";
 
 const SingleMovie = ({ movie, reviews }) => {
   const { movie_fields, movie_trailers, similar_movies, cast_and_crew } = movie;
-  const dispatch = useDispatch();
-  const { user, status, message } = useSelector((state) => state.auth);
-  const userData = useSelector((state) => state.userData);
-  const { watchedMovies, ratedMovies, favoriteMovies, watchlist } = userData;
 
-  console.log("Reviews ", reviews);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData);
+  const { user, watchedMovies, favoriteMovies, watchlist } = userData;
 
   const [watched, setWatched] = useState(true);
   const [isFavorite, setIsFavorite] = useState(true);

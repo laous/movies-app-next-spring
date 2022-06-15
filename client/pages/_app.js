@@ -42,11 +42,11 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 
 function Auth({ children }) {
-  const { user, status, message } = useSelector((state) => state.auth);
+  const { user, status, message } = useSelector((state) => state.userData);
   const router = useRouter();
   useEffect(() => {
     if (status === "loading") return;
-    if (!user) router.push("account");
+    if (!user) router.push("/account");
   }, [user, status]);
 
   if (user) {

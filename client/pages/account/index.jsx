@@ -1,19 +1,19 @@
 import { Register, SignIn } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { reset } from "../../reducers/authSlice";
 import { useEffect } from "react";
+import { resetUserData } from "../../reducers/userDataSlice";
 
 const Account = () => {
-  const { user, status, message } = useSelector((state) => state.auth);
-  console.log("USer state :", user);
+  const userData = useSelector((state) => state.userData);
+  const { user } = userData;
   const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) {
       router.push("/");
-      dispatch(reset());
+      // dispatch(resetUserData());
     }
   }, [user, router]);
   return (

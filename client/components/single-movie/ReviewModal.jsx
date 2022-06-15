@@ -31,8 +31,6 @@ const ReviewModal = ({ user, movie }) => {
 
   const router = useRouter();
 
-  console.log(user);
-
   const handleAddReview = async (e) => {
     e.preventDefault();
     const review = {

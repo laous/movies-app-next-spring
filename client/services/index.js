@@ -35,8 +35,8 @@ export const login = async (userData) => {
 // logout
 export const logout =  () => {
     if (typeof window !== 'undefined') {
-    localStorage.removeItem('movies-user')
-}
+        localStorage.removeItem('movies-user')
+    }
 }
 
 // 
@@ -52,23 +52,23 @@ export const addReview =async  (payload) => {
 // get watched movies
 export const getWatchedMovies = async (userId) => {
     return await axios
-    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/watchedList/"+ userId)
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/watchedList/"+ Number(userId))
 }
 
 /* Favorite Movies */
 export const getFavoriteMovies = async (userId) => {
     return await axios
-    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/favoritesList/"+ userId)
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/favoritesList/"+ Number(userId))
 }
 
 /* Watchlist */
 export const getWatchList = async (userId) => {
     return await axios
-    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/wishList/"+ userId)
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/wishList/"+ Number(userId))
 }
 
 /* All reviews by User*/
 export const getReviewsByUser = async (userId) => {
     return await axios
-    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/review/user/"+ userId)
+    .get(process.env.NEXT_PUBLIC_API_LINK + "/user/review/user/"+ Number(userId))
 }
