@@ -8,21 +8,26 @@ const HomeMoviesListItem = ({ movie }) => {
       className="flex flex-col items-center  gap-1 my-3 "
       style={{ flex: 1 }}
     >
-      <div className="relative group w-60 h-auto">
+      <div className="relative group w-32 md:w-60 h-auto">
         {/* Image */}
-        <Image
-          src={imageUrl + movie?.poster_path}
-          alt={movie?.title}
-          placeholder="blur"
-          blurDataURL={`/_next/image?url=${
-            imageUrl + movie?.poster_path
-          }&w=240&h=360&q=1`}
-          loading="lazy"
-          width={"240px"}
-          height="360px"
-          className={"w-full h-auto  group-hover:opacity-25 rounded-xl"}
-          objectFit="cover"
-        />
+        <Link href={"/movies/" + movie?.id} passHref>
+          <Image
+            src={imageUrl + movie?.poster_path}
+            alt={movie?.title}
+            placeholder="blur"
+            blurDataURL={`/_next/image?url=${
+              imageUrl + movie?.poster_path
+            }&w=240&h=360&q=1`}
+            loading="lazy"
+            width={"240px"}
+            height="360px"
+            className={
+              "w-full h-auto cursor-pointer  group-hover:opacity-25 rounded-xl"
+            }
+            objectFit="cover"
+          />
+        </Link>
+
         {/* 
         <img
           className="w-60 max-w-full h-auto group-hover:opacity-25 rounded-xl"
@@ -32,7 +37,7 @@ const HomeMoviesListItem = ({ movie }) => {
         /> */}
 
         {/* Content on hover */}
-        <div className="max-w-full absolute bg-black bottom-0 top-0 left-0 right-0 opacity-0 group-hover:opacity-80 flex flex-col justify-between items-center py-5 px-4">
+        <div className="max-w-full absolute bg-black bottom-0 top-0 left-0 right-0 opacity-0 group-hover:opacity-80 hidden md:flex flex-col justify-between items-center py-5 px-4">
           <div className="flex flex-col gap-4">
             <header className="flex flex-col gap-1">
               <h2 className="text-lg md:text-xl font-semibold">

@@ -6,7 +6,7 @@ const MoviesList = ({ movies, title }) => {
       <header className="w-full max-w-4xl flex items-center justify-between">
         <h2 className="text-lg">{title}</h2>
       </header>{" "}
-      <div className="flex flex-wrap justify-start items-start gap-2 px-2">
+      <div className="flex flex-wrap justify-center md:justify-start items-start gap-2 px-2">
         {movies?.list.length < 1 ? (
           <p className="text-sm self-center justify-self-center mx-auto mt-10">
             The list is empty!

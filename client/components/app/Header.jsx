@@ -70,7 +70,6 @@ const SearchBar = ({ setActiveSearch }) => {
         onChange={handleChange}
         onFocus={handleFocus}
         value={query}
-        autoFocus
       />
       <MdClose
         className="w-5 h-auto cursor-pointer"

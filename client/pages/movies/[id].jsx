@@ -25,7 +25,6 @@ import {
   removeFromWatchlist,
   getWatchlist,
 } from "../../reducers/userDataSlice";
-import { toast } from "react-toastify";
 import Link from "next/link";
 import { displayFailToast, displaySuccessToast } from "../../helpers";
 
@@ -418,7 +417,7 @@ const SingleMovie = ({ movie, reviews }) => {
           <header className="w-full max-w-4xl flex items-center ">
             <h2 className="text-xl">Reviews</h2>
           </header>
-          <div className="flex items-stretch gap-4 ">
+          <div className="flex flex-wrap justify-center items-stretch gap-4 ">
             {reviews.length > 0
               ? reviews.map((review, index) => (
                   <ReviewCard key={index} review={review} />
