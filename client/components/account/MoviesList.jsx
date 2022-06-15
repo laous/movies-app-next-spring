@@ -7,9 +7,15 @@ const MoviesList = ({ movies, title }) => {
         <h2 className="text-lg">{title}</h2>
       </header>{" "}
       <div className="flex flex-wrap justify-start items-start gap-2 px-2">
-        {movies.list.map((movie, index) => (
-          <MovieMiniCard movie={movie} key={index} />
-        ))}
+        {movies?.list.length < 1 ? (
+          <p className="text-sm self-center justify-self-center mx-auto mt-10">
+            The list is empty!
+          </p>
+        ) : (
+          movies.list.map((movie, index) => (
+            <MovieMiniCard movie={movie} key={index} />
+          ))
+        )}
       </div>
     </div>
   );

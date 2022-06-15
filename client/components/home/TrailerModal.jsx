@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReactPlayer from "react-player/lazy";
 import { FaPlay } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { GrVolumeMute, GrVolume } from "react-icons/gr";
+import { ImVolumeMedium, ImVolumeMute2 } from "react-icons/im";
 import MuiModal from "@mui/material/Modal";
 
 function TrailerModal({ state, movieLink, setShowModal }) {
@@ -26,7 +26,7 @@ function TrailerModal({ state, movieLink, setShowModal }) {
           className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none "
           onClick={handleClose}
         >
-          <AiFillCloseCircle className="h-10 w-10 text-black" />
+          <AiFillCloseCircle className="h-10 w-10 text-white" />
         </button>
 
         <div className="relative pt-[56.25%]">
@@ -50,13 +50,13 @@ function TrailerModal({ state, movieLink, setShowModal }) {
               <button className="modalButton">"thumb up icon"</button>
             </div> */}
             <button
-              className="modalButton justify-self-end self-end"
+              className="modalButton justify-self-end self-end text-white"
               onClick={() => setMuted(!muted)}
             >
               {muted ? (
-                <GrVolumeMute className="h-8 w-8" />
+                <ImVolumeMute2 className="h-8 w-8 text-white" />
               ) : (
-                <GrVolume className="h-8 w-8" />
+                <ImVolumeMedium className="h-8 w-8 text-white" />
               )}
             </button>
           </div>
