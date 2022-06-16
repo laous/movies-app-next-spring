@@ -23,17 +23,16 @@ const SignIn = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsLogin(true);
     const userData = { username, password };
     dispatch(login(userData));
-    await router.push("/").then(() => router.reload());
   };
 
   const { user, status, message } = useSelector((state) => state.auth);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (status === "failed" && isLogin) {
       toast.error("Wrong Credentials", {
         position: "bottom-right",
@@ -62,7 +61,7 @@ const SignIn = () => {
           color: "white",
         },
       });
-      router.push("/");
+      await router.push("/").then(() => router.reload());
       dispatch(reset());
     }
   }, [user, status, message, router, dispatch]);
