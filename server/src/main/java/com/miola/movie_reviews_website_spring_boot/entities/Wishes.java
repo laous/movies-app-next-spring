@@ -1,9 +1,8 @@
 package com.miola.movie_reviews_website_spring_boot.entities;
 
 import javax.persistence.*;
-
 @Entity
-public class Favorites {
+public class Wishes {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

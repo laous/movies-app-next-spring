@@ -1,10 +1,8 @@
 package com.miola.movie_reviews_website_spring_boot.services;
 
-import com.miola.movie_reviews_website_spring_boot.entities.MovieEntity;
-import com.miola.movie_reviews_website_spring_boot.entities.UserEntity;
+import com.miola.movie_reviews_website_spring_boot.entities.*;
 import com.miola.movie_reviews_website_spring_boot.jsonModels.User;
-import com.miola.movie_reviews_website_spring_boot.repos.MovieRepository;
-import com.miola.movie_reviews_website_spring_boot.repos.UserRepository;
+import com.miola.movie_reviews_website_spring_boot.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,12 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
     @Autowired
     private MovieRepository movieRepository;
+    @Autowired
+    private WatchedRepository watchedRepository;
+    @Autowired
+    private FavoritesRepository favoritesRepository;
+    @Autowired
+    private WishesRepository wishesRepository;
 
     @Override
     public boolean createUser(User user) {
@@ -117,11 +121,17 @@ public class UserServiceImpl implements UserService{
             movieRepository.save(movie);
         }
         if(user != null){
-             Set<MovieEntity> watchedList = user.getWatchedList();
-             if(mark == true)  watchedList.add(movie);
-             if(mark == false)  watchedList.remove(movie);
-             user.setWatchedList(watchedList);
-             userRepository.save(user);
+            if(mark == true){
+                Watched watched = new Watched();
+                watched.setUser(user);
+                watched.setMovie(movie);
+                watchedRepository.save(watched);;
+            }
+             if(mark == false) {
+                 Watched watched = watchedRepository.findByUserAndMovie(user, movie);
+                 if(watched != null)
+                     watchedRepository.delete(watched);
+             }
             return true;
         }else{
             return false;
@@ -137,12 +147,18 @@ public class UserServiceImpl implements UserService{
             movie.setMovieId(movieId);
             movieRepository.save(movie);
         }
-        if(user != null && movie != null){
-            Set<MovieEntity> wishList = user.getWhishList();
-            if(add == true)  wishList.add(movie);
-            if(add == false)  wishList.remove(movie);
-            user.setWhishList(wishList);
-            userRepository.save(user);
+        if(user != null){
+            if(add == true){
+                Wishes wishes = new Wishes();
+                wishes.setUser(user);
+                wishes.setMovie(movie);
+                wishesRepository.save(wishes);
+            }
+            if(add == false) {
+                Wishes wishes = wishesRepository.findByUserAndMovie(user, movie);
+                if(wishes != null)
+                    wishesRepository.delete(wishes);
+            }
             return true;
         }else{
             return false;
@@ -158,12 +174,18 @@ public class UserServiceImpl implements UserService{
             movie.setMovieId(movieId);
             movieRepository.save(movie);
         }
-        if(user != null && movie != null){
-            Set<MovieEntity> favoritesList = user.getFavorites();
-            if(favorite == true)  favoritesList.add(movie);
-            if(favorite == false)  favoritesList.remove(movie);
-            user.setFavorites(favoritesList);
-            userRepository.save(user);
+        if(user != null){
+            if(favorite == true){
+                Favorites favorites = new Favorites();
+                favorites.setUser(user);
+                favorites.setMovie(movie);
+                favoritesRepository.save(favorites);;
+            }
+            if(favorite == false) {
+                Favorites favorites = favoritesRepository.findByUserAndMovie(user, movie);
+                if(favorites != null)
+                    favoritesRepository.delete(favorites);
+            }
             return true;
         }else{
             return false;
@@ -175,9 +197,10 @@ public class UserServiceImpl implements UserService{
         UserEntity user = userRepository.findById(userId).orElse(null);
         List<MovieEntity> L = new ArrayList<>();
         if(user != null) {
-            for (MovieEntity M : user.getWatchedList()
+            List<Watched> watcheds = watchedRepository.findByUser(user);
+            for (Watched M : watcheds
                  ) {
-                L.add(M);
+                L.add(M.getMovie());
             }
             return L;
         }
@@ -190,9 +213,10 @@ public class UserServiceImpl implements UserService{
         UserEntity user = userRepository.findById(userId).orElse(null);
         List<MovieEntity> L = new ArrayList<>();
         if(user != null) {
-            for (MovieEntity M : user.getWhishList()
+            List<Wishes> wishes = wishesRepository.findByUser(user);
+            for (Wishes W : wishes
             ) {
-                L.add(M);
+                L.add(W.getMovie());
             }
             return L;
         }
@@ -204,9 +228,10 @@ public class UserServiceImpl implements UserService{
         UserEntity user = userRepository.findById(userId).orElse(null);
         List<MovieEntity> L = new ArrayList<>();
         if(user != null) {
-            for (MovieEntity M : user.getFavorites()
+            List<Favorites> favorites = favoritesRepository.findByUser(user);
+            for (Favorites F : favorites
             ) {
-                L.add(M);
+                L.add(F.getMovie());
             }
             return L;
         }

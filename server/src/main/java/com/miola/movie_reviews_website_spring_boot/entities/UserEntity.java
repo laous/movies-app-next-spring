@@ -14,22 +14,33 @@ public class UserEntity {
     private String username;
     private String email;
     private String password;
-    @OneToMany
-    private Set<MovieEntity> whishList;
-    @OneToMany
-    private Set<MovieEntity> favorites;
-    @OneToMany
-    private Set<MovieEntity> watchedList;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Watched> watchedList;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Favorites> favorites;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Wishes> wishes;
 
 
-    public UserEntity(String fullname, String username, String email, String password, Set<MovieEntity> whishList, Set<MovieEntity> favorites) {
-        this.fullname = fullname;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.whishList = whishList;
+    public Set<Favorites> getFavorites() {
+        return favorites;
+    }
+
+    public Set<Wishes> getWishes() {
+        return wishes;
+    }
+
+    public void setWishes(Set<Wishes> wishes) {
+        this.wishes = wishes;
+    }
+
+    public void setFavorites(Set<Favorites> favorites) {
         this.favorites = favorites;
     }
+
 
     public UserEntity() {
     }
@@ -66,21 +77,6 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Set<MovieEntity> getWhishList() {
-        return whishList;
-    }
-
-    public void setWhishList(Set<MovieEntity> whishList) {
-        this.whishList = whishList;
-    }
-
-    public Set<MovieEntity> getFavorites() {
-        return favorites;
-    }
-
-    public void setFavorites(Set<MovieEntity> favorites) {
-        this.favorites = favorites;
-    }
 
     public Long getId() {
         return id;
@@ -90,11 +86,11 @@ public class UserEntity {
         this.id = id;
     }
 
-    public Set<MovieEntity> getWatchedList() {
+    public Set<Watched> getWatchedList() {
         return watchedList;
     }
 
-    public void setWatchedList(Set<MovieEntity> watchedList) {
+    public void setWatchedList(Set<Watched> watchedList) {
         this.watchedList = watchedList;
     }
 

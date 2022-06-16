@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "movie")
 public class MovieEntity {
     @Id
     private Long movieId;
@@ -13,6 +12,28 @@ public class MovieEntity {
     private String description;
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
     private Set<ReviewEntity> reviewSet;
+    @OneToMany(mappedBy = "movie")
+    private Set<Watched> watchedList;
+    @OneToMany(mappedBy = "movie")
+    private Set<Favorites> favorites;
+    @OneToMany(mappedBy = "movie")
+    private Set<Wishes> wishes;
+
+    public Set<Wishes> getWishes() {
+        return wishes;
+    }
+
+    public void setWishes(Set<Wishes> wishes) {
+        this.wishes = wishes;
+    }
+
+    public Set<Favorites> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorites> favorites) {
+        this.favorites = favorites;
+    }
 
     public MovieEntity() {
 
@@ -48,6 +69,14 @@ public class MovieEntity {
 
     public void setReviewSet(Set<ReviewEntity> reviewSet) {
         this.reviewSet = reviewSet;
+    }
+
+    public Set<Watched> getWatchedList() {
+        return watchedList;
+    }
+
+    public void setWatchedList(Set<Watched> watchedList) {
+        this.watchedList = watchedList;
     }
 
     @Override
