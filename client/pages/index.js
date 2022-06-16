@@ -61,7 +61,7 @@ export default function Home({
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch data from external API
   // const [topRatedMovies, popularMovies, upcomingMovies] = await Promise.all([
   //   axios
