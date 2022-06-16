@@ -35,13 +35,13 @@ public class UserController {
     @PostMapping
     public ResponseEntity createUser(@RequestBody User user){
         if(userService.createUser(user)) return new ResponseEntity<>("true", HttpStatus.OK);
-        else return new ResponseEntity<>("false", HttpStatus.OK);
+        else return new ResponseEntity<>( HttpStatus.FORBIDDEN);
     }
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user){
         System.out.println(user);
         if(userService.authenticate(user.getUsername(), user.getPassword()) != null) return new ResponseEntity<>(userService.authenticate(user.getUsername(), user.getPassword()), HttpStatus.OK);
-        else return new ResponseEntity<>("false", HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @PutMapping("/{id_user}")
