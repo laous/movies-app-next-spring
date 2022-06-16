@@ -3,7 +3,7 @@ package com.miola.movie_reviews_website_spring_boot.entities;
 import javax.persistence.*;
 
 @Entity
-public class Favorites {
+public class Watched {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -37,3 +37,5 @@ public class Favorites {
         this.movie = movie;
     }
 }
+
+
