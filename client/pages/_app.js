@@ -46,7 +46,7 @@ function Auth({ children }) {
   const router = useRouter();
   useEffect(() => {
     if (status === "loading") return;
-    if (!user) router.push("account");
+    if (!user) router.push("/account");
   }, [user, status]);
 
   if (user) {

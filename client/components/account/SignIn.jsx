@@ -28,7 +28,7 @@ const SignIn = () => {
     setIsLogin(true);
     const userData = { username, password };
     dispatch(login(userData));
-    await router.push("/myprofile").then(() => router.reload());
+    await router.push("/").then(() => router.reload());
   };
 
   const { user, status, message } = useSelector((state) => state.auth);
