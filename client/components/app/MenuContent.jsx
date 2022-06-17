@@ -1,5 +1,13 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { CgProfile } from "react-icons/cg";
+import { FiLogOut } from "react-icons/fi";
+import { MdSearch } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { logout } from "../../reducers/authSlice";
+import { resetUserData } from "../../reducers/userDataSlice";
+import Logo from "./Logo";
 
 const MenuContent = ({ setActiveSearch }) => {
   const { user, status, message } = useSelector((state) => state.auth);
