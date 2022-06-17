@@ -15,7 +15,7 @@ const Account = () => {
       router.push("/");
       dispatch(reset());
     }
-  }, [user, router]);
+  }, [user, router, dispatch]);
   return (
     <main className="flex flex-col md:flex-row items-center justify-between md:gap-32 gap-12 h-full py-16">
       <div className="flex flex-col items-center justify-center gap-4">

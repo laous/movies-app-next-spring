@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 
 import * as api from "../../services";
 import { displayFailToast, displaySuccessToast } from "../../helpers";
+import { AiFillEdit } from "react-icons/ai";
 
 const style = {
   position: "absolute",
@@ -20,32 +21,45 @@ const style = {
   p: 4,
 };
 
-const ReviewModal = ({ user, movie }) => {
+const EditReviewModal = ({ review }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [reviewText, setReviewText] = React.useState("");
-  const [rating, setRating] = React.useState(0);
+  const [reviewText, setReviewText] = React.useState(review?.reviewText);
+  const [rating, setRating] = React.useState(review?.rating);
 
   const router = useRouter();
 
-  const handleAddReview = async (e) => {
+  const handleEditReview = async (e) => {
     e.preventDefault();
     const review = {
       movieId: movie.id,
       rating: rating,
       reviewText: reviewText,
       userId: user.userId,
+      reviewId: review?.reviewId,
     };
-    console.log("Review ", review);
-    const res = await api.addReview(review);
+    console.log("Edited Review ", review);
+    const res = await api.editReview(review);
     if (res) {
       setOpen(false);
-      displaySuccessToast("Review submitted succesfully!");
+      displaySuccessToast("Review edited succesfully!");
       router.reload(window.location.pathname);
     } else {
-      displayFailToast("Not submitted!!");
+      displayFailToast("Not edited!!");
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const res = await api.deleleteReview(review?.reviewId);
+    if (res) {
+      setOpen(false);
+      displaySuccessToast("Review deleted succesfully!");
+      router.reload(window.location.pathname);
+    } else {
+      displayFailToast("Not deleted!!");
     }
   };
 
@@ -55,12 +69,7 @@ const ReviewModal = ({ user, movie }) => {
         className="cursor-pointer flex items-center justify-center gap-1 text-lg hover:text-yellow-400"
         onClick={handleOpen}
       >
-        Rate
-        <StarIcon
-          style={{ opacity: 0.55 }}
-          fontSize="inherit"
-          className="w-6 h-auto"
-        />
+        <AiFillEdit className="h-6 w-6 text-white" />
       </span>
       <Modal
         open={open}
@@ -73,7 +82,7 @@ const ReviewModal = ({ user, movie }) => {
           className="bg-zinc-800 flex flex-col  items-stretch justify-center gap-4 rounded-3xl"
         >
           <div className="flex flex-col gap-1">
-            <h3>Add your rating</h3>
+            <h3>Edit your rating</h3>
             <Rating
               name="customized-10"
               defaultValue={rating}
@@ -97,15 +106,23 @@ const ReviewModal = ({ user, movie }) => {
               onChange={(e) => setReviewText(e.target.value)}
             ></textarea>
           </div>
-          <button
-            className="bg-gray-900 text-white max-w-[100px] self-center px-6 py-1"
-            onClick={handleAddReview}
-          >
-            Add
-          </button>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              className="bg-gray-900 text-white max-w-[100px]  px-6 py-1"
+              onClick={handleEditReview}
+            >
+              Edit
+            </button>
+            <button
+              className="bg-white text-gray-900 max-w-[100px] px-6 py-1"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </div>
         </Box>
       </Modal>
     </div>
   );
 };
-export default ReviewModal;
+export default EditReviewModal;

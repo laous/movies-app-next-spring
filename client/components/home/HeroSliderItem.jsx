@@ -20,6 +20,7 @@ const HeroSliderItem = ({ setShowModal, setMovieLink, movieLink, movie }) => {
     >
       <Image
         src={imageUrl + movie?.backdrop_path}
+        alt={movie?.title}
         layout="fill"
         loading="lazy"
         objectFit="cover"

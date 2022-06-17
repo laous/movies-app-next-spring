@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { imageUrl } from "../../constants";
 
 const CastCard = ({ cast }) => {

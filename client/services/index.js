@@ -48,6 +48,24 @@ export const addReview =async  (payload) => {
     return response.data
 }
 
+export const editReview =async  (payload) => {
+    const response =     await axios
+    .put(process.env.NEXT_PUBLIC_API_LINK + "/user/review/"+payload?.reviewId, payload , config)
+    if(!response.data) return false
+
+    return response.data
+}
+
+export const deleleteReview =async  (payload) => {
+    const response =     await axios
+    .delete(process.env.NEXT_PUBLIC_API_LINK + "/user/review/", payload , config)
+    if(!response.data) return false
+
+    return response.data
+}
+
+
+
 /* Watched Movies */
 // get watched movies
 export const getWatchedMovies = async (userId) => {

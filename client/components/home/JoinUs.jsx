@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
 const JoinUs = () => {
@@ -6,6 +7,7 @@ const JoinUs = () => {
       <img
         src="./assets/walking-girl.svg"
         className="max-h-[450px] self-end mb-[-32px] z-10"
+        alt="Walking Girl"
       />
       <div className="flex flex-col gap-3 items-center justify-center">
         <h3 className="font-bold text-2xl">What are you waiting for?</h3>
@@ -23,7 +25,7 @@ const JoinUs = () => {
       </div>
       <img
         src="./assets/movie-camera.svg"
-        alt=""
+        alt="Movie camera"
         className="max-h-[370px] self-end mb-[-5px]"
       />
     </section>
