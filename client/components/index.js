@@ -20,7 +20,7 @@ export {default as ReviewModal} from './single-movie/ReviewModal'
 export {default as ReviewCard} from './single-movie/ReviewCard'
 export {default as MoviesList} from './account/MoviesList'
 export {default as SearchItem} from './app/SearchItem'
-
+export {default as EditReviewModal} from './single-movie/EditReviewModal'
 
 
 
