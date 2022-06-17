@@ -32,6 +32,7 @@ const SignIn = () => {
 
   const { user, status, message } = useSelector((state) => state.auth);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     if (status === "failed" && isLogin) {
       toast.error("Wrong Credentials", {
@@ -64,7 +65,7 @@ const SignIn = () => {
       await router.push("/").then(() => router.reload());
       dispatch(reset());
     }
-  }, [user, status, message, router, dispatch]);
+  }, [user, status, message, router, dispatch, isLogin]);
 
   return (
     <div

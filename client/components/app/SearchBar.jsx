@@ -11,14 +11,13 @@ const SearchBar = ({ setActiveSearch }) => {
   const searchEndpoint = (query) =>
     `${process.env.NEXT_PUBLIC_API_LINK}/tmdb/search/${query}`;
 
-  const config = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
-
   const handleChange = useCallback(async (event) => {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    };
     const query = event.target.value;
     setQuery(query);
     if (query.length) {

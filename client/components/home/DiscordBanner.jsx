@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { SiDiscord } from "react-icons/si";
 
 const DiscordBanner = () => {
@@ -8,11 +9,13 @@ const DiscordBanner = () => {
         <img
           src="./assets/discord.svg"
           className="absolute right-2 bottom-0 max-w-[72px] md:max-w-none hidden md:flex"
+          alt="Discord"
         />
 
         <img
           src="./assets/movienight.svg"
           className="w-[500px] max-h-36 md:max-h-[382px] self-center md:self-end mb-[-14px]"
+          alt="Watchinf a movie"
         />
         <div className="flex flex-col justify-center gap-4 max-w-xs mb-3 md:mb-12 z-10">
           <p className="font-medium text-sm md:text-base ">

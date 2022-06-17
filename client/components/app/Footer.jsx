@@ -36,6 +36,7 @@ const Footer = () => {
           href="https://laous.netlify.app/"
           target={"_blank"}
           className="hover:text-red-300"
+          rel="noreferrer"
         >
           with love {"<3"}
         </a>

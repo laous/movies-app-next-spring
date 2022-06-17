@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   BorderButton,
   CastCard,
@@ -121,7 +123,15 @@ const SingleMovie = ({ movie, reviews }) => {
     setWatched(checkIfWatched());
     setIsFavorite(checkIsFavorite());
     setIsInWatchlist(checkIsInWatchlist());
-  }, [id, checkIfWatched, watchedMovies, favoriteMovies, watchlist]);
+  }, [
+    id,
+    checkIfWatched,
+    watchedMovies,
+    favoriteMovies,
+    watchlist,
+    checkIsFavorite,
+    checkIsInWatchlist,
+  ]);
 
   // buttons events
   // handle watching movies
