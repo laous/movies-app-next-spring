@@ -34,7 +34,7 @@ const ReviewCard = ({ review }) => {
             <span className="text-sm font-medium  text-gray-400">
               By {review?.user?.fullname} : @{review?.user?.username}
             </span>
-            <EditReviewModal />
+            <EditReviewModal review={review} />
           </>
         ) : (
           <span className="text-sm font-medium self-center text-gray-400">

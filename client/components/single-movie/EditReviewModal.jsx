@@ -38,19 +38,30 @@ const EditReviewModal = ({ review }) => {
       rating: rating,
       reviewText: reviewText,
       userId: user.userId,
+      reviewId: review?.reviewId,
     };
-    console.log("Review ", review);
-    const res = await api.addReview(review);
+    console.log("Edited Review ", review);
+    const res = await api.editReview(review);
     if (res) {
       setOpen(false);
       displaySuccessToast("Review edited succesfully!");
       router.reload(window.location.pathname);
     } else {
-      displayFailToast("Not edit!!");
+      displayFailToast("Not edited!!");
     }
   };
 
-  const handleDelete = async (e) => {};
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const res = await api.deleleteReview(review?.reviewId);
+    if (res) {
+      setOpen(false);
+      displaySuccessToast("Review deleted succesfully!");
+      router.reload(window.location.pathname);
+    } else {
+      displayFailToast("Not deleted!!");
+    }
+  };
 
   return (
     <div>
