@@ -4,12 +4,11 @@ import Modal from "@mui/material/Modal";
 
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
-import axios from "axios";
 
 import { useRouter } from "next/router";
 
 import * as api from "../../services";
-import { toast } from "react-toastify";
+import { displayFailToast, displaySuccessToast } from "../../helpers";
 
 const style = {
   position: "absolute",
@@ -31,8 +30,6 @@ const ReviewModal = ({ user, movie }) => {
 
   const router = useRouter();
 
-  console.log(user);
-
   const handleAddReview = async (e) => {
     e.preventDefault();
     const review = {
@@ -45,21 +42,10 @@ const ReviewModal = ({ user, movie }) => {
     const res = await api.addReview(review);
     if (res) {
       setOpen(false);
-
+      displaySuccessToast("Review submitted succesfully!");
       router.reload(window.location.pathname);
     } else {
-      toast.error("Not submitted!!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        style: {
-          backgroundColor: "darkred",
-        },
-      });
+      displayFailToast("Not submitted!!");
     }
   };
 
