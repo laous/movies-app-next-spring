@@ -33,15 +33,14 @@ const EditReviewModal = ({ review }) => {
 
   const handleEditReview = async (e) => {
     e.preventDefault();
-    const review = {
-      movieId: movie.id,
+    const reviewToEdit = {
+      movieId: review?.movieId,
       rating: rating,
       reviewText: reviewText,
-      userId: user.userId,
+      userId: review?.userId,
       reviewId: review?.reviewId,
     };
-    console.log("Edited Review ", review);
-    const res = await api.editReview(review);
+    const res = await api.editReview(reviewToEdit);
     if (res) {
       setOpen(false);
       displaySuccessToast("Review edited succesfully!");
@@ -51,17 +50,20 @@ const EditReviewModal = ({ review }) => {
     }
   };
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    const res = await api.deleleteReview(review?.reviewId);
-    if (res) {
-      setOpen(false);
-      displaySuccessToast("Review deleted succesfully!");
-      router.reload(window.location.pathname);
-    } else {
-      displayFailToast("Not deleted!!");
-    }
-  };
+  // const handleDelete = async (e) => {
+  //   e.preventDefault();
+  //   const reviewToDelete = {
+  //     reviewId: review?.reviewId,
+  //   };
+  //   const res = await api.deleleteReview(reviewToDelete);
+  //   if (res) {
+  //     setOpen(false);
+  //     displaySuccessToast("Review deleted succesfully!");
+  //     router.reload(window.location.pathname);
+  //   } else {
+  //     displayFailToast("Not deleted!!");
+  //   }
+  // };
 
   return (
     <div>
@@ -113,12 +115,12 @@ const EditReviewModal = ({ review }) => {
             >
               Edit
             </button>
-            <button
+            {/* <button
               className="bg-white text-gray-900 max-w-[100px] px-6 py-1"
               onClick={handleDelete}
             >
               Delete
-            </button>
+            </button> */}
           </div>
         </Box>
       </Modal>

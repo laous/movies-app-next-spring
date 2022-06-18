@@ -12,8 +12,8 @@ const ProfileSection = ({ setActualList, user }) => {
         <Profile>
           <Photo>
             <img
-              src="https://upload.wikimedia.org/wikipedia/en/e/ea/Mike_Ehrmantraut_BCS_S3.png"
-              alt="Mike Ehrmantraut"
+              src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+              alt={user?.fullname}
             />
           </Photo>
           <Info>

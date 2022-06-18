@@ -58,7 +58,7 @@ export const editReview =async  (payload) => {
 
 export const deleleteReview =async  (payload) => {
     const response =     await axios
-    .delete(process.env.NEXT_PUBLIC_API_LINK + "/user/review/", payload , config)
+    .delete(process.env.NEXT_PUBLIC_API_LINK + "/user/review", payload , config)
     if(!response.data) return false
 
     return response.data
