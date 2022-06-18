@@ -29,7 +29,7 @@ const ReviewCard = ({ review }) => {
         <p className="text-gray-200">{review?.reviewText}</p>
       </div>
       <div className="flex items-center justify-between">
-        {user?.id == review?.user.id ? (
+        {user?.userId == review?.user.userId ? (
           <>
             <span className="text-sm font-medium  text-gray-400">
               By {review?.user?.fullname} : @{review?.user?.username}
