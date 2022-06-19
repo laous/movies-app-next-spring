@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  frontend:
+    depends_on:
+      - backend
+    build: ./client
+    ports:
+      - 3000:3000
+
+  backend:
+    restart: always
+    depends_on:
+      - db
+    build: ./server
+    ports:
+      - 8080:8080
+    environment:
+      DB_URL: db
+    command: ./docker-entrypoint.sh
+
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=moviereviews
+    volumes:
+      - movies:/var/lib/mysql
+
+volumes:
+  movies:
