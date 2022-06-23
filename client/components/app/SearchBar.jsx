@@ -6,7 +6,8 @@ import SearchItem from "./SearchItem";
 const SearchBar = ({ setActiveSearch }) => {
   const searchRef = useRef(null);
   const [query, setQuery] = useState("");
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
+  const [initialRender, setInitialRender] = useState(true);
   const [results, setResults] = useState([]);
   const searchEndpoint = (query) =>
     `${process.env.NEXT_PUBLIC_API_LINK}/tmdb/search/${query}`;
@@ -40,10 +41,15 @@ const SearchBar = ({ setActiveSearch }) => {
 
   const handleClick = useCallback((event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setActive(false);
+      if(initialRender) {
+        setInitialRender(false);
+        handleFocus();
+      }else{
+        setActive(false);
+        window.removeEventListener("click", handleClick);
+      }
       setQuery("");
       setResults([]);
-      window.removeEventListener("click", handleClick);
     }
   }, []);
 
@@ -58,6 +64,7 @@ const SearchBar = ({ setActiveSearch }) => {
         placeholder="Enter a movie title"
         className="border-none outline-none bg-transparent w-[200px]"
         onChange={handleChange}
+        autoFocus
         onFocus={handleFocus}
         value={query}
       />
