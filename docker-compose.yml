@@ -7,9 +7,11 @@ services:
     build: ./client
     ports:
       - 3000:3000
+    volumes:
+      - ./client/.env:/app/.env
 
   backend:
-    restart: always
+    restart: unless-stopped
     depends_on:
       - db
     build: ./server
