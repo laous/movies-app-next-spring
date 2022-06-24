@@ -7,8 +7,6 @@ services:
     build: ./client
     ports:
       - 3000:3000
-    volumes:
-      - ./client/.env:/app/.env
 
   backend:
     restart: unless-stopped
@@ -19,7 +17,6 @@ services:
       - 8080:8080
     environment:
       DB_URL: db
-    command: ./docker-entrypoint.sh
 
   db:
     image: mysql:5.7
