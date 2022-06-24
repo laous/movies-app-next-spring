@@ -41,16 +41,17 @@ const SearchBar = ({ setActiveSearch }) => {
 
   const handleClick = useCallback((event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
-      if(initialRender) {
+      if (initialRender) {
         setInitialRender(false);
         handleFocus();
-      }else{
+      } else {
         setActive(false);
         window.removeEventListener("click", handleClick);
       }
       setQuery("");
       setResults([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
